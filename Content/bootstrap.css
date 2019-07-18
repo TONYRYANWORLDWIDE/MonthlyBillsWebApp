@@ -12,6 +12,9 @@ html {
 body {
   margin: 0;
 }
+trbold{
+    font-size: 42px;
+}
 article,
 aside,
 details,
@@ -185,11 +188,27 @@ optgroup {
 }
 table {
   border-collapse: collapse;
-  border-spacing: 0;
+  /*border-spacing: 0;*/
+  border: 1px solid blue;
 }
+.trbold{
+    font-size: x-large;
+
+}
+
+.column1 {
+    width: 15%;
+}
+
+.column2_3 {
+    width: 5%;
+}
+
 td,
 th {
-  padding: 0;
+    padding: 0;
+    border: 1px solid blue;
+    
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
@@ -1586,7 +1605,7 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
   .container {
     width: 750px;
   }
@@ -1600,7 +1619,7 @@ pre code {
   .container {
     width: 1170px;
   }
-}
+}*/
 .container-fluid {
   padding-right: 15px;
   padding-left: 15px;
@@ -2347,7 +2366,7 @@ pre code {
   }
 }
 table {
-  background-color: transparent;
+  background-color: blanchedalmond;
 }
 table col[class*="col-"] {
   position: static;
