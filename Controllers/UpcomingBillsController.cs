@@ -18,7 +18,11 @@ namespace MonthlyBillsWebApp.Controllers
         // GET: UpcomingBills
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            ViewBag.CurrentSort = sortOrder;
+            using (var context = new BillsEntities())
+            {
+                context.sp_DateOfEachBill();
+            }
+             ViewBag.CurrentSort = sortOrder;
             if (searchString != null)
             {
                 page = 1;
@@ -47,7 +51,8 @@ namespace MonthlyBillsWebApp.Controllers
                     upcomingbills = upcomingbills.OrderBy(s => s.TheDate);
                     break;
             }
-            int pageSize = upcomingbills.Count() / 6;
+
+            int pageSize = (upcomingbills.Count() / 6) + 1;
             int pageNumber = (page ?? 1);
             return View(upcomingbills.ToPagedList(pageNumber, pageSize));
             //return View(upcomingbills.ToList());

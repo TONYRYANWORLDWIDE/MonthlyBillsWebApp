@@ -9,36 +9,38 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<p>
-    <span>@Html.ActionLink("Monthly Bills  ", "Index", "MonthlyBills")</span>
-    @*TO DO create space*@
-    <span>@Html.ActionLink("Upcoming Bills  ", "Index", "UpcomingBills")</span>
-</p>
+
 <table class="table">
-    <tr>
+    <tr class="trbold">
         <th>
             @Html.DisplayNameFor(model => model.Bill)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Cost)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DayOfWeek)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bill)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cost)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Bill)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cost)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DayOfWeek)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+    </td>
+</tr>
 }
 
 </table>

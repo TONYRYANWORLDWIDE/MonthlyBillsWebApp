@@ -2,32 +2,42 @@
 @model PagedList.IPagedList<MonthlyBillsWebApp.Models.UpcomingBill>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
-
+@functions{
+    public void clearSearchString(string searchString)
+    {
+        searchString = "";
+    }
+}
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>Upcoming Bills</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<p>
-    <span>@Html.ActionLink("Monthly Bills  ", "Index", "MonthlyBills")</span>
-    @*TO DO create space*@
-    <span>@Html.ActionLink("Weekly Bills  ", "Index", "WeeklyBills")</span>
-</p>
+
+<div>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</div>
 
 
-@using (Html.BeginForm("Index", "UpcomingBill", FormMethod.Get))
+@using (Html.BeginForm("Index", "UpcomingBills", FormMethod.Get))
 {
     <p>
-        Find by Bill Name: @Html.TextBox("SearchString")
+        Find by Name: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 }
+@using (Html.BeginForm("Index", "UpcomingBills", FormMethod.Get))
+{
+<div>
+
+    <p>
+        <button type="submit" onclick="clearSearchString">Reset</button>
+    </p>
+</div>
+}
 <table class="table">
-    <tr>
+    <tr class="trbold">
         <th>
             @Html.ActionLink("The Date", "Index", new { sortOrder = ViewBag.DateSortParam })
         </th>
@@ -77,10 +87,10 @@
                 @Html.DisplayFor(modelItem => item.RunningTotal)
             </td>
             @*<td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
-            </td>*@
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                </td>*@
         </tr>
     }
 

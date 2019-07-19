@@ -13,13 +13,14 @@ namespace MonthlyBillsWebApp.Controllers
     public class MonthlyBillsController : Controller
     {
         private BillsEntities db = new BillsEntities();
-
         // GET: MonthlyBills
         public ActionResult Index()
         {
-            return View(db.MonthlyBills.ToList());
+            var monthlybills = from u in db.MonthlyBills
+                               orderby u.Bill
+                               select u;
+            return View(monthlybills.ToList());
         }
-
         // GET: MonthlyBills/Details/5
         public ActionResult Details(int? id)
         {
@@ -40,9 +41,8 @@ namespace MonthlyBillsWebApp.Controllers
         {
             return View();
         }
-
         // POST: MonthlyBills/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // TO DO // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -54,10 +54,8 @@ namespace MonthlyBillsWebApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(monthlyBill);
         }
-
         // GET: MonthlyBills/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -72,9 +70,8 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(monthlyBill);
         }
-
         // POST: MonthlyBills/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // TO DO // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -88,7 +85,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(monthlyBill);
         }
-
         // GET: MonthlyBills/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -103,7 +99,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(monthlyBill);
         }
-
         // POST: MonthlyBills/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -114,7 +109,6 @@ namespace MonthlyBillsWebApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
