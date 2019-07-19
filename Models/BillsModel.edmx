@@ -5,6 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BillsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BringHomePay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="amount" Type="real" />
+          <Property Name="DayOfWeek" Type="varchar" MaxLength="9" />
+        </EntityType>
+        <EntityType Name="Dates">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="thedate" Type="date" />
+          <Property Name="Day" Type="int" />
+          <Property Name="DayOfWeek" Type="varchar" MaxLength="9" />
+        </EntityType>
         <EntityType Name="MonthlyBills">
           <Key>
             <PropertyRef Name="id" />
@@ -33,12 +51,15 @@
         </EntityType>
         <EntityType Name="WeeklyBills">
           <Key>
-            <PropertyRef Name="Bill" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="Bill" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bill" Type="varchar" MaxLength="50" />
           <Property Name="Cost" Type="real" />
         </EntityType>
         <EntityContainer Name="BillsModelStoreContainer">
+          <EntitySet Name="BringHomePay" EntityType="Self.BringHomePay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dates" EntityType="Self.Dates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MonthlyBills" EntityType="Self.MonthlyBills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="transactionsupdateNew" EntityType="Self.transactionsupdateNew" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeeklyBills" EntityType="Self.WeeklyBills" Schema="dbo" store:Type="Tables" />
@@ -75,16 +96,37 @@
         </EntityType>
         <EntityType Name="WeeklyBill">
           <Key>
-            <PropertyRef Name="Bill" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="Bill" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bill" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Cost" Type="Single" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityContainer Name="BillsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="MonthlyBills" EntityType="Self.MonthlyBill" />
           <EntitySet Name="transactionsupdateNews" EntityType="Self.transactionsupdateNew" />
           <EntitySet Name="WeeklyBills" EntityType="Self.WeeklyBill" />
+          <EntitySet Name="BringHomePays" EntityType="BillsModel.BringHomePay" />
+          <EntitySet Name="Dates" EntityType="BillsModel.Date" />
         </EntityContainer>
+        <EntityType Name="BringHomePay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Single" />
+          <Property Name="DayOfWeek" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Date">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="thedate" Type="DateTime" Precision="0" />
+          <Property Name="Day" Type="Int32" />
+          <Property Name="DayOfWeek" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -122,8 +164,29 @@
           <EntitySetMapping Name="WeeklyBills">
             <EntityTypeMapping TypeName="BillsModel.WeeklyBill">
               <MappingFragment StoreEntitySet="WeeklyBills">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Bill" ColumnName="Bill" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BringHomePays">
+            <EntityTypeMapping TypeName="BillsModel.BringHomePay">
+              <MappingFragment StoreEntitySet="BringHomePay">
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dates">
+            <EntityTypeMapping TypeName="BillsModel.Date">
+              <MappingFragment StoreEntitySet="Dates">
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="thedate" ColumnName="thedate" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

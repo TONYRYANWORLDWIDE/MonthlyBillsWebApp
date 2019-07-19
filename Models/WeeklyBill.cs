@@ -16,5 +16,6 @@ namespace MonthlyBillsWebApp.Models
     {
         public string Bill { get; set; }
         public Nullable<float> Cost { get; set; }
+        public int id { get; set; }
     }
 }
