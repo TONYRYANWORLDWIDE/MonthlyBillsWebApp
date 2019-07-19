@@ -12,13 +12,14 @@ namespace MonthlyBillsWebApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BringHomePay
+    public partial class UpcomingBill
     {
         public int id { get; set; }
-        public string Name { get; set; }
-        public Nullable<float> amount { get; set; }
+        public Nullable<System.DateTime> TheDate { get; set; }
         public string DayOfWeek { get; set; }
-        public string Frequency { get; set; }
-        public Nullable<System.DateTime> PickOnePayDate { get; set; }
+        public string Name { get; set; }
+        public Nullable<float> Amount { get; set; }
+        public string Type { get; set; }
+        public Nullable<decimal> RunningTotal { get; set; }
     }
 }

@@ -52,6 +52,12 @@
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -164,6 +170,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MonthlyBillsController.cs" />
+    <Compile Include="Controllers\UpcomingBillsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WeeklyBillsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -195,7 +202,13 @@
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PartialClasses.cs" />
+    <Compile Include="Models\sp_DateOfEachBill_Result.cs">
+      <DependentUpon>BillsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\transactionsupdateNew.cs">
+      <DependentUpon>BillsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UpcomingBill.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WeeklyBill.cs">
@@ -209,6 +222,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -280,6 +294,11 @@
     <Content Include="Views\WeeklyBills\Details.cshtml" />
     <Content Include="Views\WeeklyBills\Edit.cshtml" />
     <Content Include="Views\WeeklyBills\Index.cshtml" />
+    <Content Include="Views\UpcomingBills\Create.cshtml" />
+    <Content Include="Views\UpcomingBills\Delete.cshtml" />
+    <Content Include="Views\UpcomingBills\Details.cshtml" />
+    <Content Include="Views\UpcomingBills\Edit.cshtml" />
+    <Content Include="Views\UpcomingBills\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -315,6 +334,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

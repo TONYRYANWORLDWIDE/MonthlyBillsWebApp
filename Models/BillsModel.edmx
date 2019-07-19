@@ -13,13 +13,15 @@
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="amount" Type="real" />
           <Property Name="DayOfWeek" Type="varchar" MaxLength="9" />
+          <Property Name="Frequency" Type="varchar" MaxLength="25" />
+          <Property Name="PickOnePayDate" Type="date" />
         </EntityType>
         <EntityType Name="Dates">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="thedate" Type="datetime" />
+          <Property Name="thedate" Type="date" />
           <Property Name="Day" Type="int" />
           <Property Name="DayOfWeek" Type="varchar" MaxLength="9" />
         </EntityType>
@@ -49,6 +51,18 @@
           <Property Name="account_name" Type="varchar(max)" />
           <Property Name="sub_cat" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="UpcomingBills">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TheDate" Type="date" />
+          <Property Name="DayOfWeek" Type="varchar" MaxLength="9" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="Amount" Type="real" />
+          <Property Name="Type" Type="varchar" MaxLength="7" />
+          <Property Name="RunningTotal" Type="numeric" Precision="13" Scale="2" />
+        </EntityType>
         <EntityType Name="WeeklyBills">
           <Key>
             <PropertyRef Name="id" />
@@ -56,12 +70,15 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Bill" Type="varchar" MaxLength="50" />
           <Property Name="Cost" Type="real" />
+          <Property Name="DayOfWeek" Type="varchar" MaxLength="9" />
         </EntityType>
+        <Function Name="sp_DateOfEachBill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="BillsModelStoreContainer">
           <EntitySet Name="BringHomePay" EntityType="Self.BringHomePay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dates" EntityType="Self.Dates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MonthlyBills" EntityType="Self.MonthlyBills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="transactionsupdateNew" EntityType="Self.transactionsupdateNew" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UpcomingBills" EntityType="Self.UpcomingBills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeeklyBills" EntityType="Self.WeeklyBills" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -101,6 +118,7 @@
           <Property Name="Bill" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Cost" Type="Single" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DayOfWeek" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="BillsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="MonthlyBills" EntityType="Self.MonthlyBill" />
@@ -108,6 +126,8 @@
           <EntitySet Name="WeeklyBills" EntityType="Self.WeeklyBill" />
           <EntitySet Name="BringHomePays" EntityType="BillsModel.BringHomePay" />
           <EntitySet Name="Dates" EntityType="BillsModel.Date" />
+          <EntitySet Name="UpcomingBills" EntityType="BillsModel.UpcomingBill" />
+          <FunctionImport Name="sp_DateOfEachBill" />
         </EntityContainer>
         <EntityType Name="BringHomePay">
           <Key>
@@ -117,15 +137,40 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="amount" Type="Single" />
           <Property Name="DayOfWeek" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Frequency" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PickOnePayDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Date">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="thedate" Type="DateTime" Precision="3" />
+          <Property Name="thedate" Type="DateTime" Precision="0" />
           <Property Name="Day" Type="Int32" />
           <Property Name="DayOfWeek" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="sp_DateOfEachBill_Result">
+          <Property Type="DateTime" Name="TheDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Bill" Nullable="true" MaxLength="50" />
+          <Property Type="Single" Name="Cost" Nullable="true" />
+          <Property Type="Decimal" Name="runningtotalbills2" Nullable="true" Precision="13" Scale="2" />
+          <Property Type="Single" Name="bringhome" Nullable="true" />
+          <Property Type="Decimal" Name="RunningtotalincomeFinal" Nullable="true" Precision="13" Scale="2" />
+          <Property Type="Decimal" Name="StartingBalanceFinal" Nullable="true" Precision="13" Scale="2" />
+          <Property Type="Decimal" Name="NET" Nullable="true" Precision="15" Scale="2" />
+          <Property Type="String" Name="DayOfWeek" Nullable="true" MaxLength="9" />
+        </ComplexType>
+        <EntityType Name="UpcomingBill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TheDate" Type="DateTime" Precision="0" />
+          <Property Name="DayOfWeek" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Single" />
+          <Property Name="Type" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="RunningTotal" Type="Decimal" Precision="13" Scale="2" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -164,6 +209,7 @@
           <EntitySetMapping Name="WeeklyBills">
             <EntityTypeMapping TypeName="BillsModel.WeeklyBill">
               <MappingFragment StoreEntitySet="WeeklyBills">
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Bill" ColumnName="Bill" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
@@ -173,6 +219,8 @@
           <EntitySetMapping Name="BringHomePays">
             <EntityTypeMapping TypeName="BillsModel.BringHomePay">
               <MappingFragment StoreEntitySet="BringHomePay">
+                <ScalarProperty Name="PickOnePayDate" ColumnName="PickOnePayDate" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
                 <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
                 <ScalarProperty Name="amount" ColumnName="amount" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -190,6 +238,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UpcomingBills">
+            <EntityTypeMapping TypeName="BillsModel.UpcomingBill">
+              <MappingFragment StoreEntitySet="UpcomingBills">
+                <ScalarProperty Name="RunningTotal" ColumnName="RunningTotal" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+                <ScalarProperty Name="TheDate" ColumnName="TheDate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_DateOfEachBill" FunctionName="BillsModel.Store.sp_DateOfEachBill" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

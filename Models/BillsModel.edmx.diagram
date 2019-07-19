@@ -4,12 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1498e6e1f59a4e91a0078a8527a2cebd" Name="Diagram1">
+      <Diagram DiagramId="1498e6e1f59a4e91a0078a8527a2cebd" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="BillsModel.MonthlyBill" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BillsModel.transactionsupdateNew" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BillsModel.WeeklyBill" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BillsModel.BringHomePay" Width="1.5" PointX="7.25" PointY="2.625" />
         <EntityTypeShape EntityType="BillsModel.Date" Width="1.5" PointX="4.875" PointY="2.75" />
+        <EntityTypeShape EntityType="BillsModel.UpcomingBill" Width="1.5" PointX="10.125" PointY="2.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

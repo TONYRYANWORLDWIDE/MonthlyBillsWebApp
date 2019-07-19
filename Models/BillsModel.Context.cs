@@ -12,6 +12,8 @@ namespace MonthlyBillsWebApp.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class BillsEntities : DbContext
     {
@@ -30,5 +32,11 @@ namespace MonthlyBillsWebApp.Models
         public virtual DbSet<WeeklyBill> WeeklyBills { get; set; }
         public virtual DbSet<BringHomePay> BringHomePays { get; set; }
         public virtual DbSet<Date> Dates { get; set; }
+        public virtual DbSet<UpcomingBill> UpcomingBills { get; set; }
+    
+        public virtual int sp_DateOfEachBill()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DateOfEachBill");
+        }
     }
 }

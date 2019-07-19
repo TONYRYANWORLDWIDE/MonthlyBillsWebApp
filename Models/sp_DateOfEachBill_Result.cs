@@ -10,15 +10,17 @@
 namespace MonthlyBillsWebApp.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class BringHomePay
+    public partial class sp_DateOfEachBill_Result
     {
-        public int id { get; set; }
-        public string Name { get; set; }
-        public Nullable<float> amount { get; set; }
+        public Nullable<System.DateTime> TheDate { get; set; }
+        public string Bill { get; set; }
+        public Nullable<float> Cost { get; set; }
+        public Nullable<decimal> runningtotalbills2 { get; set; }
+        public Nullable<float> bringhome { get; set; }
+        public Nullable<decimal> RunningtotalincomeFinal { get; set; }
+        public Nullable<decimal> StartingBalanceFinal { get; set; }
+        public Nullable<decimal> NET { get; set; }
         public string DayOfWeek { get; set; }
-        public string Frequency { get; set; }
-        public Nullable<System.DateTime> PickOnePayDate { get; set; }
     }
 }
