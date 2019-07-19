@@ -19,7 +19,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="thedate" Type="date" />
+          <Property Name="thedate" Type="datetime" />
           <Property Name="Day" Type="int" />
           <Property Name="DayOfWeek" Type="varchar" MaxLength="9" />
         </EntityType>
@@ -123,7 +123,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="thedate" Type="DateTime" Precision="0" />
+          <Property Name="thedate" Type="DateTime" Precision="3" />
           <Property Name="Day" Type="Int32" />
           <Property Name="DayOfWeek" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -181,7 +181,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Dates">
-            <EntityTypeMapping TypeName="BillsModel.Date">
+            <EntityTypeMapping TypeName="IsTypeOf(BillsModel.Date)">
               <MappingFragment StoreEntitySet="Dates">
                 <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
                 <ScalarProperty Name="Day" ColumnName="Day" />

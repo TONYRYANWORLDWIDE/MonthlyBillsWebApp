@@ -184,6 +184,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BillsModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\BringHomePay.cs">
+      <DependentUpon>BillsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Date.cs">
+      <DependentUpon>BillsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\MonthlyBill.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>

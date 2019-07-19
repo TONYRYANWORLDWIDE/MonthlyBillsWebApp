@@ -28,5 +28,7 @@ namespace MonthlyBillsWebApp.Models
         public virtual DbSet<MonthlyBill> MonthlyBills { get; set; }
         public virtual DbSet<transactionsupdateNew> transactionsupdateNews { get; set; }
         public virtual DbSet<WeeklyBill> WeeklyBills { get; set; }
+        public virtual DbSet<BringHomePay> BringHomePays { get; set; }
+        public virtual DbSet<Date> Dates { get; set; }
     }
 }

@@ -8,8 +8,8 @@
         <EntityTypeShape EntityType="BillsModel.MonthlyBill" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BillsModel.transactionsupdateNew" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BillsModel.WeeklyBill" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BillsModel.BringHomePay" Width="1.5" PointX="9.75" PointY="2.375" />
-        <EntityTypeShape EntityType="BillsModel.Date" Width="1.5" PointX="4.875" PointY="2.875" />
+        <EntityTypeShape EntityType="BillsModel.BringHomePay" Width="1.5" PointX="7.25" PointY="2.625" />
+        <EntityTypeShape EntityType="BillsModel.Date" Width="1.5" PointX="4.875" PointY="2.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
