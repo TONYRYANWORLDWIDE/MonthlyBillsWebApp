@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<MonthlyBillsWebApp.Models.UpcomingBill>*@
-@model PagedList.IPagedList<MonthlyBillsWebApp.Models.UpcomingBill>
+﻿@model PagedList.IPagedList<MonthlyBillsWebApp.Models.UpcomingBill>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @functions{
@@ -13,11 +12,12 @@
 }
 <h2>Upcoming Bills</h2>
 
-<div>
+
+@*<div>
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-</div>
+</div>*@
 
 
 @using (Html.BeginForm("Index", "UpcomingBills", FormMethod.Get))

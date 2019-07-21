@@ -28,11 +28,12 @@ namespace MonthlyBillsWebApp.Models
         }
     
         public virtual DbSet<MonthlyBill> MonthlyBills { get; set; }
-        public virtual DbSet<transactionsupdateNew> transactionsupdateNews { get; set; }
         public virtual DbSet<WeeklyBill> WeeklyBills { get; set; }
         public virtual DbSet<BringHomePay> BringHomePays { get; set; }
         public virtual DbSet<Date> Dates { get; set; }
         public virtual DbSet<UpcomingBill> UpcomingBills { get; set; }
+        public virtual DbSet<KeyBalance> KeyBalances { get; set; }
+        public virtual DbSet<transactionsupdateNew1> transactionsupdateNew1 { get; set; }
     
         public virtual int sp_DateOfEachBill()
         {

@@ -12,7 +12,7 @@ namespace MonthlyBillsWebApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class transactionsupdateNew
+    public partial class transactionsupdateNew1
     {
         public int id { get; set; }
         public long index { get; set; }

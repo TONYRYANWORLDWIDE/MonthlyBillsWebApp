@@ -169,6 +169,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KeyBalancesController.cs" />
     <Compile Include="Controllers\MonthlyBillsController.cs" />
     <Compile Include="Controllers\UpcomingBillsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -197,6 +198,9 @@
     <Compile Include="Models\Date.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\KeyBalance.cs">
+      <DependentUpon>BillsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\MonthlyBill.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
@@ -205,7 +209,7 @@
     <Compile Include="Models\sp_DateOfEachBill_Result.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\transactionsupdateNew.cs">
+    <Compile Include="Models\transactionsupdateNew1.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UpcomingBill.cs">
@@ -301,6 +305,11 @@
     <Content Include="Views\UpcomingBills\Details.cshtml" />
     <Content Include="Views\UpcomingBills\Edit.cshtml" />
     <Content Include="Views\UpcomingBills\Index.cshtml" />
+    <Content Include="Views\KeyBalances\Create.cshtml" />
+    <Content Include="Views\KeyBalances\Delete.cshtml" />
+    <Content Include="Views\KeyBalances\Details.cshtml" />
+    <Content Include="Views\KeyBalances\Edit.cshtml" />
+    <Content Include="Views\KeyBalances\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

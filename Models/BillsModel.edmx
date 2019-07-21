@@ -25,6 +25,14 @@
           <Property Name="Day" Type="int" />
           <Property Name="DayOfWeek" Type="varchar" MaxLength="9" />
         </EntityType>
+        <EntityType Name="KeyBalance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KeyBalance" Type="real" />
+          <Property Name="DateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="MonthlyBills">
           <Key>
             <PropertyRef Name="id" />
@@ -76,6 +84,7 @@
         <EntityContainer Name="BillsModelStoreContainer">
           <EntitySet Name="BringHomePay" EntityType="Self.BringHomePay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dates" EntityType="Self.Dates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KeyBalance" EntityType="Self.KeyBalance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MonthlyBills" EntityType="Self.MonthlyBills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="transactionsupdateNew" EntityType="Self.transactionsupdateNew" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UpcomingBills" EntityType="Self.UpcomingBills" Schema="dbo" store:Type="Tables" />
@@ -95,22 +104,6 @@
           <Property Name="Date" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="BillAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="transactionsupdateNew">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="index" Type="Int64" Nullable="false" />
-          <Property Name="date" Type="DateTime" Precision="3" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="originaldescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="amount" Type="Double" />
-          <Property Name="amount_transformed" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="transaction_type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="category" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="account_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="sub_cat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="WeeklyBill">
           <Key>
             <PropertyRef Name="id" />
@@ -122,12 +115,13 @@
         </EntityType>
         <EntityContainer Name="BillsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="MonthlyBills" EntityType="Self.MonthlyBill" />
-          <EntitySet Name="transactionsupdateNews" EntityType="Self.transactionsupdateNew" />
           <EntitySet Name="WeeklyBills" EntityType="Self.WeeklyBill" />
           <EntitySet Name="BringHomePays" EntityType="BillsModel.BringHomePay" />
           <EntitySet Name="Dates" EntityType="BillsModel.Date" />
           <EntitySet Name="UpcomingBills" EntityType="BillsModel.UpcomingBill" />
           <FunctionImport Name="sp_DateOfEachBill" />
+          <EntitySet Name="KeyBalances" EntityType="BillsModel.KeyBalance" />
+          <EntitySet Name="transactionsupdateNew1" EntityType="BillsModel.transactionsupdateNew1" />
         </EntityContainer>
         <EntityType Name="BringHomePay">
           <Key>
@@ -172,6 +166,30 @@
           <Property Name="Type" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="RunningTotal" Type="Decimal" Precision="13" Scale="2" />
         </EntityType>
+        <EntityType Name="KeyBalance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KeyBalance1" Type="Single" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="transactionsupdateNew1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="index" Type="Int64" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="originaldescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Double" />
+          <Property Name="amount_transformed" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="transaction_type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="category" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="account_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sub_cat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -186,23 +204,6 @@
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="BillAlias" ColumnName="BillAlias" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="transactionsupdateNews">
-            <EntityTypeMapping TypeName="BillsModel.transactionsupdateNew">
-              <MappingFragment StoreEntitySet="transactionsupdateNew">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="index" ColumnName="index" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="originaldescription" ColumnName="originaldescription" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="amount_transformed" ColumnName="amount_transformed" />
-                <ScalarProperty Name="transaction_type" ColumnName="transaction_type" />
-                <ScalarProperty Name="category" ColumnName="category" />
-                <ScalarProperty Name="account_name" ColumnName="account_name" />
-                <ScalarProperty Name="sub_cat" ColumnName="sub_cat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -252,6 +253,32 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_DateOfEachBill" FunctionName="BillsModel.Store.sp_DateOfEachBill" />
+          <EntitySetMapping Name="KeyBalances">
+            <EntityTypeMapping TypeName="BillsModel.KeyBalance">
+              <MappingFragment StoreEntitySet="KeyBalance">
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="KeyBalance1" ColumnName="KeyBalance" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transactionsupdateNew1">
+            <EntityTypeMapping TypeName="BillsModel.transactionsupdateNew1">
+              <MappingFragment StoreEntitySet="transactionsupdateNew">
+                <ScalarProperty Name="sub_cat" ColumnName="sub_cat" />
+                <ScalarProperty Name="account_name" ColumnName="account_name" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="transaction_type" ColumnName="transaction_type" />
+                <ScalarProperty Name="amount_transformed" ColumnName="amount_transformed" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="originaldescription" ColumnName="originaldescription" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="index" ColumnName="index" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
