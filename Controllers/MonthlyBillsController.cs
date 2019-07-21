@@ -18,30 +18,11 @@ namespace MonthlyBillsWebApp.Controllers
         // GET: MonthlyBills
         public ActionResult Index()
         {
-            dynamic mymodel = new ExpandoObject();
             var monthlybills = from u in db.MonthlyBills
                                orderby u.Bill
                                select u;
-            var KeyBalance = from k in db.KeyBalances
-                             select k;
-            mymodel.MonthlyBills = monthlybills.ToList();
-            mymodel.KeyBalance = KeyBalance.ToList();
-            return View(mymodel);
+            return View(monthlybills.ToList());
         }
-
-        //public ActionResult IndexViewModel()
-        //{
-        //    ViewModel mymodel = new ViewModel(); //Need to create a class containing both models??
-        //    var monthlybills = from u in db.MonthlyBills
-        //                       orderby u.Bill
-        //                       select u;
-        //    var KeyBalance = from k in db.KeyBalances
-        //                     select k;
-        //    mymodel.MonthlyBills = monthlybills.ToList();
-        //    mymodel.KeyBalance = KeyBalance.ToList();
-        //    return View(mymodel);
-        //}
-
         // GET: MonthlyBills/Details/5
         public ActionResult Details(int? id)
         {
