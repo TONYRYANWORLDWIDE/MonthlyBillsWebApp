@@ -264,6 +264,8 @@
     <Content Include="Models\BillsModel.edmx.diagram">
       <DependentUpon>BillsModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\MonthlyBillsWebAppTR - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\MonthlyBillsWebAppTR - Web Deploy1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
