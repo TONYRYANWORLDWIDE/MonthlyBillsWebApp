@@ -12,6 +12,7 @@ using System.Dynamic;
 
 namespace MonthlyBillsWebApp.Controllers
 {
+    [RequireHttps]
     public class MonthlyBillsController : Controller
     {
         private BillsEntities db = new BillsEntities();
