@@ -71,6 +71,14 @@
           <Property Name="Type" Type="varchar" MaxLength="7" />
           <Property Name="RunningTotal" Type="numeric" Precision="13" Scale="2" />
         </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UseID" />
+          </Key>
+          <Property Name="UseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="WeeklyBills">
           <Key>
             <PropertyRef Name="id" />
@@ -88,6 +96,7 @@
           <EntitySet Name="MonthlyBills" EntityType="Self.MonthlyBills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="transactionsupdateNew" EntityType="Self.transactionsupdateNew" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UpcomingBills" EntityType="Self.UpcomingBills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeeklyBills" EntityType="Self.WeeklyBills" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -122,6 +131,7 @@
           <FunctionImport Name="sp_DateOfEachBill" />
           <EntitySet Name="KeyBalances" EntityType="BillsModel.KeyBalance" />
           <EntitySet Name="transactionsupdateNew1" EntityType="BillsModel.transactionsupdateNew1" />
+          <EntitySet Name="Users" EntityType="BillsModel.User" />
         </EntityContainer>
         <EntityType Name="BringHomePay">
           <Key>
@@ -189,6 +199,14 @@
           <Property Name="category" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="account_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="sub_cat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UseID" />
+          </Key>
+          <Property Name="UseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -276,6 +294,15 @@
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="index" ColumnName="index" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BillsModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UseID" ColumnName="UseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
