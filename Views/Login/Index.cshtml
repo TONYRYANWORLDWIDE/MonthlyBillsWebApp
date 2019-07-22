@@ -15,7 +15,20 @@
             left: 40%;
             top: 40%;
             border: 1px solid black;
-            padding: 10px 10px;
+            padding: 20px 20px;
+            font-size: 24px;
+        }
+        .inputboxes{
+            overflow: hidden;
+            float: right;
+            font-size: 24px;
+        }
+        .title{
+            text-decoration: underline;
+            text-align:center;
+            font-size: 28px;
+            vertical-align: middle;
+
         }
     </style>
 </head>
@@ -25,19 +38,18 @@
         {
             <table>
                 <tr>
-                    <td></td>
-                    <td style="text-decoration:underline">Welcome</td>
+                    @*<td></td>
+                    <td>Welcome</td>*@
                 </tr>
                 <tr>
-                    <td>
+                    <td class="inputboxes">                         
                         @Html.LabelFor(model => model.UserName)
-                    </td>
-                    <td>
                         @Html.EditorFor(model => model.UserName)
                     </td>
+                        
                 </tr>
                 <tr>
-                    <td>
+                    <td class="inputboxes">
                         @Html.LabelFor(model => model.Password)                 
                         @Html.EditorFor(model => model.Password)
                     </td>
