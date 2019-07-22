@@ -4,7 +4,7 @@ using Microsoft.Owin;
 using Owin;
 using System.IO;
 using Microsoft.Owin.Security;
-//using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using System.Configuration;
 
@@ -19,14 +19,14 @@ namespace MonthlyBillsWebApp
     {
         public void Configuration(IAppBuilder app)
         {
-            //var cookieOptions = new CookieAuthenticationOptions
-            //{
-            //    LoginPath = new PathString("/Account/Login")
-            //};
+            var cookieOptions = new CookieAuthenticationOptions
+            {
+                LoginPath = new PathString("/Account/Login")
+            };
 
-            //app.UseCookieAuthentication(cookieOptions);
+            app.UseCookieAuthentication(cookieOptions);
 
-            //app.SetDefaultSignInAsAuthenticationType(cookieOptions.AuthenticationType);
+            app.SetDefaultSignInAsAuthenticationType(cookieOptions.AuthenticationType);
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {

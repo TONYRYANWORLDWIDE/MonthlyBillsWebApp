@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MonthlyBillsWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,8 +15,16 @@ namespace MonthlyBillsWebApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Authorize()
+        public ActionResult Authorize(MonthlyBillsWebApp.Models.User userModel)
         {
+            using (BillsEntities db = new BillsEntities())
+            {
+                var userDetails = db.Users.Where(x => x.UserName == userModel.UserName && x.Password == userModel.Password).FirstOrDefault();
+                if(userDetails == null)
+                {
+                    userModel.LoginErrorMessage = "Wrong Username or Password.";
+                }
+            }
             return View();
         }
     }

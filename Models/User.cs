@@ -23,5 +23,6 @@ namespace MonthlyBillsWebApp.Models
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "This Field is Requried")]
         public string Password { get; set; }
+        public string LoginErrorMessage { get; set; }
     }
 }
