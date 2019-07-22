@@ -29,10 +29,13 @@ namespace MonthlyBillsWebApp.Controllers
                 {
                     Session["userID"] = userDetails.UseID;
                     return RedirectToAction("Index", "MonthlyBills");
-                }
-
-               
+                }            
             }
         }
+        //public ActionResult LogOut()
+        //{
+        //    Session.Abandon();
+        //    return RedirectToAction("Index", "Login");
+        //}
     }
 }

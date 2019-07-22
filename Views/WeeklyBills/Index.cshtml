@@ -2,6 +2,10 @@
 
 @{
     ViewBag.Title = "Index";
+        if (Session["userID"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
 }
 
 <h2>Weekly Bills</h2>
