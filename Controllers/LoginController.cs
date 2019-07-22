@@ -32,10 +32,10 @@ namespace MonthlyBillsWebApp.Controllers
                 }            
             }
         }
-        //public ActionResult LogOut()
-        //{
-        //    Session.Abandon();
-        //    return RedirectToAction("Index", "Login");
-        //}
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "Login");
+        }
     }
 }
