@@ -20,12 +20,19 @@ namespace MonthlyBillsWebApp.Controllers
             using (BillsEntities db = new BillsEntities())
             {
                 var userDetails = db.Users.Where(x => x.UserName == userModel.UserName && x.Password == userModel.Password).FirstOrDefault();
-                if(userDetails == null)
+                if (userDetails == null)
                 {
                     userModel.LoginErrorMessage = "Wrong Username or Password.";
+                    return View("Index", userModel);
                 }
+                else
+                {
+                    Session["userID"] = userDetails.UseID;
+                    return RedirectToAction("Index", "MonthlyBills");
+                }
+
+               
             }
-            return View();
         }
     }
 }
