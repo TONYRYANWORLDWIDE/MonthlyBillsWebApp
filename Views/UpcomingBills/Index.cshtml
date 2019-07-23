@@ -16,7 +16,7 @@
 <div>
     <p>
         @*@Html.ActionLink("Create New", "Create")*@
-        <a href="@Url.Action("LogOut", "Login")">Log Out</a>
+        @*<a href="@Url.Action("LogOut", "Login")">Log Out</a>*@
     </p>
 </div>
 
@@ -26,7 +26,7 @@
 <p>
     Find by Name: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
     <input type="submit" value="Search" />
-    <button type="submit" onclick="clearSearchString">Reset</button>
+    <button type="reset" onclick="clearSearchString">Reset</button>
 
 </p>
 }

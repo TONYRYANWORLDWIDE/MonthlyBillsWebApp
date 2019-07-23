@@ -33,12 +33,12 @@ namespace MonthlyBillsWebApp.Controllers
                 }            
             }
         }
-        public ActionResult LogOut()
-        { 
-            int userId = (int)Session["userID"];
-            Session.Abandon();
-            return RedirectToAction("Index", "Login");
-        }
+        //public ActionResult LogOut()
+        //{ 
+        //    int userId = (int)Session["userID"];
+        //    Session.Abandon();
+        //    return RedirectToAction("Index", "Login");
+        //}
         [HttpGet]
         public ActionResult AddOrEdit(int UseID = 0)
         {

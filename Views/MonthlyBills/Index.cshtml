@@ -1,19 +1,19 @@
 ﻿@model IEnumerable<MonthlyBillsWebApp.Models.MonthlyBill>
 
-@{
+@*@{
     if (Session["userID"] == null)
     {
         Response.Redirect("~/Login/Index");
     }
     ViewBag.Title = "Monthly Bills";
-}
+}*@
 
 <h2>Monthly Bills</h2>
-<h3>Username: @Session["userName"].ToString()</h3>
+@*@<h3>Username: @Session["userName"].ToString()</h3>*@
 
 <p>
     @Html.ActionLink("Create New", "Create")   
-    <a href="@Url.Action("LogOut", "Login")">Log Out</a>
+    @*<a href="@Url.Action("LogOut", "Login")">Log Out</a>*@
 </p>
 
 
