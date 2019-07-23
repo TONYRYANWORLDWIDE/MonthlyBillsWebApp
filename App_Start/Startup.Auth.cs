@@ -5,6 +5,7 @@ using Microsoft.Owin.Security.Cookies;
 using IdentitySample.Models;
 using Owin;
 using System;
+using Microsoft.Owin.Security.Google;
 
 namespace IdentitySample
 {
@@ -58,9 +59,13 @@ namespace IdentitySample
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                //ClientId = ConfigurationManager.AppSettings["461861078491-ma9ei04pm3s47393alado1j92f4n28m2.apps.googleusercontent.com"],
+                //ClientSecret = ConfigurationManager.AppSettings["efqJJgac5XXj37dIgL2ST3pq"]
+                ClientId = "461861078491-ma9ei04pm3s47393alado1j92f4n28m2.apps.googleusercontent.com",
+                ClientSecret = "efqJJgac5XXj37dIgL2ST3pq"
+            });
         }
     }
 }
