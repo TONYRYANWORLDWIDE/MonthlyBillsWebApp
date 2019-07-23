@@ -42,6 +42,7 @@
           <Property Name="Cost" Type="real" />
           <Property Name="Date" Type="varchar" MaxLength="2" />
           <Property Name="BillAlias" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="transactionsupdateNew">
           <Key>
@@ -71,14 +72,6 @@
           <Property Name="Type" Type="varchar" MaxLength="7" />
           <Property Name="RunningTotal" Type="numeric" Precision="13" Scale="2" />
         </EntityType>
-        <EntityType Name="UserOG">
-          <Key>
-            <PropertyRef Name="UseID" />
-          </Key>
-          <Property Name="UseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="WeeklyBills">
           <Key>
             <PropertyRef Name="id" />
@@ -96,7 +89,6 @@
           <EntitySet Name="MonthlyBills" EntityType="Self.MonthlyBills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="transactionsupdateNew" EntityType="Self.transactionsupdateNew" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UpcomingBills" EntityType="Self.UpcomingBills" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserOG" EntityType="Self.UserOG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeeklyBills" EntityType="Self.WeeklyBills" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -112,6 +104,7 @@
           <Property Name="Cost" Type="Single" />
           <Property Name="Date" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="BillAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="WeeklyBill">
           <Key>
@@ -131,7 +124,6 @@
           <FunctionImport Name="sp_DateOfEachBill" />
           <EntitySet Name="KeyBalances" EntityType="BillsModel.KeyBalance" />
           <EntitySet Name="transactionsupdateNew1" EntityType="BillsModel.transactionsupdateNew1" />
-          <EntitySet Name="UserOGs" EntityType="BillsModel.UserOG" />
         </EntityContainer>
         <EntityType Name="BringHomePay">
           <Key>
@@ -200,14 +192,6 @@
           <Property Name="account_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="sub_cat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="UserOG">
-          <Key>
-            <PropertyRef Name="UseID" />
-          </Key>
-          <Property Name="UseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -217,6 +201,7 @@
           <EntitySetMapping Name="MonthlyBills">
             <EntityTypeMapping TypeName="BillsModel.MonthlyBill">
               <MappingFragment StoreEntitySet="MonthlyBills">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Bill" ColumnName="Bill" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
@@ -294,15 +279,6 @@
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="index" ColumnName="index" />
                 <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserOGs">
-            <EntityTypeMapping TypeName="BillsModel.UserOG">
-              <MappingFragment StoreEntitySet="UserOG">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UseID" ColumnName="UseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -212,7 +212,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KeyBalancesController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MonthlyBillsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
@@ -263,9 +262,6 @@
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UpcomingBill.cs">
-      <DependentUpon>BillsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserOG.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WeeklyBill.cs">
@@ -365,10 +361,8 @@
     <Content Include="Views\KeyBalances\Details.cshtml" />
     <Content Include="Views\KeyBalances\Edit.cshtml" />
     <Content Include="Views\KeyBalances\Index.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-    <Content Include="Views\Login\AddOrEdit.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
