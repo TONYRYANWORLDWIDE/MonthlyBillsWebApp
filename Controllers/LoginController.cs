@@ -15,11 +15,11 @@ namespace MonthlyBillsWebApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Authorize(MonthlyBillsWebApp.Models.User userModel)
+        public ActionResult Authorize(MonthlyBillsWebApp.Models.UserOG userModel)
         {
             using (BillsEntities db = new BillsEntities())
             {
-                var userDetails = db.Users.Where(x => x.UserName == userModel.UserName && x.Password == userModel.Password).FirstOrDefault();
+                var userDetails = db.UserOGs.Where(x => x.UserName == userModel.UserName && x.Password == userModel.Password).FirstOrDefault();
                 if (userDetails == null)
                 {
                     userModel.LoginErrorMessage = "Wrong Username or Password.";
@@ -41,7 +41,7 @@ namespace MonthlyBillsWebApp.Controllers
         }
         public ActionResult AddOrEdit(int id = 0)
         {
-            User userModel = new User();
+            UserOG userModel = new UserOG();
             return View(userModel);
         }
     }

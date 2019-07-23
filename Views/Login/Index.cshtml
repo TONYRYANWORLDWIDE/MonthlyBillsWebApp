@@ -1,4 +1,4 @@
-﻿@model MonthlyBillsWebApp.Models.User
+﻿@model MonthlyBillsWebApp.Models.UserOG
 
 @{
     Layout = null;
@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
     <style>
-        #login-div{
+        #login-div {
             position: absolute;
             left: 40%;
             top: 40%;
@@ -18,17 +18,18 @@
             padding: 20px 20px;
             font-size: 24px;
         }
-        .inputboxes{
+
+        .inputboxes {
             overflow: hidden;
             float: right;
             font-size: 24px;
         }
-        .title{
+
+        .title {
             text-decoration: underline;
-            text-align:center;
+            text-align: center;
             font-size: 28px;
             vertical-align: middle;
-
         }
     </style>
 </head>
@@ -39,27 +40,27 @@
             <table>
                 <tr>
                     @*<td></td>
-                    <td>Welcome</td>*@
-                </tr>
-                <tr>
-                    <td class="inputboxes">                         
-                        @Html.LabelFor(model => model.UserName)
-                        @Html.EditorFor(model => model.UserName)
-                    </td>
-                        
+                        <td>Welcome</td>*@
                 </tr>
                 <tr>
                     <td class="inputboxes">
-                        @Html.LabelFor(model => model.Password)                 
+                        @Html.LabelFor(model => model.UserName)
+                        @Html.EditorFor(model => model.UserName)
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="inputboxes">
+                        @Html.LabelFor(model => model.Password)
                         @Html.EditorFor(model => model.Password)
                     </td>
                 </tr>
                 <tr>
-                    <td></td>                    
+                    <td></td>
                     <td>@Html.ValidationMessageFor(model => model.Password)</td>
                 </tr>
                 <tr>
-                    <td colspan="2">      
+                    <td colspan="2">
                         <label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
                     </td>
                 </tr>

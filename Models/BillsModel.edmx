@@ -71,7 +71,7 @@
           <Property Name="Type" Type="varchar" MaxLength="7" />
           <Property Name="RunningTotal" Type="numeric" Precision="13" Scale="2" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="UserOG">
           <Key>
             <PropertyRef Name="UseID" />
           </Key>
@@ -96,7 +96,7 @@
           <EntitySet Name="MonthlyBills" EntityType="Self.MonthlyBills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="transactionsupdateNew" EntityType="Self.transactionsupdateNew" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UpcomingBills" EntityType="Self.UpcomingBills" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserOG" EntityType="Self.UserOG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeeklyBills" EntityType="Self.WeeklyBills" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -131,7 +131,7 @@
           <FunctionImport Name="sp_DateOfEachBill" />
           <EntitySet Name="KeyBalances" EntityType="BillsModel.KeyBalance" />
           <EntitySet Name="transactionsupdateNew1" EntityType="BillsModel.transactionsupdateNew1" />
-          <EntitySet Name="Users" EntityType="BillsModel.User" />
+          <EntitySet Name="UserOGs" EntityType="BillsModel.UserOG" />
         </EntityContainer>
         <EntityType Name="BringHomePay">
           <Key>
@@ -200,7 +200,7 @@
           <Property Name="account_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="sub_cat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="UserOG">
           <Key>
             <PropertyRef Name="UseID" />
           </Key>
@@ -297,9 +297,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="BillsModel.User">
-              <MappingFragment StoreEntitySet="User">
+          <EntitySetMapping Name="UserOGs">
+            <EntityTypeMapping TypeName="BillsModel.UserOG">
+              <MappingFragment StoreEntitySet="UserOG">
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UseID" ColumnName="UseID" />

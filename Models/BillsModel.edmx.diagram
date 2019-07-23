@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="BillsModel.UpcomingBill" Width="1.5" PointX="10.125" PointY="2.875" />
         <EntityTypeShape EntityType="BillsModel.KeyBalance" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="BillsModel.transactionsupdateNew1" Width="1.5" PointX="3.375" PointY="5.75" />
-        <EntityTypeShape EntityType="BillsModel.User" Width="1.5" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="BillsModel.UserOG" Width="1.5" PointX="5.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -245,7 +245,7 @@
     <Compile Include="Models\UpcomingBill.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.cs">
+    <Compile Include="Models\UserOG.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WeeklyBill.cs">
