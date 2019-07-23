@@ -55,8 +55,8 @@ a:hover {
 abbr[title] {
   border-bottom: none;
   text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-  -moz-text-decoration: underline dotted;
+  /*-webkit-text-decoration: underline dotted;
+  -moz-text-decoration: underline dotted;*/
   text-decoration: underline dotted;
 }
 b,
@@ -1689,8 +1689,9 @@ pre code {
 .col-lg-12 {
   position: relative;
   min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
+
 }
 .col-xs-1,
 .col-xs-2,
@@ -2042,6 +2043,7 @@ pre code {
   .col-md-11,
   .col-md-12 {
     float: left;
+
   }
   .col-md-12 {
     width: 100%;
@@ -2635,7 +2637,7 @@ input[type="search"] {
   box-sizing: border-box;
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
+  /*appearance: none;*/
 }
 input[type="radio"],
 input[type="checkbox"] {
@@ -3096,8 +3098,9 @@ select[multiple].input-lg {
   min-height: 27px;
 }
 .form-horizontal .form-group {
-  margin-right: -15px;
-  margin-left: -15px;
+    margin-right: -15px;
+    margin-left: -15px;
+    width: 50%;
 }
 @media (min-width: 768px) {
   .form-horizontal .control-label {
@@ -5248,7 +5251,7 @@ a.thumbnail.active {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  -webkit-background-size: 40px 40px;
+  /*-webkit-background-size: 40px 40px;*/
   background-size: 40px 40px;
 }
 .progress.active .progress-bar,
@@ -5959,7 +5962,7 @@ button.close {
   border: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
+  /*appearance: none;*/
 }
 .modal-open {
   overflow: hidden;

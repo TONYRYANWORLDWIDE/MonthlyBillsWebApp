@@ -39,10 +39,30 @@ namespace MonthlyBillsWebApp.Controllers
             Session.Abandon();
             return RedirectToAction("Index", "Login");
         }
-        public ActionResult AddOrEdit(int id = 0)
+        [HttpGet]
+        public ActionResult AddOrEdit(int UseID = 0)
         {
             UserOG userModel = new UserOG();
             return View(userModel);
+        }
+        [HttpPost]
+        public ActionResult AddOrEdit(UserOG usermodel)
+        {
+            using (BillsEntities db2 = new BillsEntities())
+            {
+                if(db2.UserOGs.Any(x => x.UserName == usermodel.UserName))
+                {
+                    ViewBag.DuplicateMessage = "Username already exists. Please try again.";
+                    return View("AddOrEdit", usermodel);
+                }
+                db2.UserOGs.Add(usermodel);
+                db2.SaveChanges();
+            }
+            ModelState.Clear();
+            ViewBag.SuccessMessage = "Registration Successful";
+            //return View("AddOrEdit", new UserOG());
+            return RedirectToAction("Index", "Login");
+
         }
     }
 }

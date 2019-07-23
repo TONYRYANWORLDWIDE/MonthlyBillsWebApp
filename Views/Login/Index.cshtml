@@ -34,6 +34,9 @@
     </style>
 </head>
 <body>
+    <div>
+        @Html.ActionLink("New User", "AddOrEdit")
+    </div>
     <div id="login-div">
         @using (Html.BeginForm("Authorize", "Login", FormMethod.Post))
         {

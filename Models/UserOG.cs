@@ -11,12 +11,21 @@ namespace MonthlyBillsWebApp.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class UserOG
     {
         public int UseID { get; set; }
+        [Required(ErrorMessage= "This field is required")]
         public string UserName { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
+        [DataType(DataType.Password)]
+        [DisplayName("Confirm Password")]
+        [Compare("Password")]
+        public string ConfirmPassword { get; set; }
         public string LoginErrorMessage { get; set; }
     }
 }
