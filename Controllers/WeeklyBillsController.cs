@@ -37,7 +37,7 @@ namespace MonthlyBillsWebApp.Controllers
                                orderby u.Bill
                                select u;
             
-            return View(db.WeeklyBills.ToList());
+            return View(weeklybills.ToList());
         }
 
         // GET: WeeklyBills/Details/5
