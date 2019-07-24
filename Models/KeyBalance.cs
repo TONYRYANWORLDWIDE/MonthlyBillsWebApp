@@ -17,5 +17,6 @@ namespace MonthlyBillsWebApp.Models
         public int id { get; set; }
         public Nullable<float> KeyBalance1 { get; set; }
         public Nullable<System.DateTime> DateTime { get; set; }
+        public string UserID { get; set; }
     }
 }

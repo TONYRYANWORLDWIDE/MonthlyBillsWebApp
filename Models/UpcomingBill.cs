@@ -21,5 +21,6 @@ namespace MonthlyBillsWebApp.Models
         public Nullable<float> Amount { get; set; }
         public string Type { get; set; }
         public Nullable<decimal> RunningTotal { get; set; }
+        public string UserID { get; set; }
     }
 }

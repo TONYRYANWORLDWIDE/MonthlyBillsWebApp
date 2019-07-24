@@ -43,8 +43,7 @@ namespace MonthlyBillsWebApp.Controllers
 
             var monthlybills = from u in db.MonthlyBills
                                where u.UserID == userIdValue
-                               orderby u.Bill
-                                
+                               orderby u.Bill                                
                                select u;
             return View(monthlybills.ToList());
         }

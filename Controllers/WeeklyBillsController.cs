@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MonthlyBillsWebApp.Models;
+using System.Security.Claims;
 
 namespace MonthlyBillsWebApp.Controllers
 {
@@ -15,8 +16,27 @@ namespace MonthlyBillsWebApp.Controllers
         private BillsEntities db = new BillsEntities();
 
         // GET: WeeklyBills
+        public string userIdValue { get; private set; }
         public ActionResult Index()
         {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            if (claimsIdentity != null)
+            {
+                // the principal identity is a claims identity.
+                // now we need to find the NameIdentifier claim
+                var userIdClaim = claimsIdentity.Claims
+                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+                if (userIdClaim != null)
+                {
+                    userIdValue = userIdClaim.Value;
+                }
+            }
+            var weeklybills = from u in db.WeeklyBills
+                               where u.UserID == userIdValue
+                               orderby u.Bill
+                               select u;
+            
             return View(db.WeeklyBills.ToList());
         }
 
@@ -54,6 +74,7 @@ namespace MonthlyBillsWebApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
 
             return View(weeklyBill);
         }
