@@ -210,6 +210,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BringHomePaysController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KeyBalancesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -396,6 +397,11 @@
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\BringHomePays\Create.cshtml" />
+    <Content Include="Views\BringHomePays\Delete.cshtml" />
+    <Content Include="Views\BringHomePays\Details.cshtml" />
+    <Content Include="Views\BringHomePays\Edit.cshtml" />
+    <Content Include="Views\BringHomePays\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
