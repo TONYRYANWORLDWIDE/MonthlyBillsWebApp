@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using MonthlyBillsWebApp.Models;
@@ -15,13 +16,36 @@ namespace MonthlyBillsWebApp.Controllers
     {
         private BillsEntities db = new BillsEntities();
 
-        // GET: KeyBalances
+        // GET: 
+        public string userIdValue { get; private set; }
+
         public ActionResult Index()
         {
-            return View(db.KeyBalances.ToList());
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            if (claimsIdentity != null)
+            {
+                // the principal identity is a claims identity.
+                // now we need to find the NameIdentifier claim
+                var userIdClaim = claimsIdentity.Claims
+                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+                if (userIdClaim != null)
+                {
+                    userIdValue = userIdClaim.Value;
+                }
+            }
+            var balance = from u in db.KeyBalances
+                              where u.UserID == userIdValue
+                              
+                              select u;
+
+            return View(balance.ToList());
+        }
+
+            
           
 
-        }
+        
 
         // GET: KeyBalances/Details/5
         public ActionResult Details(int? id)
