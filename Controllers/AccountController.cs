@@ -6,12 +6,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MonthlyBillsWebApp.Models;
+
 
 namespace IdentitySample.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private BillsEntities db = new BillsEntities();
         public AccountController()
         {
         }
@@ -394,8 +397,6 @@ namespace IdentitySample.Controllers
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "MonthlyBills");
         }
-
-        //
         // GET: /Account/ExternalLoginFailure
         [HttpGet]
         [AllowAnonymous]
@@ -403,11 +404,9 @@ namespace IdentitySample.Controllers
         {
             return View();
         }
-
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
-
         private IAuthenticationManager AuthenticationManager
         {
             get
@@ -415,7 +414,6 @@ namespace IdentitySample.Controllers
                 return HttpContext.GetOwinContext().Authentication;
             }
         }
-
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -423,7 +421,6 @@ namespace IdentitySample.Controllers
                 ModelState.AddModelError("", error);
             }
         }
-
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -432,7 +429,6 @@ namespace IdentitySample.Controllers
             }
             return RedirectToAction("Index", "MonthlyBills");
         }
-
         internal class ChallengeResult : HttpUnauthorizedResult
         {
             public ChallengeResult(string provider, string redirectUri)
