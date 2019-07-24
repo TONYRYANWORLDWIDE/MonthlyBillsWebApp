@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BillsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BillsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BringHomePay">
           <Key>
             <PropertyRef Name="id" />
@@ -15,6 +15,7 @@
           <Property Name="DayOfWeek" Type="varchar" MaxLength="9" />
           <Property Name="Frequency" Type="varchar" MaxLength="25" />
           <Property Name="PickOnePayDate" Type="date" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Dates">
           <Key>
@@ -139,6 +140,7 @@
           <Property Name="DayOfWeek" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="Frequency" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="PickOnePayDate" Type="DateTime" Precision="0" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Date">
           <Key>
@@ -230,6 +232,7 @@
           <EntitySetMapping Name="BringHomePays">
             <EntityTypeMapping TypeName="BillsModel.BringHomePay">
               <MappingFragment StoreEntitySet="BringHomePay">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="PickOnePayDate" ColumnName="PickOnePayDate" />
                 <ScalarProperty Name="Frequency" ColumnName="Frequency" />
                 <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />

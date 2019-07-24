@@ -20,5 +20,6 @@ namespace MonthlyBillsWebApp.Models
         public string DayOfWeek { get; set; }
         public string Frequency { get; set; }
         public Nullable<System.DateTime> PickOnePayDate { get; set; }
+        public string UserID { get; set; }
     }
 }
