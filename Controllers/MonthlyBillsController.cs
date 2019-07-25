@@ -20,11 +20,20 @@ namespace MonthlyBillsWebApp.Controllers
         private BillsEntities db = new BillsEntities();
 
         public string userIdValue { get; private set; }
-        public int id { get; private set; }
+       // public int id { get; private set; }
 
         // GET: MonthlyBills
 
+        //public ActionResult Index()
+        //{
+        //    BillsEntities entities = new BillsEntities();
+        //    List<MonthlyBill> monthlyBills = entities.MonthlyBills.ToList();
 
+
+        //    //Add a Dummy Row.
+        //    monthlyBills.Insert(0, new MonthlyBill());
+        //    return View(monthlyBills);
+        //}
         public ActionResult Index()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
@@ -49,7 +58,18 @@ namespace MonthlyBillsWebApp.Controllers
 
         }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        public JsonResult InsertMonthlyBills(MonthlyBill monthlyBill)
+        {
+            using (BillsEntities entities = new BillsEntities())
+            {
+                entities.MonthlyBills.Add(monthlyBill);
+                entities.SaveChanges();
+            }
+
+            return Json(monthlyBill);
+        }
+        [HttpPost]
+
 
         public ActionResult UpdateMonthlyBills(MonthlyBill monthlyBill)
         {
@@ -74,6 +94,28 @@ namespace MonthlyBillsWebApp.Controllers
            return new EmptyResult();
           
         }
+        [HttpPost]
+        public ActionResult DeleteCustomer(int id)
+        {
+            using (BillsEntities entities = new BillsEntities())
+            {
+                MonthlyBill  mb = (from c in entities.MonthlyBills
+                                     where c.id == id
+                                     select c).FirstOrDefault();
+                entities.MonthlyBills.Remove(mb);
+                entities.SaveChanges();
+            }
+
+            var monthlybills = from u in db.MonthlyBills
+                               where u.UserID == userIdValue
+                               orderby u.Bill
+                               select u;
+
+            return View(monthlybills.ToList());
+
+        }
+
+
         [HttpPost]
         // GET: MonthlyBills/Details/5
         public ActionResult Details(int? id)
