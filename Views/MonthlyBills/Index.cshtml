@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "Index";
+    Layout = null;
 }
 <h2>Monthly Bills</h2>
 
@@ -14,63 +14,38 @@
 
 <table id="tblMonthlyBills" class="table">
     <tr class="trbold">
-    
-        <th style="width:100px">Customer Id</th>
-        <th style="width:150px">Name</th>
-        <th style="width:150px">Country</th>
+
+        <th style="width:100px">id</th>
+        <th style="width:150px">Bill</th>
+        <th style="width:150px">Date</th>
+        <th style="width:150px">Cost</th>
         <th style="width:150px"></th>
     </tr>
-    @*<tr>
-    <th class="column1">
-            ID
-        </th>
-        <th class="column1">
-            @Html.DisplayNameFor(model => model.Bill)
-        </th>
-        <th class="column2_3">
-            @Html.DisplayNameFor(model => model.Cost)
-        </th>
-        <th class="column2_3">
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th class="column2_3"></th>
-    </tr>*@
 
-    @foreach (var item in Model)
+    @foreach (MonthlyBillsWebApp.Models.MonthlyBill monthlyBill in Model)
     {
         <tr>
             <td class="id">
                 @*@Html.EditorFor(modelItem => item.id)*@
 
-                <span>@item.id</span>
+                <span>@monthlyBill.id</span>
             </td>
-            <td>
+            <td class="Bill">
                 @* @Html.EditorFor(modelItem => item.Bill)*@
-                <span>@item.Bill</span>
-                <input type="text" value="@item.Bill" style="display:none" />
+                <span>@monthlyBill.Bill</span>
+                <input type="text" value="@monthlyBill.Bill" style="display:none" />
             </td>
-            <td>
+            <td class="Date">
                 @*@Html.EditorFor(modelItem => item.Cost)*@
-                <span>@item.Date</span>
+                <span>@monthlyBill.Date</span>
+                <input type="text" value="@monthlyBill.Date" style="display:none" />
             </td>
-            <td>
+            <td class="Cost">
                 @*@Html.EditorFor(modelItem => item.Date)*@
-                <span>@item.Cost</span>
+                <span>@monthlyBill.Cost</span>
+                <input type="text" value="@monthlyBill.Cost" style="display:none" />
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.BillAlias)
-                </td>*@
-            @*<td>
-                    @Html.ActionLink("Inplace", "Index") |
-                    @Html.ActionLink("Edit Me", "Edit", new { id = item.id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-default" />
-                        </div>
-                    </div>
-                </td>*@
+
             <td>
                 <a class="Edit" href="javascript:;">Edit</a>
                 <a class="Update" href="javascript:;" style="display:none">Update</a>
@@ -86,19 +61,21 @@
 @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
 <script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
 <script type="text/javascript">
-            $(function () {
-            //Remove the dummy row if data present.
-            if ($("#tblMonthlyBills tr").length > 3) {
-                $("#tblMonthlyBills tr:eq(1)").remove();
-            } else {
-                var row = $("#tblMonthlyBills tr:last-child");
-                row.find(".Edit").hide();
-                row.find(".Delete").hide();
-                row.find("span").html('&nbsp;');
-            }
-            });
 
-            $("body").on("click", "#tblMonthlyBills.Edit", function () {
+        //        $(function () {
+        //    //Remove the dummy row if data present.
+        //    if ($("#tblCustomers tr").length > 2) {
+        //        $("#tblCustomers tr:eq(1)").remove();
+        //    } else {
+        //        var row = $("#tblCustomers tr:last-child");
+        //        row.find(".Edit").hide();
+        //        row.find(".Delete").hide();
+        //        row.find("span").html('&nbsp;');
+        //    }
+        //});
+
+
+            $("body").on("click", "#tblMonthlyBills .Edit", function () {
             var row = $(this).closest("tr");
             $("td", row).each(function () {
                 if ($(this).find("input").length > 0) {
@@ -110,6 +87,36 @@
             row.find(".Cancel").show();
             row.find(".Delete").hide();
             $(this).hide();
+            });
+
+            $("body").on("click", "#tblMonthlyBills .Update", function () {
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    var span = $(this).find("span");
+                    var input = $(this).find("input");
+                    span.html(input.val());
+                    span.show();
+                    input.hide();
+                }
+            });
+            row.find(".Edit").show();
+            row.find(".Delete").show();
+            row.find(".Cancel").hide();
+            $(this).hide();
+ 
+            var monthlyBill = {};
+            monthlyBill.id = row.find(".id").find("span").html();
+            monthlyBill.Bill = row.find(".Bill").find("span").html();
+            monthlyBill.Date = row.find(".Date").find("span").html();
+            monthlyBill.Cost = row.find(".Cost").find("span").html();
+            $.ajax({
+                type: "POST",
+                url: "/MonthlyBills/UpdateMonthlyBills",
+                data: '{monthlyBill:' + JSON.stringify(monthlyBill) + '}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            });
         });
 
 </script>

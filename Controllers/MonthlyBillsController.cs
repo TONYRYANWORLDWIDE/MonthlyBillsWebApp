@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+//using System.Data;
+//using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -25,82 +25,64 @@ namespace MonthlyBillsWebApp.Controllers
         // GET: MonthlyBills
         public ActionResult Index()
         {
-            var claimsIdentity = User.Identity as ClaimsIdentity;
-            //if (claimsIdentity != null)
-            //{
-                // the principal identity is a claims identity.
-                // now we need to find the NameIdentifier claim
-            var userIdClaim = claimsIdentity.Claims
-                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            BillsEntities entities = new BillsEntities();
+            List<MonthlyBill> mb = entities.MonthlyBills.ToList();
+            //.Customers.ToList();
 
-            if (userIdClaim != null)
-            {
-                userIdValue = userIdClaim.Value;
-            }
-
-            //MonthlyBill monthlybill = db.MonthlyBills.Find(id);
-            if (false)
-            // (monthlybill == null)
-            {
-                var monthlybills = from u in db.MonthlyBills
-                                   where u.UserID == userIdValue
-                                   orderby u.Bill
-                                   select u;
-
-                return View(monthlybills.ToList());
-            }
-            else
-            {
-                
-
-                //db.Entry(monthlybill).State = EntityState.Modified;
-                    //db.SaveChanges();
-            var monthlybills = from u in db.MonthlyBills
-                                where u.UserID == userIdValue
-                                orderby u.Bill
-                                select u;
-                
-                return View(monthlybills.ToList());
-            }          
+            //Add a Dummy Row.
+            mb.Insert(0, new MonthlyBill());
+            return View(mb);
         }
+
+        //public ActionResult Index()
+        //{
+        //    var claimsIdentity = User.Identity as ClaimsIdentity;
+        //    //if (claimsIdentity != null)
+        //    //{
+        //    // the principal identity is a claims identity.
+        //    // now we need to find the NameIdentifier claim
+        //    var userIdClaim = claimsIdentity.Claims
+        //        .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+        //    if (userIdClaim != null)
+        //    {
+        //        userIdValue = userIdClaim.Value;
+        //    }
+        //    var monthlybills = from u in db.MonthlyBills
+        //                        where u.UserID == userIdValue
+        //                        orderby u.Bill
+        //                        select u;
+
+        //    return View(monthlybills.ToList());
+
+        //}
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "id,Bill,Cost,Date")] MonthlyBill monthlyBill)
+        //[ValidateAntiForgeryToken]
+
+        public ActionResult UpdateMonthlyBills(MonthlyBill monthlyBill)
         {
-            if (ModelState.IsValid)
+            using (BillsEntities entities = new BillsEntities())
             {
-                MonthlyBill monthlybill = db.MonthlyBills.Find(id);
-                db.Entry(monthlyBill).State = EntityState.Modified;
-                bool saveFailed;
-                do
-                {
-                    saveFailed = false;
-                    try
-                    {
-                        db.SaveChanges();
-                    }
-                    catch (DbUpdateConcurrencyException ex)
-                    {
-                        saveFailed = true;
-
-                        // Update the values of the entity that failed to save from the store
-                        ex.Entries.Single().Reload();
-                    }
-                } while (saveFailed);
-                
-                
-                //return RedirectToAction("Index");
+                MonthlyBill updatedBills = (from c in entities.MonthlyBills
+                                            where c.id == monthlyBill.id
+                                            select c).FirstOrDefault();
+                updatedBills.Bill = monthlyBill.Bill;
+                updatedBills.Date = monthlyBill.Date;
+                updatedBills.Cost = monthlyBill.Cost;
+                entities.SaveChanges();
             }
-            var monthlybills = from u in db.MonthlyBills
-                               where u.UserID == userIdValue
-                               orderby u.Bill
-                               select u;
-            return View(monthlybills.ToList());
 
+            //var monthlybills = from u in db.MonthlyBills
+            //                   where u.UserID == userIdValue
+            //                   orderby u.Bill
+            //                   select u;
+
+            //return View(monthlybills.ToList());
+
+           return new EmptyResult();
+          
         }
-
         [HttpPost]
-
         // GET: MonthlyBills/Details/5
         public ActionResult Details(int? id)
         {
@@ -160,7 +142,7 @@ namespace MonthlyBillsWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(monthlyBill).State = EntityState.Modified;
+                db.Entry(monthlyBill).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
