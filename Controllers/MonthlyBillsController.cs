@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using MonthlyBillsWebApp.Models;
 using System.Dynamic;
 using System.Security.Claims;
+using System.Data.Entity.Infrastructure;
 //using Expando;
 
 namespace MonthlyBillsWebApp.Controllers
@@ -16,37 +17,90 @@ namespace MonthlyBillsWebApp.Controllers
     [RequireHttps]
     public class MonthlyBillsController : Controller
     {
-
-
-
-
         private BillsEntities db = new BillsEntities();
 
         public string userIdValue { get; private set; }
+        public int id { get; private set; }
 
         // GET: MonthlyBills
         public ActionResult Index()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
-            if (claimsIdentity != null)
-            {
+            //if (claimsIdentity != null)
+            //{
                 // the principal identity is a claims identity.
                 // now we need to find the NameIdentifier claim
-                var userIdClaim = claimsIdentity.Claims
-                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            var userIdClaim = claimsIdentity.Claims
+                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
-                if (userIdClaim != null)
-                {
-                    userIdValue = userIdClaim.Value;
-                }
+            if (userIdClaim != null)
+            {
+                userIdValue = userIdClaim.Value;
             }
 
+            //MonthlyBill monthlybill = db.MonthlyBills.Find(id);
+            if (false)
+            // (monthlybill == null)
+            {
+                var monthlybills = from u in db.MonthlyBills
+                                   where u.UserID == userIdValue
+                                   orderby u.Bill
+                                   select u;
+
+                return View(monthlybills.ToList());
+            }
+            else
+            {
+                
+
+                //db.Entry(monthlybill).State = EntityState.Modified;
+                    //db.SaveChanges();
+            var monthlybills = from u in db.MonthlyBills
+                                where u.UserID == userIdValue
+                                orderby u.Bill
+                                select u;
+                
+                return View(monthlybills.ToList());
+            }          
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include = "id,Bill,Cost,Date")] MonthlyBill monthlyBill)
+        {
+            if (ModelState.IsValid)
+            {
+                MonthlyBill monthlybill = db.MonthlyBills.Find(id);
+                db.Entry(monthlyBill).State = EntityState.Modified;
+                bool saveFailed;
+                do
+                {
+                    saveFailed = false;
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (DbUpdateConcurrencyException ex)
+                    {
+                        saveFailed = true;
+
+                        // Update the values of the entity that failed to save from the store
+                        ex.Entries.Single().Reload();
+                    }
+                } while (saveFailed);
+                
+                
+                //return RedirectToAction("Index");
+            }
             var monthlybills = from u in db.MonthlyBills
                                where u.UserID == userIdValue
-                               orderby u.Bill                                
+                               orderby u.Bill
                                select u;
             return View(monthlybills.ToList());
+
         }
+
+        [HttpPost]
+
         // GET: MonthlyBills/Details/5
         public ActionResult Details(int? id)
         {
@@ -94,6 +148,7 @@ namespace MonthlyBillsWebApp.Controllers
             {
                 return HttpNotFound();
             }
+           
             return View(monthlyBill);
         }
         // POST: MonthlyBills/Edit/5

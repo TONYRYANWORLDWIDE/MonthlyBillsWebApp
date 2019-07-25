@@ -1,25 +1,30 @@
 ﻿@model IEnumerable<MonthlyBillsWebApp.Models.MonthlyBill>
 
-@*@{
-    if (Session["userID"] == null)
-    {
-        Response.Redirect("~/Login/Index");
-    }
-    ViewBag.Title = "Monthly Bills";
-}*@
 
+@{
+    ViewBag.Title = "Index";
+}
 <h2>Monthly Bills</h2>
-@*@<h3>Username: @Session["userName"].ToString()</h3>*@
+
 
 <p>
-    @Html.ActionLink("Create New", "Create")   
-    @*<a href="@Url.Action("LogOut", "Login")">Log Out</a>*@
+    @Html.ActionLink("Create New", "Create")
+
 </p>
 
-
-<table class="table">
-    <tr class="trbold"> 
-        <th class = "column1">
+<table id="tblMonthlyBills" class="table">
+    <tr class="trbold">
+    
+        <th style="width:100px">Customer Id</th>
+        <th style="width:150px">Name</th>
+        <th style="width:150px">Country</th>
+        <th style="width:150px"></th>
+    </tr>
+    @*<tr>
+    <th class="column1">
+            ID
+        </th>
+        <th class="column1">
             @Html.DisplayNameFor(model => model.Bill)
         </th>
         <th class="column2_3">
@@ -29,28 +34,87 @@
             @Html.DisplayNameFor(model => model.Date)
         </th>
         <th class="column2_3"></th>
-    </tr>
+    </tr>*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bill)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.BillAlias)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="id">
+                @*@Html.EditorFor(modelItem => item.id)*@
+
+                <span>@item.id</span>
+            </td>
+            <td>
+                @* @Html.EditorFor(modelItem => item.Bill)*@
+                <span>@item.Bill</span>
+                <input type="text" value="@item.Bill" style="display:none" />
+            </td>
+            <td>
+                @*@Html.EditorFor(modelItem => item.Cost)*@
+                <span>@item.Date</span>
+            </td>
+            <td>
+                @*@Html.EditorFor(modelItem => item.Date)*@
+                <span>@item.Cost</span>
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.BillAlias)
+                </td>*@
+            @*<td>
+                    @Html.ActionLink("Inplace", "Index") |
+                    @Html.ActionLink("Edit Me", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </td>*@
+            <td>
+                <a class="Edit" href="javascript:;">Edit</a>
+                <a class="Update" href="javascript:;" style="display:none">Update</a>
+                <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
+                <a class="Delete" href="javascript:;">Delete</a>
+            </td>
+        </tr>
+    }
+
 
 </table>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+@*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
+<script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript">
+            $(function () {
+            //Remove the dummy row if data present.
+            if ($("#tblMonthlyBills tr").length > 3) {
+                $("#tblMonthlyBills tr:eq(1)").remove();
+            } else {
+                var row = $("#tblMonthlyBills tr:last-child");
+                row.find(".Edit").hide();
+                row.find(".Delete").hide();
+                row.find("span").html('&nbsp;');
+            }
+            });
+
+            $("body").on("click", "#tblMonthlyBills.Edit", function () {
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    $(this).find("input").show();
+                    $(this).find("span").hide();
+                }
+            });
+            row.find(".Update").show();
+            row.find(".Cancel").show();
+            row.find(".Delete").hide();
+            $(this).hide();
+        });
+
+</script>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
+
