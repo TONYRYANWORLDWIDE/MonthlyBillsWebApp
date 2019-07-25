@@ -18,13 +18,11 @@ namespace IdentitySample.Controllers
         public AccountController()
         {
         }
-
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
@@ -37,8 +35,6 @@ namespace IdentitySample.Controllers
                 _userManager = value;
             }
         }
-
-        //
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]
@@ -70,7 +66,6 @@ namespace IdentitySample.Controllers
             {
                 return View(model);
             }
-
             // This doen't count login failures towards lockout only two factor authentication
             // To enable password failures to trigger lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -88,8 +83,6 @@ namespace IdentitySample.Controllers
                     return View(model);
             }
         }
-
-        //
         // GET: /Account/VerifyCode
         [HttpGet]
         [AllowAnonymous]
@@ -107,8 +100,6 @@ namespace IdentitySample.Controllers
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-
-        //
         // POST: /Account/VerifyCode
         [HttpPost]
         [AllowAnonymous]
@@ -133,8 +124,6 @@ namespace IdentitySample.Controllers
                     return View(model);
             }
         }
-
-        //
         // GET: /Account/Register
         [HttpGet]
         [AllowAnonymous]
@@ -142,8 +131,6 @@ namespace IdentitySample.Controllers
         {
             return View();
         }
-
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -218,8 +205,6 @@ namespace IdentitySample.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-        //
         // GET: /Account/ForgotPasswordConfirmation
         [HttpGet]
         [AllowAnonymous]
@@ -227,8 +212,6 @@ namespace IdentitySample.Controllers
         {
             return View();
         }
-
-        //
         // GET: /Account/ResetPassword
         [HttpGet]
         [AllowAnonymous]
@@ -236,8 +219,6 @@ namespace IdentitySample.Controllers
         {
             return code == null ? View("Error") : View();
         }
-
-        //
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
@@ -262,8 +243,6 @@ namespace IdentitySample.Controllers
             AddErrors(result);
             return View();
         }
-
-        //
         // GET: /Account/ResetPasswordConfirmation
         [HttpGet]
         [AllowAnonymous]
@@ -271,8 +250,6 @@ namespace IdentitySample.Controllers
         {
             return View();
         }
-
-        //
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
@@ -282,8 +259,6 @@ namespace IdentitySample.Controllers
             // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
-
-        //
         // GET: /Account/SendCode
         [HttpGet]
         [AllowAnonymous]
@@ -298,8 +273,6 @@ namespace IdentitySample.Controllers
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-
-        //
         // POST: /Account/SendCode
         [HttpPost]
         [AllowAnonymous]
@@ -318,8 +291,6 @@ namespace IdentitySample.Controllers
             }
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
-
-        //
         // GET: /Account/ExternalLoginCallback
         [HttpGet]
         [AllowAnonymous]
@@ -349,8 +320,6 @@ namespace IdentitySample.Controllers
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
-
-        //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]
@@ -435,18 +404,15 @@ namespace IdentitySample.Controllers
                 : this(provider, redirectUri, null)
             {
             }
-
             public ChallengeResult(string provider, string redirectUri, string userId)
             {
                 LoginProvider = provider;
                 RedirectUri = redirectUri;
                 UserId = userId;
             }
-
             public string LoginProvider { get; set; }
             public string RedirectUri { get; set; }
             public string UserId { get; set; }
-
             public override void ExecuteResult(ControllerContext context)
             {
                 var properties = new AuthenticationProperties { RedirectUri = RedirectUri };

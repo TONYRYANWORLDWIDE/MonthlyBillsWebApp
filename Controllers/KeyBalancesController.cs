@@ -35,8 +35,7 @@ namespace MonthlyBillsWebApp.Controllers
                 }
             }
             var balance = from u in db.KeyBalances
-                              where u.UserID == userIdValue
-                              
+                              where u.UserID == userIdValue                              
                               select u;
 
             return View(balance.ToList());
