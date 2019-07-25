@@ -58,7 +58,7 @@ namespace MonthlyBillsWebApp.Controllers
 
         }
         [HttpPost]
-        public JsonResult InsertMonthlyBills(MonthlyBill monthlyBill)
+        public System.Web.Mvc.JsonResult InsertMonthlyBills(MonthlyBill monthlyBill)
         {
             using (BillsEntities entities = new BillsEntities())
             {
