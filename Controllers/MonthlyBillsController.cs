@@ -69,8 +69,6 @@ namespace MonthlyBillsWebApp.Controllers
             return Json(monthlyBill);
         }
         [HttpPost]
-
-
         public ActionResult UpdateMonthlyBills(MonthlyBill monthlyBill)
         {
             using (BillsEntities entities = new BillsEntities())
@@ -90,9 +88,7 @@ namespace MonthlyBillsWebApp.Controllers
             //                   select u;
 
             //return View(monthlybills.ToList());
-
-           return new EmptyResult();
-          
+           return new EmptyResult();          
         }
         [HttpPost]
         public ActionResult DeleteCustomer(int id)
@@ -105,17 +101,12 @@ namespace MonthlyBillsWebApp.Controllers
                 entities.MonthlyBills.Remove(mb);
                 entities.SaveChanges();
             }
-
             var monthlybills = from u in db.MonthlyBills
                                where u.UserID == userIdValue
                                orderby u.Bill
                                select u;
-
             return View(monthlybills.ToList());
-
         }
-
-
         [HttpPost]
         // GET: MonthlyBills/Details/5
         public ActionResult Details(int? id)
@@ -137,21 +128,20 @@ namespace MonthlyBillsWebApp.Controllers
         {
             return View();
         }
-        // POST: MonthlyBills/Create
-        // TO DO // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Bill,Cost,Date,BillAlias")] MonthlyBill monthlyBill)
-        {
-            if (ModelState.IsValid)
-            {
-                db.MonthlyBills.Add(monthlyBill);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(monthlyBill);
-        }
+        // POST: MonthlyBills/Create
+        //public ActionResult Create([Bind(Include = "id,Bill,Cost,Date,BillAlias")] MonthlyBill monthlyBill)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.MonthlyBills.Add(monthlyBill);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(monthlyBill);
+        //}
         // GET: MonthlyBills/Edit/5
         public ActionResult Edit(int? id)
         {
