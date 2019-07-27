@@ -53,8 +53,8 @@ namespace MonthlyBillsWebApp.Controllers
                                orderby u.Bill
                                select u;
 
-            //return View(monthlybills.ToList());
-            return View(monthlybills);
+            return View(monthlybills.ToList());
+            //return View(monthlybills);
 
         }
         [HttpPost]

@@ -135,6 +135,22 @@
         $(this).hide();
     });
 
+        $("body").on("click", "#tblMonthlyBills .Cancel", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                $(this).find("input").hide();
+                $(this).find("span").show();
+            }
+        });
+        row.find(".Edit").show();
+        row.find(".Update").hide();
+        row.find(".Cancel").hide();
+        row.find(".Delete").show();
+        $(this).hide();
+    });
+
+
     $("body").on("click", "#tblMonthlyBills .Update", function () {
         var row = $(this).closest("tr");
         $("td", row).each(function () {
