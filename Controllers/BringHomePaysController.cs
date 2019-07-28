@@ -21,11 +21,8 @@ namespace MonthlyBillsWebApp.Controllers
             var claimsIdentity = User.Identity as ClaimsIdentity;
             if (claimsIdentity != null)
             {
-                // the principal identity is a claims identity.
-                // now we need to find the NameIdentifier claim
                 var userIdClaim = claimsIdentity.Claims
                     .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-
                 if (userIdClaim != null)
                 {
                     userIdValue = userIdClaim.Value;
@@ -34,11 +31,8 @@ namespace MonthlyBillsWebApp.Controllers
             var bringhome = from u in db.BringHomePays
                           where u.UserID == userIdValue
                           select u;
-
             return View(bringhome.ToList());
         }
-
-        // GET: BringHomePays/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -52,16 +46,10 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(bringHomePay);
         }
-
-        // GET: BringHomePays/Create
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: BringHomePays/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,Name,amount,DayOfWeek,Frequency,PickOnePayDate,UserID")] BringHomePay bringHomePay)
@@ -75,8 +63,6 @@ namespace MonthlyBillsWebApp.Controllers
 
             return View(bringHomePay);
         }
-
-        // GET: BringHomePays/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,10 +76,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(bringHomePay);
         }
-
-        // POST: BringHomePays/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Name,amount,DayOfWeek,Frequency,PickOnePayDate,UserID")] BringHomePay bringHomePay)
@@ -106,8 +88,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(bringHomePay);
         }
-
-        // GET: BringHomePays/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -121,8 +101,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(bringHomePay);
         }
-
-        // POST: BringHomePays/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -132,7 +110,6 @@ namespace MonthlyBillsWebApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

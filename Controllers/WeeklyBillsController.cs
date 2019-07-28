@@ -19,6 +19,16 @@ namespace MonthlyBillsWebApp.Controllers
         public string userIdValue { get; private set; }
         public ActionResult Index()
         {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+
+
+            var userIdClaim = claimsIdentity.Claims
+                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+            if (userIdClaim != null)
+            {
+                userIdValue = userIdClaim.Value;
+            }
 
             var weeklybills = from u in db.WeeklyBills
                                where u.UserID == userIdValue
