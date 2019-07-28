@@ -33,6 +33,10 @@ namespace MonthlyBillsWebApp.Controllers
                 {
                     userIdValue = userIdClaim.Value;
                 }
+                else
+                {
+                    userIdValue = "tempuser";
+                }
             }
             var balance = from u in db.KeyBalances
                               where u.UserID == userIdValue                              
@@ -65,19 +69,32 @@ namespace MonthlyBillsWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,KeyBalance1,DateTime")] KeyBalance keyBalance)
+        public ActionResult Create([Bind(Include = "id,KeyBalance1,DateTime,UserID")] KeyBalance keyBalance)
         {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+
+            var userIdClaim = claimsIdentity.Claims
+                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+
+            if (userIdClaim != null)
+            {
+                userIdValue = userIdClaim.Value;
+            }
+            else
+            {
+                userIdValue = "tempuser";
+            }
+
             if (ModelState.IsValid)
             {
+                keyBalance.UserID = userIdValue;
                 db.KeyBalances.Add(keyBalance);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(keyBalance);
         }
-
-        // GET: KeyBalances/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,8 +116,24 @@ namespace MonthlyBillsWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,KeyBalance1,DateTime")] KeyBalance keyBalance)
         {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+
+            var userIdClaim = claimsIdentity.Claims
+                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+
+            if (userIdClaim != null)
+            {
+                userIdValue = userIdClaim.Value;
+            }
+            else
+            {
+                userIdValue = "tempuser";
+            }
+
             if (ModelState.IsValid)
             {
+                keyBalance.UserID = userIdValue;
                 db.Entry(keyBalance).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

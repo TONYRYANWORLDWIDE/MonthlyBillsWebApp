@@ -31,7 +31,7 @@ namespace MonthlyBillsWebApp.Controllers
             }
             else
             {
-                userIdValue = ip;
+                userIdValue = "tempuser";
             }
             var weeklybills = from u in db.WeeklyBills
                                where u.UserID == userIdValue
@@ -128,11 +128,8 @@ namespace MonthlyBillsWebApp.Controllers
             }
             else
             {
-                userIdValue = "f";
+                userIdValue = "tempuser";
             }
-
-
-
 
 
             if (ModelState.IsValid)
