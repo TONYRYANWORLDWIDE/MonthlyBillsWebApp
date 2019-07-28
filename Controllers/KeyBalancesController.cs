@@ -24,8 +24,6 @@ namespace MonthlyBillsWebApp.Controllers
             var claimsIdentity = User.Identity as ClaimsIdentity;
             if (claimsIdentity != null)
             {
-                // the principal identity is a claims identity.
-                // now we need to find the NameIdentifier claim
                 var userIdClaim = claimsIdentity.Claims
                     .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
@@ -63,10 +61,6 @@ namespace MonthlyBillsWebApp.Controllers
         {
             return View();
         }
-
-        // POST: KeyBalances/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,KeyBalance1,DateTime,UserID")] KeyBalance keyBalance)
@@ -75,8 +69,6 @@ namespace MonthlyBillsWebApp.Controllers
 
             var userIdClaim = claimsIdentity.Claims
                 .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-
-
             if (userIdClaim != null)
             {
                 userIdValue = userIdClaim.Value;
@@ -108,10 +100,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(keyBalance);
         }
-
-        // POST: KeyBalances/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,KeyBalance1,DateTime")] KeyBalance keyBalance)
@@ -120,8 +108,6 @@ namespace MonthlyBillsWebApp.Controllers
 
             var userIdClaim = claimsIdentity.Claims
                 .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-
-
             if (userIdClaim != null)
             {
                 userIdValue = userIdClaim.Value;
@@ -130,7 +116,6 @@ namespace MonthlyBillsWebApp.Controllers
             {
                 userIdValue = "tempuser";
             }
-
             if (ModelState.IsValid)
             {
                 keyBalance.UserID = userIdValue;
@@ -140,8 +125,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(keyBalance);
         }
-
-        // GET: KeyBalances/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -155,8 +138,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(keyBalance);
         }
-
-        // POST: KeyBalances/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -166,7 +147,6 @@ namespace MonthlyBillsWebApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -21,17 +21,18 @@ namespace MonthlyBillsWebApp.Controllers
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
-            if (claimsIdentity != null)
-            {
-                // the principal identity is a claims identity.
-                // now we need to find the NameIdentifier claim
-                var userIdClaim = claimsIdentity.Claims
-                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
-                if (userIdClaim != null)
-                {
-                    userIdValue = userIdClaim.Value;
-                }
+
+            var userIdClaim = claimsIdentity.Claims
+                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+            if (userIdClaim != null)
+            {
+                userIdValue = userIdClaim.Value;
+            }
+            else
+            {
+                userIdValue = "tempuser";
             }
             using (var context = new BillsEntities())
             {
@@ -65,13 +66,12 @@ namespace MonthlyBillsWebApp.Controllers
                     upcomingbills = upcomingbills.OrderBy(s => s.TheDate);
                     break;
             }
-            int pageSize = (upcomingbills.Count() / 6) + 1;
+            int pageSize = 20;              
+
             int pageNumber = (page ?? 1);
             return View(upcomingbills.ToPagedList(pageNumber, pageSize));
             //return View(upcomingbills.ToList());
         }
-
-        // GET: UpcomingBills/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -85,30 +85,35 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(upcomingBill);
         }
-
-        // GET: UpcomingBills/Create
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: UpcomingBills/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,TheDate,DayOfWeek,Name,Amount,Type,RunningTotal")] UpcomingBill upcomingBill)
         {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+
+            var userIdClaim = claimsIdentity.Claims
+                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            if (userIdClaim != null)
+            {
+                userIdValue = userIdClaim.Value;
+            }
+            else
+            {
+                userIdValue = "tempuser";
+            }
             if (ModelState.IsValid)
             {
+                upcomingBill.UserID = userIdValue;
                 db.UpcomingBills.Add(upcomingBill);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(upcomingBill);
         }
-
         // GET: UpcomingBills/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -123,10 +128,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(upcomingBill);
         }
-
-        // POST: UpcomingBills/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,TheDate,DayOfWeek,Name,Amount,Type,RunningTotal")] UpcomingBill upcomingBill)
@@ -139,8 +140,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(upcomingBill);
         }
-
-        // GET: UpcomingBills/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -154,8 +153,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(upcomingBill);
         }
-
-        // POST: UpcomingBills/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -165,7 +162,6 @@ namespace MonthlyBillsWebApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

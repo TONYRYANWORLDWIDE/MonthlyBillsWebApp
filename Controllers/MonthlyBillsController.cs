@@ -37,12 +37,16 @@ namespace MonthlyBillsWebApp.Controllers
         public ActionResult Index()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
+
             var userIdClaim = claimsIdentity.Claims
                 .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-
             if (userIdClaim != null)
             {
                 userIdValue = userIdClaim.Value;
+            }
+            else
+            {
+                userIdValue = "tempuser";
             }
             var monthlybills = from u in db.MonthlyBills
                                where u.UserID == userIdValue
@@ -51,7 +55,6 @@ namespace MonthlyBillsWebApp.Controllers
 
             return View(monthlybills.ToList());
             //return View(monthlybills);
-
         }
         [HttpPost]
         public System.Web.Mvc.JsonResult InsertMonthlyBills(MonthlyBill monthlyBill)
@@ -77,13 +80,6 @@ namespace MonthlyBillsWebApp.Controllers
                 updatedBills.Cost = monthlyBill.Cost;
                 entities.SaveChanges();
             }
-
-            //var monthlybills = from u in db.MonthlyBills
-            //                   where u.UserID == userIdValue
-            //                   orderby u.Bill
-            //                   select u;
-
-            //return View(monthlybills.ToList());
            return new EmptyResult();          
         }
         [HttpPost]
@@ -128,16 +124,30 @@ namespace MonthlyBillsWebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // POST: MonthlyBills/Create
-        //public ActionResult Create([Bind(Include = "id,Bill,Cost,Date,BillAlias")] MonthlyBill monthlyBill)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.MonthlyBills.Add(monthlyBill);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(monthlyBill);
-        //}
+        public ActionResult Create([Bind(Include = "id,Bill,Cost,Date,BillAlias")] MonthlyBill monthlyBill)
+        {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+
+            var userIdClaim = claimsIdentity.Claims
+                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            if (userIdClaim != null)
+            {
+                userIdValue = userIdClaim.Value;
+            }
+            else
+            {
+                userIdValue = "tempuser";
+            }
+
+            if (ModelState.IsValid)
+            {
+                monthlyBill.UserID = userIdValue;
+                db.MonthlyBills.Add(monthlyBill);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(monthlyBill);
+        }
         // GET: MonthlyBills/Edit/5
         public ActionResult Edit(int? id)
         {

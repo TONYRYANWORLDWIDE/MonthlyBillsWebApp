@@ -27,6 +27,10 @@ namespace MonthlyBillsWebApp.Controllers
                 {
                     userIdValue = userIdClaim.Value;
                 }
+                else
+                {
+                    userIdValue = "tempuser";
+                }
             }
             var bringhome = from u in db.BringHomePays
                           where u.UserID == userIdValue
@@ -54,13 +58,25 @@ namespace MonthlyBillsWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,Name,amount,DayOfWeek,Frequency,PickOnePayDate,UserID")] BringHomePay bringHomePay)
         {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+
+            var userIdClaim = claimsIdentity.Claims
+                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            if (userIdClaim != null)
+            {
+                userIdValue = userIdClaim.Value;
+            }
+            else
+            {
+                userIdValue = "tempuser";
+            }
             if (ModelState.IsValid)
             {
+                bringHomePay.UserID = userIdValue;
                 db.BringHomePays.Add(bringHomePay);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(bringHomePay);
         }
         public ActionResult Edit(int? id)
@@ -80,8 +96,21 @@ namespace MonthlyBillsWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Name,amount,DayOfWeek,Frequency,PickOnePayDate,UserID")] BringHomePay bringHomePay)
         {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+
+            var userIdClaim = claimsIdentity.Claims
+                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            if (userIdClaim != null)
+            {
+                userIdValue = userIdClaim.Value;
+            }
+            else
+            {
+                userIdValue = "tempuser";
+            }
             if (ModelState.IsValid)
             {
+                bringHomePay.UserID = userIdValue;
                 db.Entry(bringHomePay).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

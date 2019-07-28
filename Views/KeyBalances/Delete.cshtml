@@ -3,37 +3,28 @@
 @{
     ViewBag.Title = "Delete";
 }
-
 <h2>Delete</h2>
-
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>KeyBalance</h4>
+    <h4></h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.KeyBalance1)
-        </dt>
-
+        <dt style="text-align:left;">
+            Bank Balance
         <dd>
             @Html.DisplayFor(model => model.KeyBalance1)
         </dd>
-
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.DateTime)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.DateTime)
-        </dd>
-
+        </dd>*@
     </dl>
-
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-default" style="text-align:left;"/> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }
