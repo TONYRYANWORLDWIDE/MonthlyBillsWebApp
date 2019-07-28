@@ -37,10 +37,6 @@ namespace MonthlyBillsWebApp.Controllers
         public ActionResult Index()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
-            //if (claimsIdentity != null)
-            //{
-            // the principal identity is a claims identity.
-            // now we need to find the NameIdentifier claim
             var userIdClaim = claimsIdentity.Claims
                 .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 

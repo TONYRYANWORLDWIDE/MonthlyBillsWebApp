@@ -40,13 +40,6 @@ namespace MonthlyBillsWebApp.Controllers
 
             return View(balance.ToList());
         }
-
-            
-          
-
-        
-
-        // GET: KeyBalances/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)

@@ -20,7 +20,7 @@ namespace MonthlyBillsWebApp.Controllers
         public ActionResult Index()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
-
+            string ip = Request.UserHostAddress;
 
             var userIdClaim = claimsIdentity.Claims
                 .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
@@ -29,16 +29,18 @@ namespace MonthlyBillsWebApp.Controllers
             {
                 userIdValue = userIdClaim.Value;
             }
-
+            else
+            {
+                userIdValue = ip;
+            }
             var weeklybills = from u in db.WeeklyBills
                                where u.UserID == userIdValue
                                orderby u.Bill
                                select u;
+
             
             return View(weeklybills.ToList());
         }
-
-        // GET: WeeklyBills/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -64,10 +66,27 @@ namespace MonthlyBillsWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Bill,Cost,id")] WeeklyBill weeklyBill)
+        public ActionResult Create([Bind(Include = "Bill,Cost,id,DayOfWeek,UserID")] WeeklyBill weeklyBill)
         {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+
+            var userIdClaim = claimsIdentity.Claims
+                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+
+            if (userIdClaim != null)
+            {
+                userIdValue = userIdClaim.Value;
+            }
+            else
+            {
+                userIdValue = "tempuser";
+            }
+
             if (ModelState.IsValid)
             {
+                weeklyBill.UserID = userIdValue;
+
                 db.WeeklyBills.Add(weeklyBill);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -92,15 +111,33 @@ namespace MonthlyBillsWebApp.Controllers
             return View(weeklyBill);
         }
 
-        // POST: WeeklyBills/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Bill,Cost,id,DayOfWeek")] WeeklyBill weeklyBill)
         {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+
+            var userIdClaim = claimsIdentity.Claims
+                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+
+            if (userIdClaim != null)
+            {
+                userIdValue = userIdClaim.Value;
+            }
+            else
+            {
+                userIdValue = "f";
+            }
+
+
+
+
+
             if (ModelState.IsValid)
             {
+                weeklyBill.UserID = userIdValue;
                 db.Entry(weeklyBill).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
