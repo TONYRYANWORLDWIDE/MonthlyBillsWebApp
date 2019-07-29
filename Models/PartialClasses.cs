@@ -11,6 +11,10 @@ namespace MonthlyBillsWebApp.Models
     public partial class UpcomingBill
     {
     }
+    [MetadataType(typeof(WeeklyBillsMetadata))]
+    public partial class WeeklyBill
+    {
+    }
 
 
 }
