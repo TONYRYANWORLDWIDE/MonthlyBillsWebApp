@@ -161,10 +161,10 @@ namespace MonthlyBillsWebApp.Controllers
                 entities.MonthlyBills.Remove(mb);
                 entities.SaveChanges();
             }
-            var monthlybills = from u in db.MonthlyBills
-                               where u.UserID == userIdValue
-                               orderby u.Bill
-                               select u;
+            //var monthlybills = from u in db.MonthlyBills
+            //                   where u.UserID == userIdValue
+            //                   orderby u.Bill
+            //                   select u;
             return RedirectToAction("Index");
         }
 
