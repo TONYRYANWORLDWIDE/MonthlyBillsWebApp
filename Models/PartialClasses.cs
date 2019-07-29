@@ -15,6 +15,12 @@ namespace MonthlyBillsWebApp.Models
     public partial class WeeklyBill
     {
     }
-
-
+    [MetadataType(typeof(KeyBalancemetadata))]
+    public partial class KeyBalance
+    {
+    }
+    [MetadataType(typeof(BringHomePaymetadata))]
+    public partial class BringHomePay
+    {
+    }
 }
