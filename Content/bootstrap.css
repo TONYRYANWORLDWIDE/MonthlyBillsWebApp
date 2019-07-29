@@ -2376,8 +2376,8 @@ pre code {
   }
 }
 table {
-    border: 5px solid black;
-  background-color: rgba(0, 0, 0, 0.075);
+  border: 5px solid black;
+  /*background-color: rgba(0, 0, 0, 0.075);*/
   width: 50%;
 
 }

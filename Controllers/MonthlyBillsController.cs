@@ -66,23 +66,7 @@ namespace MonthlyBillsWebApp.Controllers
             }
            return new EmptyResult();          
         }
-        [HttpPost]
-        public ActionResult DeleteCustomer(int id)
-        {
-            using (BillsEntities entities = new BillsEntities())
-            {
-                MonthlyBill  mb = (from c in entities.MonthlyBills
-                                     where c.id == id
-                                     select c).FirstOrDefault();
-                entities.MonthlyBills.Remove(mb);
-                entities.SaveChanges();
-            }
-            var monthlybills = from u in db.MonthlyBills
-                               where u.UserID == userIdValue
-                               orderby u.Bill
-                               select u;
-            return View(monthlybills.ToList());
-        }
+        
         [HttpPost]
         public ActionResult Details(int? id)
         {
@@ -164,15 +148,35 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(monthlyBill);
         }
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
-            MonthlyBill monthlyBill = db.MonthlyBills.Find(id);
-            db.MonthlyBills.Remove(monthlyBill);
-            db.SaveChanges();
+            using (BillsEntities entities = new BillsEntities())
+            {
+                MonthlyBill mb = (from c in entities.MonthlyBills
+                                  where c.id == id
+                                  select c).FirstOrDefault();
+                entities.MonthlyBills.Remove(mb);
+                entities.SaveChanges();
+            }
+            var monthlybills = from u in db.MonthlyBills
+                               where u.UserID == userIdValue
+                               orderby u.Bill
+                               select u;
             return RedirectToAction("Index");
         }
+
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    MonthlyBill monthlyBill = db.MonthlyBills.Find(id);
+        //    db.MonthlyBills.Remove(monthlyBill);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
         protected override void Dispose(bool disposing)
         {
             if (disposing)

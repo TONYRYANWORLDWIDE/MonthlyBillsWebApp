@@ -20,6 +20,10 @@ textarea {
 .field-validation-error {
     color: #b94a48;
 }
+tr {
+    background-color: rgba(0, 0, 0, 0.075);
+   
+}
 
 .field-validation-valid {
     display: none;

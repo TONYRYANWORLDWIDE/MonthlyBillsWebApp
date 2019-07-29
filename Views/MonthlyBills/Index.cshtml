@@ -12,11 +12,11 @@
 
 </p>
 
-<table id="tblMonthlyBills" class="table">
+<table id="tblMonthlyBills" class="table ">
     <tr class="trbold">
 
-        <th style="width:1%;">id</th>
-        <th style="width: 24%;">Bill</th>
+        <th style="visibility:collapse; background-color:white; border:solid black 5px;">id</th>
+        <th style="width: 25%;">Bill</th>
         <th style="width:25%">Date</th>
         <th style="width: 25%;">Cost</th>
         <th style="width:25%;"></th>
@@ -25,10 +25,10 @@
     @foreach (MonthlyBillsWebApp.Models.MonthlyBill monthlyBill in Model)
     {
         <tr>
-            <td class="id">
+            <td class="id" style="visibility:collapse; border:5px solid black;">
                 @*@Html.EditorFor(modelItem => item.id)*@
 
-                <span>@monthlyBill.id </span>
+                <span>@Html.HiddenFor(modelItem => monthlyBill.id) </span>
             </td>
             <td class="Bill">
                 @* @Html.EditorFor(modelItem => item.Bill)*@
@@ -50,7 +50,8 @@
                 <a class="Edit" href="javascript:;">Edit</a>
                 <a class="Update" href="javascript:;" style="display:none">Update</a>
                 <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
-                <a class="Delete" href="javascript:;">Delete</a>
+                @*  <a class="Delete" href="javascript:;">Delete</a>*@
+                @Html.ActionLink("Delete", "Delete", new { id = monthlyBill.id })
             </td>
         </tr>
     }
@@ -187,7 +188,7 @@
         var id = row.find("span").html();
         $.ajax({
             type: "POST",
-            url: "/MonthlyBills/DeleteCustomer",
+            url: "/MonthlyBills/Delete",
             data: '{id: ' + id + '}',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
