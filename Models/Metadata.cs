@@ -23,11 +23,14 @@ namespace MonthlyBillsWebApp.Models
     }
     public class UpcomingBillMetadata
     {
-
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [Display(Name = "TheDate")]
         public Date TheDate;
-
-
+    }
+    public class WeeklyBills
+    {
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name = "TheDate")]
+        public Date TheDate;
     }
 }

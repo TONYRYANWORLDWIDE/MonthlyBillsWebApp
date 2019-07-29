@@ -70,7 +70,6 @@ namespace MonthlyBillsWebApp.Controllers
 
             int pageNumber = (page ?? 1);
             return View(upcomingbills.ToPagedList(pageNumber, pageSize));
-            //return View(upcomingbills.ToList());
         }
         public ActionResult Details(int? id)
         {
@@ -114,7 +113,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(upcomingBill);
         }
-        // GET: UpcomingBills/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)

@@ -18,22 +18,8 @@ namespace MonthlyBillsWebApp.Controllers
     public class MonthlyBillsController : Controller
     {
         private BillsEntities db = new BillsEntities();
-
         public string userIdValue { get; private set; }
        // public int id { get; private set; }
-
-        // GET: MonthlyBills
-
-        //public ActionResult Index()
-        //{
-        //    BillsEntities entities = new BillsEntities();
-        //    List<MonthlyBill> monthlyBills = entities.MonthlyBills.ToList();
-
-
-        //    //Add a Dummy Row.
-        //    monthlyBills.Insert(0, new MonthlyBill());
-        //    return View(monthlyBills);
-        //}
         public ActionResult Index()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
@@ -52,7 +38,6 @@ namespace MonthlyBillsWebApp.Controllers
                                where u.UserID == userIdValue
                                orderby u.Bill
                                select u;
-
             return View(monthlybills.ToList());
             //return View(monthlybills);
         }
@@ -64,7 +49,6 @@ namespace MonthlyBillsWebApp.Controllers
                 entities.MonthlyBills.Add(monthlyBill);
                 entities.SaveChanges();
             }
-
             return Json(monthlyBill);
         }
         [HttpPost]
@@ -100,7 +84,6 @@ namespace MonthlyBillsWebApp.Controllers
             return View(monthlybills.ToList());
         }
         [HttpPost]
-        // GET: MonthlyBills/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -114,16 +97,12 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(monthlyBill);
         }
-
-        // GET: MonthlyBills/Create
         public ActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // POST: MonthlyBills/Create
         public ActionResult Create([Bind(Include = "id,Bill,Cost,Date,BillAlias")] MonthlyBill monthlyBill)
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
@@ -138,7 +117,6 @@ namespace MonthlyBillsWebApp.Controllers
             {
                 userIdValue = "tempuser";
             }
-
             if (ModelState.IsValid)
             {
                 monthlyBill.UserID = userIdValue;
@@ -148,7 +126,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(monthlyBill);
         }
-        // GET: MonthlyBills/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -159,13 +136,9 @@ namespace MonthlyBillsWebApp.Controllers
             if (monthlyBill == null)
             {
                 return HttpNotFound();
-            }
-           
+            }           
             return View(monthlyBill);
         }
-        // POST: MonthlyBills/Edit/5
-        // TO DO // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Bill,Cost,Date,BillAlias")] MonthlyBill monthlyBill)
@@ -178,7 +151,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(monthlyBill);
         }
-        // GET: MonthlyBills/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -192,7 +164,6 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(monthlyBill);
         }
-        // POST: MonthlyBills/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
