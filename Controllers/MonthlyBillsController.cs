@@ -161,22 +161,11 @@ namespace MonthlyBillsWebApp.Controllers
                 entities.MonthlyBills.Remove(mb);
                 entities.SaveChanges();
             }
-            //var monthlybills = from u in db.MonthlyBills
-            //                   where u.UserID == userIdValue
-            //                   orderby u.Bill
-            //                   select u;
+
             return RedirectToAction("Index");
         }
 
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    MonthlyBill monthlyBill = db.MonthlyBills.Find(id);
-        //    db.MonthlyBills.Remove(monthlyBill);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

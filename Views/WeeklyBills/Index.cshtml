@@ -15,37 +15,165 @@
     @*<a href="@Url.Action("LogOut", "Login")">Log Out</a>*@
 </p>
 
-<table class="table">
+<table id="tblWeeklyBills" class="table">
     <tr class="trbold">
-        <th>
-            @Html.DisplayNameFor(model => model.Bill)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DayOfWeek)
-        </th>
-        <th></th>
+
+        <th style="visibility:collapse; background-color:white; border:solid black 5px;">id</th>
+        <th style="width: 25%;">Bill</th>
+        <th style="width:25%">DayOfWeek</th>
+        <th style="width: 25%;">Cost</th>
+        <th style="width:25%;"></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Bill)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Cost)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.DayOfWeek)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.id })
-    </td>
-</tr>
-}
+
+
+
+    @*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bill)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DayOfWeek)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }*@
+
+    @foreach (MonthlyBillsWebApp.Models.WeeklyBill weeklyBill in Model)
+    {
+        <tr>
+            <td class="id" style="visibility:collapse; border:5px solid black;">
+                @*@Html.EditorFor(modelItem => item.id)*@
+
+                <span>@Html.HiddenFor(modelItem => weeklyBill.id) </span>
+            </td>
+            <td class="Bill">
+     
+                <span>@weeklyBill.Bill</span>
+                <input type="text" value="@weeklyBill.Bill" style="display:none" />
+            </td>
+            <td class="DayOfWeek">
+         
+                <span>@weeklyBill.DayOfWeek</span>
+                <input type="text" value="@weeklyBill.DayOfWeek" style="display:none" />
+            </td>
+            <td class="Cost">
+          
+                <span>@weeklyBill.Cost</span>
+                <input type="text" value="@weeklyBill.Cost" style="display:none" />
+            </td>
+
+            <td>
+                <a class="Edit" href="javascript:;">Edit</a>
+                <a class="Update" href="javascript:;" style="display:none">Update</a>
+                <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
+                @*  <a class="Delete" href="javascript:;">Delete</a>*@
+                @Html.ActionLink("Delete", "Delete", new { id = weeklyBill.id })
+            </td>
+        </tr>
+    }
 
 </table>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+
+    $("body").on("click", "#tblWeeklyBills .Edit", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                $(this).find("input").show();
+                $(this).find("span").hide();
+            }
+        });
+        row.find(".Update").show();
+        row.find(".Cancel").show();
+        row.find(".Delete").hide();
+        $(this).hide();
+    });
+
+    $("body").on("click", "#tblWeeklyBills .Cancel", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                $(this).find("input").hide();
+                $(this).find("span").show();
+            }
+        });
+        row.find(".Edit").show();
+        row.find(".Update").hide();
+        row.find(".Cancel").hide();
+        row.find(".Delete").show();
+        $(this).hide();
+    });
+
+
+    $("body").on("click", "#tblWeeklyBills .Update", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                var span = $(this).find("span");
+                var input = $(this).find("input");
+                span.html(input.val());
+                span.show();
+                input.hide();
+            }
+        });
+        row.find(".Edit").show();
+        row.find(".Delete").show();
+        row.find(".Cancel").hide();
+        $(this).hide();
+
+        var weeklyBill = {};
+        weeklyBill.id = row.find(".id").find("span").html();
+        weeklyBill.Bill = row.find(".Bill").find("span").html();
+        weeklyBill.DayOfWeek = row.find(".DayOfWeek").find("span").html();
+        weeklyBill.Cost = row.find(".Cost").find("span").html();
+        $.ajax({
+            type: "POST",
+            url: "/WeeklyBills/UpdateWeeklyBills",
+            data: '{weeklyBill:' + JSON.stringify(weeklyBill) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        });
+    });
+
+    $("body").on("click", "#tblWeeklyBills .Delete", function () {
+        if (confirm("Do you want to delete this row?")) {
+            var row = $(this).closest("tr");
+            var id = row.find("span").html();
+            $.ajax({
+                type: "POST",
+                url: "/WeeklyBills/Delete",
+                data: '{id: ' + id + '}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if ($("#tblWeeklyBills tr").length > 2) {
+                        row.remove();
+                    } else {
+                        row.find(".Edit").hide();
+                        row.find(".Delete").hide();
+                        row.find("span").html('&nbsp;');
+                    }
+                }
+            });
+        }
+    });
+</script>
+
+
+

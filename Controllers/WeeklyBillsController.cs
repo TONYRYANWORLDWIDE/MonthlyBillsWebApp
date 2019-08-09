@@ -41,6 +41,22 @@ namespace MonthlyBillsWebApp.Controllers
             
             return View(weeklybills.ToList());
         }
+
+        [HttpPost]
+        public ActionResult UpdateWeeklyBills(WeeklyBill weeklyBill)
+        {
+            using (BillsEntities entities = new BillsEntities())
+            {
+                WeeklyBill updatedBills = (from c in entities.WeeklyBills
+                                            where c.id == weeklyBill.id
+                                            select c).FirstOrDefault();
+                updatedBills.Bill = weeklyBill.Bill;
+                updatedBills.Cost = weeklyBill.Cost;
+                updatedBills.DayOfWeek = weeklyBill.DayOfWeek;
+                entities.SaveChanges();
+            }
+            return new EmptyResult();
+        }
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -157,9 +173,28 @@ namespace MonthlyBillsWebApp.Controllers
             return View(weeklyBill);
         }
 
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            using (BillsEntities entities = new BillsEntities())
+            {
+                WeeklyBill wb = (from c in entities.WeeklyBills
+                                  where c.id == id
+                                  select c).FirstOrDefault();
+                entities.WeeklyBills.Remove(wb);
+                entities.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
         // POST: WeeklyBills/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+
+
+
         public ActionResult DeleteConfirmed(int id)
         {
             WeeklyBill weeklyBill = db.WeeklyBills.Find(id);
