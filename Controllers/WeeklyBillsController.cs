@@ -195,13 +195,13 @@ namespace MonthlyBillsWebApp.Controllers
 
 
 
-        public ActionResult DeleteConfirmed(int id)
-        {
-            WeeklyBill weeklyBill = db.WeeklyBills.Find(id);
-            db.WeeklyBills.Remove(weeklyBill);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    WeeklyBill weeklyBill = db.WeeklyBills.Find(id);
+        //    db.WeeklyBills.Remove(weeklyBill);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
