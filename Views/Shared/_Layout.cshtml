@@ -6,6 +6,15 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145685922-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-145685922-1');
+    </script>
 
 </head>
 <body>
@@ -25,8 +34,6 @@
                     <li>@Html.ActionLink("Bank Balance  ", "Index", "KeyBalances")</li>
                     <li>@Html.ActionLink("Income  ", "Index", "BringHomepays")</li>
                     <li>@Html.ActionLink("Upcoming Bills  ", "Index", "UpcomingBills")</li>
-
-
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
