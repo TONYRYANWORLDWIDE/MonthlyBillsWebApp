@@ -22,5 +22,7 @@ namespace MonthlyBillsWebApp.Models
         public string Type { get; set; }
         public Nullable<decimal> RunningTotal { get; set; }
         public string UserID { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

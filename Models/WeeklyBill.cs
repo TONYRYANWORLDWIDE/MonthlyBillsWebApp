@@ -19,5 +19,7 @@ namespace MonthlyBillsWebApp.Models
         public int id { get; set; }
         public string DayOfWeek { get; set; }
         public string UserID { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

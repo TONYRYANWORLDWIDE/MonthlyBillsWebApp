@@ -20,5 +20,7 @@ namespace MonthlyBillsWebApp.Models
         public string Date { get; set; }
         public string BillAlias { get; set; }
         public string UserID { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

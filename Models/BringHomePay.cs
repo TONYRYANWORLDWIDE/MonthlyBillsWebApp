@@ -21,5 +21,7 @@ namespace MonthlyBillsWebApp.Models
         public string Frequency { get; set; }
         public Nullable<System.DateTime> PickOnePayDate { get; set; }
         public string UserID { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

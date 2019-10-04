@@ -225,6 +225,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>BillsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BillsModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -257,9 +260,6 @@
     </Compile>
     <Compile Include="Models\PartialClasses.cs" />
     <Compile Include="Models\sp_DateOfEachBill_Result.cs">
-      <DependentUpon>BillsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\transactionsupdateNew1.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UpcomingBill.cs">

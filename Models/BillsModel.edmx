@@ -64,22 +64,6 @@
           <Property Name="BillAlias" Type="nvarchar" MaxLength="50" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
-        <EntityType Name="transactionsupdateNew">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="index" Type="bigint" Nullable="false" />
-          <Property Name="date" Type="datetime" />
-          <Property Name="description" Type="varchar(max)" />
-          <Property Name="originaldescription" Type="varchar(max)" />
-          <Property Name="amount" Type="float" />
-          <Property Name="amount_transformed" Type="varchar(max)" />
-          <Property Name="transaction_type" Type="varchar(max)" />
-          <Property Name="category" Type="varchar(max)" />
-          <Property Name="account_name" Type="varchar(max)" />
-          <Property Name="sub_cat" Type="varchar(max)" />
-        </EntityType>
         <EntityType Name="UpcomingBills">
           <Key>
             <PropertyRef Name="id" />
@@ -170,7 +154,6 @@
           <EntitySet Name="Dates" EntityType="Self.Dates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KeyBalance" EntityType="Self.KeyBalance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MonthlyBills" EntityType="Self.MonthlyBills" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="transactionsupdateNew" EntityType="Self.transactionsupdateNew" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UpcomingBills" EntityType="Self.UpcomingBills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeeklyBills" EntityType="Self.WeeklyBills" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__BringHome__UserI__467D75B8" Association="Self.FK__BringHome__UserI__467D75B8">
@@ -229,7 +212,6 @@
           <EntitySet Name="UpcomingBills" EntityType="BillsModel.UpcomingBill" />
           <FunctionImport Name="sp_DateOfEachBill" />
           <EntitySet Name="KeyBalances" EntityType="BillsModel.KeyBalance" />
-          <EntitySet Name="transactionsupdateNew1" EntityType="BillsModel.transactionsupdateNew1" />
           <EntitySet Name="AspNetUsers" EntityType="BillsModel.AspNetUser" />
           <AssociationSet Name="FK__BringHome__UserI__467D75B8" Association="BillsModel.FK__BringHome__UserI__467D75B8">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
@@ -309,22 +291,6 @@
           <Property Name="DateTime" Type="DateTime" Precision="3" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="BillsModel.FK__KeyBalanc__UserI__3552E9B6" FromRole="KeyBalance" ToRole="AspNetUser" />
-        </EntityType>
-        <EntityType Name="transactionsupdateNew1">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="index" Type="Int64" Nullable="false" />
-          <Property Name="date" Type="DateTime" Precision="3" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="originaldescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="amount" Type="Double" />
-          <Property Name="amount_transformed" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="transaction_type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="category" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="account_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="sub_cat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
@@ -482,23 +448,6 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="KeyBalance1" ColumnName="KeyBalance" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="transactionsupdateNew1">
-            <EntityTypeMapping TypeName="BillsModel.transactionsupdateNew1">
-              <MappingFragment StoreEntitySet="transactionsupdateNew">
-                <ScalarProperty Name="sub_cat" ColumnName="sub_cat" />
-                <ScalarProperty Name="account_name" ColumnName="account_name" />
-                <ScalarProperty Name="category" ColumnName="category" />
-                <ScalarProperty Name="transaction_type" ColumnName="transaction_type" />
-                <ScalarProperty Name="amount_transformed" ColumnName="amount_transformed" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="originaldescription" ColumnName="originaldescription" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="index" ColumnName="index" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

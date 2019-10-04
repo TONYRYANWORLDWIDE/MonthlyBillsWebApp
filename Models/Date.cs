@@ -18,5 +18,6 @@ namespace MonthlyBillsWebApp.Models
         public Nullable<System.DateTime> thedate { get; set; }
         public Nullable<int> Day { get; set; }
         public string DayOfWeek { get; set; }
+        public string DayOfMonth { get; set; }
     }
 }
