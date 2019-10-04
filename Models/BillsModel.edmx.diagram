@@ -6,12 +6,18 @@
     <edmx:Diagrams>
       <Diagram DiagramId="1498e6e1f59a4e91a0078a8527a2cebd" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="BillsModel.MonthlyBill" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BillsModel.WeeklyBill" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BillsModel.BringHomePay" Width="1.5" PointX="7.25" PointY="2.625" />
-        <EntityTypeShape EntityType="BillsModel.Date" Width="1.5" PointX="4" PointY="3.125" />
-        <EntityTypeShape EntityType="BillsModel.UpcomingBill" Width="1.5" PointX="10.125" PointY="2.875" />
-        <EntityTypeShape EntityType="BillsModel.KeyBalance" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="BillsModel.transactionsupdateNew1" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="BillsModel.WeeklyBill" Width="1.5" PointX="5.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BillsModel.BringHomePay" Width="1.5" PointX="8.75" PointY="0.5" />
+        <EntityTypeShape EntityType="BillsModel.Date" Width="1.5" PointX="1.25" PointY="3.5" />
+        <EntityTypeShape EntityType="BillsModel.UpcomingBill" Width="1.5" PointX="11.375" PointY="3.75" />
+        <EntityTypeShape EntityType="BillsModel.KeyBalance" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="BillsModel.transactionsupdateNew1" Width="1.5" PointX="9" PointY="6.375" />
+        <EntityTypeShape EntityType="BillsModel.AspNetUser" Width="1.5" PointX="5.5" PointY="3.5" />
+        <AssociationConnector Association="BillsModel.FK__BringHome__UserI__467D75B8" />
+        <AssociationConnector Association="BillsModel.FK__KeyBalanc__UserI__3552E9B6" />
+        <AssociationConnector Association="BillsModel.FK__MonthlyBi__UserI__2DB1C7EE" />
+        <AssociationConnector Association="BillsModel.FK__UpcomingB__UserI__36470DEF" />
+        <AssociationConnector Association="BillsModel.FK__WeeklyBil__UserI__345EC57D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

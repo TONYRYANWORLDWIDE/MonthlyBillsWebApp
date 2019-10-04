@@ -5,6 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BillsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="BringHomePay">
           <Key>
             <PropertyRef Name="id" />
@@ -25,6 +42,7 @@
           <Property Name="thedate" Type="date" />
           <Property Name="Day" Type="int" />
           <Property Name="DayOfWeek" Type="varchar" MaxLength="9" />
+          <Property Name="DayOfMonth" Type="varchar" MaxLength="2" />
         </EntityType>
         <EntityType Name="KeyBalance">
           <Key>
@@ -85,8 +103,69 @@
           <Property Name="DayOfWeek" Type="varchar" MaxLength="9" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <Association Name="FK__BringHome__UserI__467D75B8">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="BringHomePay" Type="Self.BringHomePay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BringHomePay">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KeyBalanc__UserI__3552E9B6">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="KeyBalance" Type="Self.KeyBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KeyBalance">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MonthlyBi__UserI__2DB1C7EE">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="MonthlyBills" Type="Self.MonthlyBills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MonthlyBills">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UpcomingB__UserI__36470DEF">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="UpcomingBills" Type="Self.UpcomingBills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UpcomingBills">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WeeklyBil__UserI__345EC57D">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="WeeklyBills" Type="Self.WeeklyBills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WeeklyBills">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="sp_DateOfEachBill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="BillsModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BringHomePay" EntityType="Self.BringHomePay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dates" EntityType="Self.Dates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KeyBalance" EntityType="Self.KeyBalance" Schema="dbo" store:Type="Tables" />
@@ -94,6 +173,26 @@
           <EntitySet Name="transactionsupdateNew" EntityType="Self.transactionsupdateNew" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UpcomingBills" EntityType="Self.UpcomingBills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeeklyBills" EntityType="Self.WeeklyBills" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BringHome__UserI__467D75B8" Association="Self.FK__BringHome__UserI__467D75B8">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="BringHomePay" EntitySet="BringHomePay" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KeyBalanc__UserI__3552E9B6" Association="Self.FK__KeyBalanc__UserI__3552E9B6">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="KeyBalance" EntitySet="KeyBalance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MonthlyBi__UserI__2DB1C7EE" Association="Self.FK__MonthlyBi__UserI__2DB1C7EE">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MonthlyBills" EntitySet="MonthlyBills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UpcomingB__UserI__36470DEF" Association="Self.FK__UpcomingB__UserI__36470DEF">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UpcomingBills" EntitySet="UpcomingBills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WeeklyBil__UserI__345EC57D" Association="Self.FK__WeeklyBil__UserI__345EC57D">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="WeeklyBills" EntitySet="WeeklyBills" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -109,6 +208,7 @@
           <Property Name="Date" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="BillAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="BillsModel.FK__MonthlyBi__UserI__2DB1C7EE" FromRole="MonthlyBill" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="WeeklyBill">
           <Key>
@@ -119,6 +219,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DayOfWeek" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="BillsModel.FK__WeeklyBil__UserI__345EC57D" FromRole="WeeklyBill" ToRole="AspNetUser" />
         </EntityType>
         <EntityContainer Name="BillsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="MonthlyBills" EntityType="Self.MonthlyBill" />
@@ -129,6 +230,27 @@
           <FunctionImport Name="sp_DateOfEachBill" />
           <EntitySet Name="KeyBalances" EntityType="BillsModel.KeyBalance" />
           <EntitySet Name="transactionsupdateNew1" EntityType="BillsModel.transactionsupdateNew1" />
+          <EntitySet Name="AspNetUsers" EntityType="BillsModel.AspNetUser" />
+          <AssociationSet Name="FK__BringHome__UserI__467D75B8" Association="BillsModel.FK__BringHome__UserI__467D75B8">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="BringHomePay" EntitySet="BringHomePays" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KeyBalanc__UserI__3552E9B6" Association="BillsModel.FK__KeyBalanc__UserI__3552E9B6">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="KeyBalance" EntitySet="KeyBalances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MonthlyBi__UserI__2DB1C7EE" Association="BillsModel.FK__MonthlyBi__UserI__2DB1C7EE">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="MonthlyBill" EntitySet="MonthlyBills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UpcomingB__UserI__36470DEF" Association="BillsModel.FK__UpcomingB__UserI__36470DEF">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="UpcomingBill" EntitySet="UpcomingBills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WeeklyBil__UserI__345EC57D" Association="BillsModel.FK__WeeklyBil__UserI__345EC57D">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="WeeklyBill" EntitySet="WeeklyBills" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="BringHomePay">
           <Key>
@@ -141,6 +263,7 @@
           <Property Name="Frequency" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="PickOnePayDate" Type="DateTime" Precision="0" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="BillsModel.FK__BringHome__UserI__467D75B8" FromRole="BringHomePay" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="Date">
           <Key>
@@ -150,6 +273,7 @@
           <Property Name="thedate" Type="DateTime" Precision="0" />
           <Property Name="Day" Type="Int32" />
           <Property Name="DayOfWeek" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="DayOfMonth" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         <ComplexType Name="sp_DateOfEachBill_Result">
           <Property Type="DateTime" Name="TheDate" Nullable="true" Precision="23" />
@@ -174,6 +298,7 @@
           <Property Name="Type" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="RunningTotal" Type="Decimal" Precision="13" Scale="2" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="BillsModel.FK__UpcomingB__UserI__36470DEF" FromRole="UpcomingBill" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="KeyBalance">
           <Key>
@@ -183,6 +308,7 @@
           <Property Name="KeyBalance1" Type="Single" />
           <Property Name="DateTime" Type="DateTime" Precision="3" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="BillsModel.FK__KeyBalanc__UserI__3552E9B6" FromRole="KeyBalance" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="transactionsupdateNew1">
           <Key>
@@ -200,6 +326,88 @@
           <Property Name="account_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="sub_cat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BringHomePays" Relationship="BillsModel.FK__BringHome__UserI__467D75B8" FromRole="AspNetUser" ToRole="BringHomePay" />
+          <NavigationProperty Name="KeyBalances" Relationship="BillsModel.FK__KeyBalanc__UserI__3552E9B6" FromRole="AspNetUser" ToRole="KeyBalance" />
+          <NavigationProperty Name="MonthlyBills" Relationship="BillsModel.FK__MonthlyBi__UserI__2DB1C7EE" FromRole="AspNetUser" ToRole="MonthlyBill" />
+          <NavigationProperty Name="UpcomingBills" Relationship="BillsModel.FK__UpcomingB__UserI__36470DEF" FromRole="AspNetUser" ToRole="UpcomingBill" />
+          <NavigationProperty Name="WeeklyBills" Relationship="BillsModel.FK__WeeklyBil__UserI__345EC57D" FromRole="AspNetUser" ToRole="WeeklyBill" />
+        </EntityType>
+        <Association Name="FK__BringHome__UserI__467D75B8">
+          <End Type="BillsModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="BillsModel.BringHomePay" Role="BringHomePay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BringHomePay">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KeyBalanc__UserI__3552E9B6">
+          <End Type="BillsModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="BillsModel.KeyBalance" Role="KeyBalance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KeyBalance">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MonthlyBi__UserI__2DB1C7EE">
+          <End Type="BillsModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="BillsModel.MonthlyBill" Role="MonthlyBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MonthlyBill">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UpcomingB__UserI__36470DEF">
+          <End Type="BillsModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="BillsModel.UpcomingBill" Role="UpcomingBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UpcomingBill">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WeeklyBil__UserI__345EC57D">
+          <End Type="BillsModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="BillsModel.WeeklyBill" Role="WeeklyBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WeeklyBill">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -245,6 +453,7 @@
           <EntitySetMapping Name="Dates">
             <EntityTypeMapping TypeName="IsTypeOf(BillsModel.Date)">
               <MappingFragment StoreEntitySet="Dates">
+                <ScalarProperty Name="DayOfMonth" ColumnName="DayOfMonth" />
                 <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
                 <ScalarProperty Name="thedate" ColumnName="thedate" />
@@ -291,6 +500,24 @@
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="index" ColumnName="index" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="BillsModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
