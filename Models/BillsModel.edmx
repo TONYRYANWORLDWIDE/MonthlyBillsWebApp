@@ -52,6 +52,7 @@
           <Property Name="KeyBalance" Type="real" />
           <Property Name="DateTime" Type="datetime" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="AvailableBalance" Type="real" />
         </EntityType>
         <EntityType Name="MonthlyBills">
           <Key>
@@ -63,6 +64,7 @@
           <Property Name="Date" Type="varchar" MaxLength="2" />
           <Property Name="BillAlias" Type="nvarchar" MaxLength="50" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="Paid?" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UpcomingBills">
           <Key>
@@ -192,6 +194,7 @@
           <Property Name="BillAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="BillsModel.FK__MonthlyBi__UserI__2DB1C7EE" FromRole="MonthlyBill" ToRole="AspNetUser" />
+          <Property Name="Paid_" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="WeeklyBill">
           <Key>
@@ -291,6 +294,7 @@
           <Property Name="DateTime" Type="DateTime" Precision="3" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="BillsModel.FK__KeyBalanc__UserI__3552E9B6" FromRole="KeyBalance" ToRole="AspNetUser" />
+          <Property Name="AvailableBalance" Type="Single" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
@@ -383,6 +387,7 @@
           <EntitySetMapping Name="MonthlyBills">
             <EntityTypeMapping TypeName="BillsModel.MonthlyBill">
               <MappingFragment StoreEntitySet="MonthlyBills">
+                <ScalarProperty Name="Paid_" ColumnName="Paid?" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Bill" ColumnName="Bill" />
@@ -445,6 +450,7 @@
           <EntitySetMapping Name="KeyBalances">
             <EntityTypeMapping TypeName="BillsModel.KeyBalance">
               <MappingFragment StoreEntitySet="KeyBalance">
+                <ScalarProperty Name="AvailableBalance" ColumnName="AvailableBalance" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="KeyBalance1" ColumnName="KeyBalance" />
