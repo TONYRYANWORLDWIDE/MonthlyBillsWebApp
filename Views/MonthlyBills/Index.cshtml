@@ -142,7 +142,7 @@
         //$(this).hide();
 
         var monthlyBill = {};
-        monthlyBill.id = row.find(".id").value();
+        monthlyBill.id = row.find(".id").find('input').val();
         monthlyBill.Bill = row.find(".Bill").find('input').val();
         monthlyBill.Date = row.find(".Date").find('input').val();
         monthlyBill.Cost = row.find(".Cost").find('input').val();
