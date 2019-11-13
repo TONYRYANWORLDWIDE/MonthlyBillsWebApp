@@ -186,18 +186,7 @@ textarea {
 optgroup {
   font-weight: bold;
 }
-table {
-    border-collapse: collapse;
 
-    /*border: 5px solid black;*/
-
-    /*box-sizing: border-box;*/
-    /*background-color: #eadada;*/
-    
-
-    /*position: relative;*/
-
-}
 .trbold{
     font-size: x-large;
 
