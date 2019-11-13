@@ -62,6 +62,7 @@ namespace MonthlyBillsWebApp.Controllers
                 updatedBills.Bill = monthlyBill.Bill;
                 updatedBills.Date = monthlyBill.Date;
                 updatedBills.Cost = monthlyBill.Cost;
+                updatedBills.Paid_ = monthlyBill.Paid_;
                 entities.SaveChanges();
             }
            return new EmptyResult();          
@@ -125,7 +126,7 @@ namespace MonthlyBillsWebApp.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Bill,Cost,Date,BillAlias")] MonthlyBill monthlyBill)
+        public ActionResult Edit([Bind(Include = "id,Bill,Cost,Date,BillAlias,Paid_")] MonthlyBill monthlyBill)
         {
             if (ModelState.IsValid)
             {

@@ -10,38 +10,46 @@
     <tr class="trbold">
 
         <th style="visibility:collapse; background-color:white; border:solid black 5px;">id</th>
-        <th style="width: 25%;">Bill</th>
-        <th style="width:25%">Date</th>
-        <th style="width: 25%;">Cost</th>
-        <th style="width:25%;"></th>
+        <th style="width: 20%;">Bill</th>
+        <th style="width:20%">Date</th>
+        <th style="width: 20%;">Cost</th>
+        <th style="width: 20%">Paid?</th>
+        <th style="width:20%;"></th>
     </tr>
     @foreach (MonthlyBillsWebApp.Models.MonthlyBill monthlyBill in Model)
     {
-        <tr>
-            <td class="id" style="visibility:collapse; border:5px solid black;">
-                <span>@Html.HiddenFor(modelItem => monthlyBill.id) </span>
-            </td>
-            <td class="Bill">
-                <span>@monthlyBill.Bill</span>
-                <input type="text" value="@monthlyBill.Bill" style="display:none" />
-            </td>
-            <td class="Date">
-                <span>@monthlyBill.Date</span>
-                <input type="text" value="@monthlyBill.Date" style="display:none" />
-            </td>
-            <td class="Cost">
-                <span>@monthlyBill.Cost</span>
-                <input type="text" value="@monthlyBill.Cost" style="display:none" />
-            </td>
+<tr>
+    <td class="id" style="visibility:collapse; border:5px solid black;">
+        <span>@Html.HiddenFor(modelItem => monthlyBill.id) </span>
+    </td>
 
-            <td>
-                <a class="Edit" href="javascript:;">Edit</a>
-                <a class="Update" href="javascript:;" style="display:none">Update</a>
-                <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
-                @*  <a class="Delete" href="javascript:;">Delete</a>*@
-                @Html.ActionLink("Delete", "Delete", new { id = monthlyBill.id })
-            </td>
-        </tr>
+    <td class="Bill">
+        <span>@monthlyBill.Bill</span>
+        <input type="text" value="@monthlyBill.Bill" style="display:none" />
+    </td>
+    <td class="Date">
+        <span>@monthlyBill.Date</span>
+        <input type="text" value="@monthlyBill.Date" style="display:none" />
+    </td>
+    <td class="Cost">
+        <span>@monthlyBill.Cost</span>
+        <input type="text" value="@monthlyBill.Cost" style="display:none" />
+    </td>
+    <td class="Paid">
+        @*<span>@monthlyBill.Paid_</span>*@
+        @*<input type="text" value="@monthlyBill.Paid_" style="display:none" />*@
+        <span>@Html.CheckBoxFor(model => monthlyBill.Paid_)</span>
+    </td>
+
+
+    <td>
+        <a class="Edit" href="javascript:;">Edit</a>
+        <a class="Update" href="javascript:;" style="display:none">Update</a>
+        <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
+        @*  <a class="Delete" href="javascript:;">Delete</a>*@
+        @Html.ActionLink("Delete", "Delete", new { id = monthlyBill.id })
+    </td>
+</tr>
     }
 </table>
 
