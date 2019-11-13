@@ -35,8 +35,13 @@
         @Html.EditorFor(model => @monthlyBill.Cost, new { htmlAttributes = new { @class = "form-control Cost" } })
     </td>
     <td class="Paid">
-
-       @Html.CheckBoxFor(model => monthlyBill.Paid_, new { htmlAttributes = new { @class = "Paid" } })
+        @*<input type="checkbox" name="@monthlyBill.Paid_">*@
+        @Html.CheckBoxFor(model => monthlyBill.Paid_, new { htmlAttributes = new { @class = "Paid" } })
+        @*<input type="checkbox" name="Paid"  id="Paid" class="Paid"
+              value="@Html.Raw(@monthlyBill.Paid_)" />*@
+        @*@Html.Raw((@monthlyBill.Paid_) ? "checked=\"checked\"" : "") />*@
+        @*@Html.CheckBoxFor(model => @monthlyBill.Paid_, new { @class = "k-checkbox" })
+        @Html.LabelFor(m => @monthlyBill.Paid_, htmlAttributes: new { @class = "k-checkbox-label" })*@
     </td>
 
 
