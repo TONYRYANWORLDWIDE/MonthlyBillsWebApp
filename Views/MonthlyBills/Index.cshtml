@@ -10,38 +10,44 @@
     <tr class="trbold">
 
         <th style="visibility:collapse; background-color:white; border:solid black 5px;">id</th>
-        <th style="width: 25%;">Bill</th>
-        <th style="width:25%">Date</th>
+        <th style="width: 35%;">Bill</th>
+        <th style="width:15%">Date</th>
         <th style="width: 25%;">Cost</th>
-        <th style="width:25%;"></th>
+        <th style="width: 10%">Paid?</th>
+        <th style="width:15%;"></th>
     </tr>
     @foreach (MonthlyBillsWebApp.Models.MonthlyBill monthlyBill in Model)
     {
-        <tr>
-            <td class="id" style="visibility:collapse; border:5px solid black;">
-                <span>@Html.HiddenFor(modelItem => monthlyBill.id) </span>
-            </td>
-            <td class="Bill">
-                <span>@monthlyBill.Bill</span>
-                <input type="text" value="@monthlyBill.Bill" style="display:none" />
-            </td>
-            <td class="Date">
-                <span>@monthlyBill.Date</span>
-                <input type="text" value="@monthlyBill.Date" style="display:none" />
-            </td>
-            <td class="Cost">
-                <span>@monthlyBill.Cost</span>
-                <input type="text" value="@monthlyBill.Cost" style="display:none" />
-            </td>
+<tr>
+    <td class="id" style="visibility:collapse; border:5px solid black;">
+        <span>@Html.HiddenFor(modelItem => monthlyBill.id) </span>
+    </td>
 
-            <td>
-                <a class="Edit" href="javascript:;">Edit</a>
-                <a class="Update" href="javascript:;" style="display:none">Update</a>
-                <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
-                @*  <a class="Delete" href="javascript:;">Delete</a>*@
-                @Html.ActionLink("Delete", "Delete", new { id = monthlyBill.id })
-            </td>
-        </tr>
+    <td class="Bill">
+      
+
+        @Html.EditorFor(model => @monthlyBill.Bill, new { htmlAttributes = new { @class = "form-control Bill" } })
+    </td>
+    <td class="Date">
+        @Html.EditorFor(model => @monthlyBill.Date, new { htmlAttributes = new { @class = "form-control Date" } })
+    </td>
+    <td class="Cost">
+        @Html.EditorFor(model => @monthlyBill.Cost, new { htmlAttributes = new { @class = "form-control Cost" } })
+    </td>
+    <td class="Paid">
+
+       @Html.CheckBoxFor(model => monthlyBill.Paid_, new { htmlAttributes = new { @class = "Paid" } })
+    </td>
+
+
+    <td>
+        @*<a class="Edit" href="javascript:;">Edit</a>*@
+        <a class="Update" href="javascript:;">Update</a>
+        <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
+        @*  <a class="Delete" href="javascript:;">Delete</a>*@
+        @Html.ActionLink("Delete", "Delete", new { id = monthlyBill.id })
+    </td>
+</tr>
     }
 </table>
 
@@ -94,56 +100,55 @@
             }
         });
     });
-    $("body").on("click", "#tblMonthlyBills .Edit", function () {
-        var row = $(this).closest("tr");
-        $("td", row).each(function () {
-            if ($(this).find("input").length > 0) {
-                $(this).find("input").show();
-                $(this).find("span").hide();
-            }
-        });
-        row.find(".Update").show();
-        row.find(".Cancel").show();
-        row.find(".Delete").hide();
-        $(this).hide();
-    });
-        $("body").on("click", "#tblMonthlyBills .Cancel", function () {
-        var row = $(this).closest("tr");
-        $("td", row).each(function () {
-            if ($(this).find("input").length > 0) {
-                $(this).find("input").hide();
-                $(this).find("span").show();
-            }
-        });
-        row.find(".Edit").show();
-        row.find(".Update").hide();
-        row.find(".Cancel").hide();
-        row.find(".Delete").show();
-        $(this).hide();
-    });
+    //$("body").on("click", "#tblMonthlyBills .Edit", function () {
+    //    var row = $(this).closest("tr");
+    //    $("td", row).each(function () {
+    //        if ($(this).find("input").length > 0) {
+    //            $(this).find("input").show();
+    //            $(this).find("span").hide();
+    //        }
+    //    });
+    //    row.find(".Update").show();
+    //    row.find(".Cancel").show();
+    //    row.find(".Delete").hide();
+    //    $(this).hide();
+    //});
+    //    $("body").on("click", "#tblMonthlyBills .Cancel", function () {
+    //    var row = $(this).closest("tr");
+    //    $("td", row).each(function () {
+    //        if ($(this).find("input").length > 0) {
+    //            $(this).find("input").hide();
+    //            $(this).find("span").show();
+    //        }
+    //    });
+    //    row.find(".Edit").show();
+    //    row.find(".Update").hide();
+    //    row.find(".Cancel").hide();
+    //    row.find(".Delete").show();
+    //    $(this).hide();
+    //});
     $("body").on("click", "#tblMonthlyBills .Update", function () {
+        console.log("Starting Update");
         var row = $(this).closest("tr");
         $("td", row).each(function () {
             if ($(this).find("input").length > 0) {
                 var span = $(this).find("span");
                 var input = $(this).find("input");
                 span.html(input.val());
-                span.show();
-                input.hide();
+
             }
         });
-        row.find(".Edit").show();
-        row.find(".Delete").show();
-        row.find(".Cancel").hide();
-        $(this).hide();
+
+        //$(this).hide();
 
         var monthlyBill = {};
-        monthlyBill.id = row.find(".id").find("span").html();
-        monthlyBill.Bill = row.find(".Bill").find("span").html();
-        monthlyBill.Date = row.find(".Date").find("span").html();
-        monthlyBill.Cost = row.find(".Cost").find("span").html();
+        monthlyBill.id = row.find(".id").find('span').html();
+        monthlyBill.Bill = row.find(".Bill").find('input').val();
+        monthlyBill.Date = row.find(".Date").find('input').val();
+        monthlyBill.Cost = row.find(".Cost").find('input').val();
+        monthlyBill.Paid_ = row.find(".Paid").find('input').val();
         $.ajax({
-            type: "POST",
+            type: "POST", 
             url: "/MonthlyBills/UpdateMonthlyBills",
             data: '{monthlyBill:' + JSON.stringify(monthlyBill) + '}',
             contentType: "application/json; charset=utf-8",

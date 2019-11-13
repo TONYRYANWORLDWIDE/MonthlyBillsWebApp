@@ -1,12 +1,27 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+  /* margin: 0; */
+  	margin-right: 15%;
+margin-left: 15%;
+	position: relative;
 }
 
+
 /* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.body {
+    /* padding-left: 15px; */
+    /* padding-right: 15px; */
+		margin-right: 20%;
+margin-left: 20%;
+	position: relative;
+	font-size: 14px;
+	  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333333;
+  background-color: #fff;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -50,6 +65,8 @@ input[type="checkbox"].input-validation-error {
 
 table {
     border-collapse: collapse;
-    width: 10%;
+	
+    /* width: 10%; */
+
 }
 
