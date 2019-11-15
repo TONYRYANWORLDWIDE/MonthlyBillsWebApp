@@ -65,7 +65,8 @@ namespace MonthlyBillsWebApp.Controllers
                 updatedBills.Paid_ = monthlyBill.Paid_;
                 entities.SaveChanges();
             }
-           return new EmptyResult();          
+            //return View(monthlyBill);
+            return RedirectToAction("Index");
         }
         
         [HttpPost]

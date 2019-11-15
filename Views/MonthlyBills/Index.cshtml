@@ -36,12 +36,11 @@
     </td>
     <td class="Paid">
         @*<input type="checkbox" name="@monthlyBill.Paid_">*@
-        @Html.CheckBoxFor(model => monthlyBill.Paid_, new { htmlAttributes = new { @class = "Paid" } })
-        @*<input type="checkbox" name="Paid"  id="Paid" class="Paid"
-              value="@Html.Raw(@monthlyBill.Paid_)" />*@
+        @*@Html.CheckBoxFor(model => monthlyBill.Paid_, new { htmlAttributes = new { @class = "Paid" } })*@
+        @*<input type="checkbox" name="Paid"  id="Paid" class="Paid" value=@Html.Raw(@monthlyBill.Paid_) />*@
         @*@Html.Raw((@monthlyBill.Paid_) ? "checked=\"checked\"" : "") />*@
-        @*@Html.CheckBoxFor(model => @monthlyBill.Paid_, new { @class = "k-checkbox" })
-        @Html.LabelFor(m => @monthlyBill.Paid_, htmlAttributes: new { @class = "k-checkbox-label" })*@
+        @Html.CheckBoxFor(model => @monthlyBill.Paid_, new { @class = "k-checkbox" })
+
     </td>
 
 
@@ -122,6 +121,16 @@
     //    row.find(".Delete").show();
     //    $(this).hide();
     //});
+
+
+
+
+        
+
+
+
+
+
     $("body").on("click", "#tblMonthlyBills .Update", function () {
         console.log("Starting Update");
         var row = $(this).closest("tr");
@@ -130,9 +139,14 @@
                 var span = $(this).find("span");
                 var input = $(this).find("input");
                 span.html(input.val());
+                
+             
 
             }
         });
+
+        
+
 
         //$(this).hide();
 
@@ -141,7 +155,17 @@
         monthlyBill.Bill = row.find(".Bill").find('input').val();
         monthlyBill.Date = row.find(".Date").find('input').val();
         monthlyBill.Cost = row.find(".Cost").find('input').val();
-        monthlyBill.Paid_ = row.find(".Paid").find('input').val();
+            $("input[class ='k-checkbox']").change(function () {
+
+                if (this.checked) {
+                    monthlyBill.Paid = true;
+            console.log("checked");
+        }
+        else {
+                    console.log("it aint");
+                    monthlyBill.Paid = false;
+        }
+    });
         $.ajax({
             type: "POST", 
             url: "/MonthlyBills/UpdateMonthlyBills",
