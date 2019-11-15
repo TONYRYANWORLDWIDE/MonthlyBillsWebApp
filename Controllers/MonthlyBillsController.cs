@@ -68,7 +68,25 @@ namespace MonthlyBillsWebApp.Controllers
             //return View(monthlyBill);
             return RedirectToAction("Index");
         }
-        
+
+        [HttpPost]
+        public ActionResult UpdateMonthlyPaid(MonthlyBill monthlyPaid)
+        {
+            using (BillsEntities entities = new BillsEntities())
+            {
+                MonthlyBill updatedPaid = (from c in entities.MonthlyBills
+                                            where c.id == monthlyPaid.id
+                                            select c).FirstOrDefault();
+                updatedPaid.Paid_ = monthlyPaid.Paid_;
+
+                entities.SaveChanges();
+            }
+            //return View(monthlyBill);
+            return RedirectToAction("Index");
+        }
+
+
+
         [HttpPost]
         public ActionResult Details(int? id)
         {
