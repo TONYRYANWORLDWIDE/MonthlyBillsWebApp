@@ -58,17 +58,7 @@
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-            $(function () {
-        //Remove the dummy row if data present.
-        if ($("#tblCustomers tr").length > 2) {
-            $("#tblCustomers tr:eq(1)").remove();
-        } else {
-            var row = $("#tblCustomers tr:last-child");
-            row.find(".Edit").hide();
-            row.find(".Delete").hide();
-            row.find("span").html('&nbsp;');
-                }
-        });
+
 
     function AppendRow(row, id, bill, date, cost) {
         $(".id", row).find("span").html(id);
