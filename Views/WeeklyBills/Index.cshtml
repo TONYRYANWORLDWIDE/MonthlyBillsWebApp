@@ -84,28 +84,30 @@
 
 
     $("body").on("click", "#tblWeeklyBills .Update", function () {
-        var row = $(this).closest("tr");
-        $("td", row).each(function () {
-            if ($(this).find("input").length > 0) {
-                var span = $(this).find("span");
-                var input = $(this).find("input");
-                span.html(input.val());
+        if (confirm("Do you want to update this row?")) {
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    var span = $(this).find("span");
+                    var input = $(this).find("input");
+                    span.html(input.val());
 
-            }
-        });  
+                }
+            });
 
-        var weeklyBill = {};
-        weeklyBill.id = row.find(".id").find("span").html();
-        weeklyBill.Bill = row.find(".Bill").find("input").val();
-        weeklyBill.DayOfWeek = row.find(".DayOfWeek").find("input").val();
-        weeklyBill.Cost = row.find(".Cost").find("input").val();
-        $.ajax({
-            type: "POST",
-            url: "/WeeklyBills/UpdateWeeklyBills",
-            data: '{weeklyBill:' + JSON.stringify(weeklyBill) + '}',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json"
-        });
+            var weeklyBill = {};
+            weeklyBill.id = row.find(".id").find("span").html();
+            weeklyBill.Bill = row.find(".Bill").find("input").val();
+            weeklyBill.DayOfWeek = row.find(".DayOfWeek").find("input").val();
+            weeklyBill.Cost = row.find(".Cost").find("input").val();
+            $.ajax({
+                type: "POST",
+                url: "/WeeklyBills/UpdateWeeklyBills",
+                data: '{weeklyBill:' + JSON.stringify(weeklyBill) + '}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            });
+        }
     });
 
     $("body").on("click", "#tblWeeklyBills .Delete", function () {
