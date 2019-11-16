@@ -130,31 +130,8 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(monthlyBill);
         }
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MonthlyBill monthlyBill = db.MonthlyBills.Find(id);
-            if (monthlyBill == null)
-            {
-                return HttpNotFound();
-            }           
-            return View(monthlyBill);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Bill,Cost,Date,BillAlias,Paid_")] MonthlyBill monthlyBill)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(monthlyBill).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(monthlyBill);
-        }
+
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
