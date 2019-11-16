@@ -71,95 +71,10 @@ namespace MonthlyBillsWebApp.Controllers
             int pageNumber = (page ?? 1);
             return View(upcomingbills.ToPagedList(pageNumber, pageSize));
         }
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UpcomingBill upcomingBill = db.UpcomingBills.Find(id);
-            if (upcomingBill == null)
-            {
-                return HttpNotFound();
-            }
-            return View(upcomingBill);
-        }
-        public ActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,TheDate,DayOfWeek,Name,Amount,Type,RunningTotal")] UpcomingBill upcomingBill)
-        {
-            var claimsIdentity = User.Identity as ClaimsIdentity;
 
-            var userIdClaim = claimsIdentity.Claims
-                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-            if (userIdClaim != null)
-            {
-                userIdValue = userIdClaim.Value;
-            }
-            else
-            {
-                userIdValue = "tempuser";
-            }
-            if (ModelState.IsValid)
-            {
-                upcomingBill.UserID = userIdValue;
-                db.UpcomingBills.Add(upcomingBill);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(upcomingBill);
-        }
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UpcomingBill upcomingBill = db.UpcomingBills.Find(id);
-            if (upcomingBill == null)
-            {
-                return HttpNotFound();
-            }
-            return View(upcomingBill);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,TheDate,DayOfWeek,Name,Amount,Type,RunningTotal")] UpcomingBill upcomingBill)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(upcomingBill).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(upcomingBill);
-        }
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UpcomingBill upcomingBill = db.UpcomingBills.Find(id);
-            if (upcomingBill == null)
-            {
-                return HttpNotFound();
-            }
-            return View(upcomingBill);
-        }
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            UpcomingBill upcomingBill = db.UpcomingBills.Find(id);
-            db.UpcomingBills.Remove(upcomingBill);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+       
+       
+       
         protected override void Dispose(bool disposing)
         {
             if (disposing)
