@@ -350,10 +350,6 @@
     <Content Include="Views\WeeklyBills\Details.cshtml" />
     <Content Include="Views\WeeklyBills\Edit.cshtml" />
     <Content Include="Views\WeeklyBills\Index.cshtml" />
-    <Content Include="Views\UpcomingBills\Create.cshtml" />
-    <Content Include="Views\UpcomingBills\Delete.cshtml" />
-    <Content Include="Views\UpcomingBills\Details.cshtml" />
-    <Content Include="Views\UpcomingBills\Edit.cshtml" />
     <Content Include="Views\UpcomingBills\Index.cshtml" />
     <Content Include="Views\KeyBalances\Create.cshtml" />
     <Content Include="Views\KeyBalances\Delete.cshtml" />
