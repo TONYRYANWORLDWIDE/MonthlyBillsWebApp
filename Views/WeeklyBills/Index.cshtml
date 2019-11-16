@@ -58,7 +58,7 @@
                 <a class="Update" href="javascript:;">Update</a>
                 <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
                   <a class="Delete" href="javascript:;">Delete</a>
-                @Html.ActionLink("Delete", "Delete", new { id = weeklyBill.id })
+                @*@Html.ActionLink("Delete", "Delete", new { id = weeklyBill.id })*@
             </td>
         </tr>
     }
@@ -114,13 +114,10 @@
             console.log('Deleting2');
             var row = $(this).closest("tr");
             var id = row.find("span").find('input').val();
-            var id2 = row.find(".id").find("span").html();
-
-
-           
-            console.log('Deleting3')
+            //var id2 = row.find(".id").find("span").html();           
+            //console.log('Deleting3')
             console.log("id: " + id);
-            console.log("id2: " + id2);
+            //console.log("id2: " + id2);
             $.ajax({
                 type: "POST",
                 url: "/WeeklyBills/Deletejq",
