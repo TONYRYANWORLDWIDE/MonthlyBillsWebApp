@@ -87,20 +87,6 @@ namespace MonthlyBillsWebApp.Controllers
 
 
 
-        [HttpPost]
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MonthlyBill monthlyBill = db.MonthlyBills.Find(id);
-            if (monthlyBill == null)
-            {
-                return HttpNotFound();
-            }
-            return View(monthlyBill);
-        }
         public ActionResult Create()
         {
             return View();

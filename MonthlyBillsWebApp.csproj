@@ -343,11 +343,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\MonthlyBills\Create.cshtml" />
     <Content Include="Views\MonthlyBills\Delete.cshtml" />
-    <Content Include="Views\MonthlyBills\Details.cshtml" />
     <Content Include="Views\MonthlyBills\Index.cshtml" />
     <Content Include="Views\WeeklyBills\Create.cshtml" />
     <Content Include="Views\WeeklyBills\Delete.cshtml" />
-    <Content Include="Views\WeeklyBills\Details.cshtml" />
     <Content Include="Views\WeeklyBills\Edit.cshtml" />
     <Content Include="Views\WeeklyBills\Index.cshtml" />
     <Content Include="Views\UpcomingBills\Index.cshtml" />
