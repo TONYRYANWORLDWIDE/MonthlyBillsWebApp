@@ -344,7 +344,6 @@
     <Content Include="Views\MonthlyBills\Create.cshtml" />
     <Content Include="Views\MonthlyBills\Delete.cshtml" />
     <Content Include="Views\MonthlyBills\Details.cshtml" />
-    <Content Include="Views\MonthlyBills\Edit.cshtml" />
     <Content Include="Views\MonthlyBills\Index.cshtml" />
     <Content Include="Views\WeeklyBills\Create.cshtml" />
     <Content Include="Views\WeeklyBills\Delete.cshtml" />
