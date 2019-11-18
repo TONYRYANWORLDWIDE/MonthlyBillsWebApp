@@ -4,11 +4,12 @@ using System.Collections.Generic;
 //using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using MonthlyBillsWebApp.Models;
 using System.Dynamic;
-using System.Security.Claims;
+
 using System.Data.Entity.Infrastructure;
 //using Expando;
 
@@ -36,7 +37,7 @@ namespace MonthlyBillsWebApp.Controllers
             }
             var monthlybills = from u in db.MonthlyBills
                                where u.UserID == userIdValue
-                               orderby u.Bill
+                               orderby u.Date
                                select u;
             return View(monthlybills.ToList());
             //return View(monthlybills);
@@ -65,23 +66,28 @@ namespace MonthlyBillsWebApp.Controllers
                 updatedBills.Paid_ = monthlyBill.Paid_;
                 entities.SaveChanges();
             }
-           return new EmptyResult();          
+            //return View(monthlyBill);
+            return RedirectToAction("Index");
         }
-        
+
         [HttpPost]
-        public ActionResult Details(int? id)
+        public ActionResult UpdateMonthlyPaid(MonthlyBill monthlyPaid)
         {
-            if (id == null)
+            using (BillsEntities entities = new BillsEntities())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                MonthlyBill updatedPaid = (from c in entities.MonthlyBills
+                                            where c.id == monthlyPaid.id
+                                            select c).FirstOrDefault();
+                updatedPaid.Paid_ = monthlyPaid.Paid_;
+
+                entities.SaveChanges();
             }
-            MonthlyBill monthlyBill = db.MonthlyBills.Find(id);
-            if (monthlyBill == null)
-            {
-                return HttpNotFound();
-            }
-            return View(monthlyBill);
+            //return View(monthlyBill);
+            return RedirectToAction("Index");
         }
+
+
+
         public ActionResult Create()
         {
             return View();
@@ -111,31 +117,8 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(monthlyBill);
         }
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MonthlyBill monthlyBill = db.MonthlyBills.Find(id);
-            if (monthlyBill == null)
-            {
-                return HttpNotFound();
-            }           
-            return View(monthlyBill);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Bill,Cost,Date,BillAlias,Paid_")] MonthlyBill monthlyBill)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(monthlyBill).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(monthlyBill);
-        }
+
+
         public ActionResult Delete(int? id)
         {
             if (id == null)

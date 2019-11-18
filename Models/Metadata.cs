@@ -77,8 +77,15 @@ namespace MonthlyBillsWebApp.Models
 
 
         [Required]
+        //[DataType(DataType.)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+
         [Display(Name = "PickOnePayDate")]
-        public Date PickOnePayDate;
+        //public Date PickOnePayDate;
+        public DateTime PickOnePayDate;
+
+
+
 
     }
 

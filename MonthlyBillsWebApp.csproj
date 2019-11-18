@@ -343,18 +343,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\MonthlyBills\Create.cshtml" />
     <Content Include="Views\MonthlyBills\Delete.cshtml" />
-    <Content Include="Views\MonthlyBills\Details.cshtml" />
-    <Content Include="Views\MonthlyBills\Edit.cshtml" />
     <Content Include="Views\MonthlyBills\Index.cshtml" />
     <Content Include="Views\WeeklyBills\Create.cshtml" />
     <Content Include="Views\WeeklyBills\Delete.cshtml" />
-    <Content Include="Views\WeeklyBills\Details.cshtml" />
     <Content Include="Views\WeeklyBills\Edit.cshtml" />
     <Content Include="Views\WeeklyBills\Index.cshtml" />
-    <Content Include="Views\UpcomingBills\Create.cshtml" />
-    <Content Include="Views\UpcomingBills\Delete.cshtml" />
-    <Content Include="Views\UpcomingBills\Details.cshtml" />
-    <Content Include="Views\UpcomingBills\Edit.cshtml" />
     <Content Include="Views\UpcomingBills\Index.cshtml" />
     <Content Include="Views\KeyBalances\Create.cshtml" />
     <Content Include="Views\KeyBalances\Delete.cshtml" />
@@ -398,7 +391,6 @@
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\BringHomePays\Create.cshtml" />
     <Content Include="Views\BringHomePays\Delete.cshtml" />
-    <Content Include="Views\BringHomePays\Details.cshtml" />
     <Content Include="Views\BringHomePays\Edit.cshtml" />
     <Content Include="Views\BringHomePays\Index.cshtml" />
   </ItemGroup>

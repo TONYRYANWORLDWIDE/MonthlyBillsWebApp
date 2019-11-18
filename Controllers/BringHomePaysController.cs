@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+//using System.Data;
+//using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using MonthlyBillsWebApp.Models;
+using System.Dynamic;
+
+using System.Data.Entity.Infrastructure;
 
 namespace MonthlyBillsWebApp.Controllers
 {
@@ -37,19 +40,27 @@ namespace MonthlyBillsWebApp.Controllers
                           select u;
             return View(bringhome.ToList());
         }
-        public ActionResult Details(int? id)
+        [HttpPost]
+
+        public ActionResult Update(BringHomePay bringHomePay)
         {
-            if (id == null)
+            using (BillsEntities entities = new BillsEntities())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                BringHomePay updateBringHome = (from b in entities.BringHomePays
+                                                where b.id == bringHomePay.id
+                                                select b).FirstOrDefault();
+                updateBringHome.amount = bringHomePay.amount;
+                updateBringHome.Name = bringHomePay.Name;
+                updateBringHome.Frequency = bringHomePay.Frequency;
+                updateBringHome.DayOfWeek = bringHomePay.DayOfWeek;
+                updateBringHome.PickOnePayDate = bringHomePay.PickOnePayDate;
+                entities.SaveChanges();
+
+
             }
-            BringHomePay bringHomePay = db.BringHomePays.Find(id);
-            if (bringHomePay == null)
-            {
-                return HttpNotFound();
-            }
-            return View(bringHomePay);
+            return RedirectToAction("Index");
         }
+
         public ActionResult Create()
         {
             return View();
@@ -92,31 +103,33 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return View(bringHomePay);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Name,amount,DayOfWeek,Frequency,PickOnePayDate,UserID")] BringHomePay bringHomePay)
-        {
-            var claimsIdentity = User.Identity as ClaimsIdentity;
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "id,Name,amount,DayOfWeek,Frequency,PickOnePayDate,UserID")] BringHomePay bringHomePay)
+        //{
+        //    var claimsIdentity = User.Identity as ClaimsIdentity;
 
-            var userIdClaim = claimsIdentity.Claims
-                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-            if (userIdClaim != null)
-            {
-                userIdValue = userIdClaim.Value;
-            }
-            else
-            {
-                userIdValue = "tempuser";
-            }
-            if (ModelState.IsValid)
-            {
-                bringHomePay.UserID = userIdValue;
-                db.Entry(bringHomePay).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(bringHomePay);
-        }
+        //    var userIdClaim = claimsIdentity.Claims
+        //        .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+        //    if (userIdClaim != null)
+        //    {
+        //        userIdValue = userIdClaim.Value;
+        //    }
+        //    else
+        //    {
+        //        userIdValue = "tempuser";
+        //    }
+        //    if (ModelState.IsValid)
+        //    {
+        //        bringHomePay.UserID = userIdValue;
+        //        db.Entry(bringHomePay).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(bringHomePay);
+        //}
+
+
         public ActionResult Delete(int? id)
         {
             if (id == null)

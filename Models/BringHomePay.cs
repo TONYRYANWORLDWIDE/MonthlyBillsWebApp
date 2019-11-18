@@ -11,7 +11,8 @@ namespace MonthlyBillsWebApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class BringHomePay
     {
         public int id { get; set; }
@@ -19,7 +20,9 @@ namespace MonthlyBillsWebApp.Models
         public Nullable<float> amount { get; set; }
         public string DayOfWeek { get; set; }
         public string Frequency { get; set; }
+  
         public Nullable<System.DateTime> PickOnePayDate { get; set; }
+
         public string UserID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }

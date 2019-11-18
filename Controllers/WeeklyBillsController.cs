@@ -57,19 +57,7 @@ namespace MonthlyBillsWebApp.Controllers
             }
             return new EmptyResult();
         }
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            WeeklyBill weeklyBill = db.WeeklyBills.Find(id);
-            if (weeklyBill == null)
-            {
-                return HttpNotFound();
-            }
-            return View(weeklyBill);
-        }
+
 
         // GET: WeeklyBills/Create
         public ActionResult Create()
@@ -110,98 +98,38 @@ namespace MonthlyBillsWebApp.Controllers
 
 
             return View(weeklyBill);
-        }
-
-        // GET: WeeklyBills/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            WeeklyBill weeklyBill = db.WeeklyBills.Find(id);
-            if (weeklyBill == null)
-            {
-                return HttpNotFound();
-            }
-            return View(weeklyBill);
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Bill,Cost,id,DayOfWeek")] WeeklyBill weeklyBill)
-        {
-            var claimsIdentity = User.Identity as ClaimsIdentity;
-
-            var userIdClaim = claimsIdentity.Claims
-                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-
-
-            if (userIdClaim != null)
-            {
-                userIdValue = userIdClaim.Value;
-            }
-            else
-            {
-                userIdValue = "tempuser";
-            }
-
-
-            if (ModelState.IsValid)
-            {
-                weeklyBill.UserID = userIdValue;
-                db.Entry(weeklyBill).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(weeklyBill);
-        }
+        }       
 
         // GET: WeeklyBills/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            WeeklyBill weeklyBill = db.WeeklyBills.Find(id);
-            if (weeklyBill == null)
-            {
-                return HttpNotFound();
-            }
-            return View(weeklyBill);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    WeeklyBill weeklyBill = db.WeeklyBills.Find(id);
+        //    if (weeklyBill == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(weeklyBill);
+        //}
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        //[HttpPost]
+        //, ActionName("Delete")
+        //[ValidateAntiForgeryToken]
+        public ActionResult Deletejq(int? id)
         {
             using (BillsEntities entities = new BillsEntities())
             {
-                WeeklyBill wb = (from c in entities.WeeklyBills
-                                  where c.id == id
-                                  select c).FirstOrDefault();
-                entities.WeeklyBills.Remove(wb);
-                entities.SaveChanges();
+
+                WeeklyBill weeklyBill = db.WeeklyBills.Find(id);
+                db.WeeklyBills.Remove(weeklyBill);
+                db.SaveChanges();        
             }
 
             return RedirectToAction("Index");
         }
-
-        // POST: WeeklyBills/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-
-
-
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    WeeklyBill weeklyBill = db.WeeklyBills.Find(id);
-        //    db.WeeklyBills.Remove(weeklyBill);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
 
         protected override void Dispose(bool disposing)
         {
