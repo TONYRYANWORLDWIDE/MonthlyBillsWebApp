@@ -391,7 +391,6 @@
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\BringHomePays\Create.cshtml" />
     <Content Include="Views\BringHomePays\Delete.cshtml" />
-    <Content Include="Views\BringHomePays\Details.cshtml" />
     <Content Include="Views\BringHomePays\Edit.cshtml" />
     <Content Include="Views\BringHomePays\Index.cshtml" />
   </ItemGroup>

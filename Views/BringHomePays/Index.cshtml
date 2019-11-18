@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MonthlyBillsWebApp.Models.BringHomePay>
 
 @{
-    ViewBag.Title = "Index";
+//ViewBag.Title = "Index";
 }
 
 <h2>Income</h2>
@@ -9,55 +9,86 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
+<table id="tblMonthlyBills"  class="table">
+    <tr class="trbold">
         <th style="visibility:collapse; background-color:white; border:solid black 5px;">id</th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.amount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DayOfWeek)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Frequency)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PickOnePayDate)
-        </th>
+        <th>            Name        </th>
+        <th>            amount        </th>
+        <th>            DayOfWeek        </th>
+        <th>           Frequency        </th>
+        <th>            PickOnePayDate        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
+    @foreach (MonthlyBillsWebApp.Models.BringHomePay bringHomePay in Model)
+    {
+        <tr>
 
-    <td class="id" style="visibility:collapse; border:5px solid black;">
-        <span>@Html.HiddenFor(modelItem => item.id) </span>
+            <td class="id" style="visibility:collapse; border:5px solid black;">
+                <span>@Html.HiddenFor(modelItem => bringHomePay.id) </span>
 
-    </td>
-    <td>
-        @Html.EditorFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.EditorFor(modelItem => item.amount)
-    </td>
-    <td>
-        @Html.EditorFor(modelItem => item.DayOfWeek)
-    </td>
-    <td>
-        @Html.EditorFor(modelItem => item.Frequency)
-    </td>
-    <td>
-        @Html.EditorFor(modelItem => item.PickOnePayDate)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.id })
-    </td>
-</tr>
-}
+            </td>
+            <td class="Name">
+                @Html.EditorFor(modelItem => bringHomePay.Name,new { htmlAttributes = new { @class = "form-control Name" } })
+            </td>
+            <td class="amount">
+                @Html.EditorFor(modelItem => bringHomePay.amount,new { htmlAttributes = new { @class = "form-control amount" } })
+            </td>
+            <td class="DayOfWeek">
+                @Html.EditorFor(modelItem => bringHomePay.DayOfWeek,new { htmlAttributes = new { @class = "form-control DayOfWeek" } })
+            </td>
+            <td class="Frequency">
+                @Html.EditorFor(modelItem => bringHomePay.Frequency,new { htmlAttributes = new { @class = "form-control Frequency" } })
+            </td>
+            <td class="PickOnePayDate">
+                @Html.EditorFor(modelItem => bringHomePay.PickOnePayDate,new { htmlAttributes = new { @class = "form-control PickOnePayDate" } })
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.id }) |*@
+                <a class="Update" href="javascript:;">Update</a>
+                @Html.ActionLink("Delete", "Delete", new { id = bringHomePay.id })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    $("body").on("click", "#tblMonthlyBills .Update", function () {
+        console.log("updating bringy");
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                var span = $(this).find("span");
+                var input = $(this).find("input");
+                span.html(input.val());
+            }
+        });
+
+        var bringHomePay = {};
+        //bringHomePay.id = row.find(".id").find("input").val();
+        console.log("updating getit");
+        var a = row.find(".id").find("span").html();
+        var b = row.find(".id").find("input").val()
+        console.log("a:" + a + " b:" + b);
+        bringHomePay.id = row.find(".id").find("span").html();
+        bringHomePay.Name = row.find(".Name").find("input").val()
+        bringHomePay.amount = row.find(".amount").find("input").val()
+        bringHomePay.DayOfWeek = row.find(".DayOfWeek").find("input").val()
+        bringHomePay.Frequency = row.find(".Frequency").find("input").val()
+        bringHomePay.PickOnePayDate = row.find(".PickOnePayDate").find("input").val()
+        console.table(bringHomePay);
+        $.ajax({
+            type: "POST",
+            url: "/BringHomepays/Update",
+            data: '{bringHomePay:' + JSON.stringify(bringHomePay) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        })
+    });
+
+
+    
+</script>

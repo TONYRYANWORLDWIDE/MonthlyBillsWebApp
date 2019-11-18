@@ -93,11 +93,7 @@
                 txtCost.val("");
             }
         });
-    });
-
-
-
-    
+    });    
 
     $("input.k-checkbox:checkbox").change(function () {
         var monthlyPaid = {};
@@ -130,11 +126,6 @@
             dataType: "json"
         });
     });
-   
-
-
-
-
 
     $("body").on("click", "#tblMonthlyBills .Update", function () {
         console.log("Starting Update");
@@ -146,7 +137,6 @@
                 span.html(input.val());
             }
         });       
-
 
         var monthlyBill = {};
         monthlyBill.id = row.find(".id").find('span').html();

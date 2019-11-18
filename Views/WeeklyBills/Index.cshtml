@@ -36,33 +36,21 @@
                 <span>@Html.HiddenFor(modelItem => weeklyBill.id) </span>
             </td>
             <td class="Bill">
-
-                @Html.EditorFor(model => @weeklyBill.Bill, new { htmlAttributes = new { @class = "form-control Bill" } })
-               
+                @Html.EditorFor(model => @weeklyBill.Bill, new { htmlAttributes = new { @class = "form-control Bill" } })              
             </td>
-            <td class="DayOfWeek">
-
-
-                
+            <td class="DayOfWeek">                
                 @Html.EditorFor(model => @weeklyBill.DayOfWeek, new { htmlAttributes = new { @class = "form-control Bill" } })
             </td>
-            <td class="Cost">
-
-
-               
+            <td class="Cost">               
                 @Html.EditorFor(model => @weeklyBill.Cost, new { htmlAttributes = new { @class = "form-control Bill" } })
             </td>
-
             <td>
-
                 <a class="Update" href="javascript:;">Update</a>
                 <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
                   <a class="Delete" href="javascript:;">Delete</a>
-                @*@Html.ActionLink("Delete", "Delete", new { id = weeklyBill.id })*@
             </td>
         </tr>
     }
-
 </table>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
@@ -82,7 +70,6 @@
         $(this).hide();
     });
 
-
     $("body").on("click", "#tblWeeklyBills .Update", function () {
         if (confirm("Do you want to update this row?")) {
             var row = $(this).closest("tr");
@@ -91,7 +78,6 @@
                     var span = $(this).find("span");
                     var input = $(this).find("input");
                     span.html(input.val());
-
                 }
             });
 
@@ -125,9 +111,7 @@
                 url: "/WeeklyBills/Deletejq",
                 data: '{id: ' + id + '}',
                 contentType: "application/json; charset=utf-8",
-                dataType: "json",
-               
-               
+                dataType: "json",               
             });
         }
     });
