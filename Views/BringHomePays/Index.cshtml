@@ -11,6 +11,7 @@
 </p>
 <table class="table">
     <tr>
+        <th style="visibility:collapse; background-color:white; border:solid black 5px;">id</th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -30,28 +31,33 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.amount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DayOfWeek)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Frequency)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PickOnePayDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
+<tr>
+
+    <td class="id" style="visibility:collapse; border:5px solid black;">
+        <span>@Html.HiddenFor(modelItem => item.id) </span>
+
+    </td>
+    <td>
+        @Html.EditorFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.EditorFor(modelItem => item.amount)
+    </td>
+    <td>
+        @Html.EditorFor(modelItem => item.DayOfWeek)
+    </td>
+    <td>
+        @Html.EditorFor(modelItem => item.Frequency)
+    </td>
+    <td>
+        @Html.EditorFor(modelItem => item.PickOnePayDate)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+    </td>
+</tr>
 }
 
 </table>
