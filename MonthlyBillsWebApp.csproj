@@ -351,7 +351,6 @@
     <Content Include="Views\UpcomingBills\Index.cshtml" />
     <Content Include="Views\KeyBalances\Create.cshtml" />
     <Content Include="Views\KeyBalances\Delete.cshtml" />
-    <Content Include="Views\KeyBalances\Details.cshtml" />
     <Content Include="Views\KeyBalances\Edit.cshtml" />
     <Content Include="Views\KeyBalances\Index.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
