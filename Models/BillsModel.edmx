@@ -78,6 +78,7 @@
           <Property Name="Type" Type="varchar" MaxLength="7" />
           <Property Name="RunningTotal" Type="numeric" Precision="13" Scale="2" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="Paid?" Type="bit" />
         </EntityType>
         <EntityType Name="WeeklyBills">
           <Key>
@@ -284,6 +285,7 @@
           <Property Name="RunningTotal" Type="Decimal" Precision="13" Scale="2" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="BillsModel.FK__UpcomingB__UserI__36470DEF" FromRole="UpcomingBill" ToRole="AspNetUser" />
+          <Property Name="Paid_" Type="Boolean" />
         </EntityType>
         <EntityType Name="KeyBalance">
           <Key>
@@ -435,6 +437,7 @@
           <EntitySetMapping Name="UpcomingBills">
             <EntityTypeMapping TypeName="BillsModel.UpcomingBill">
               <MappingFragment StoreEntitySet="UpcomingBills">
+                <ScalarProperty Name="Paid_" ColumnName="Paid?" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="RunningTotal" ColumnName="RunningTotal" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
