@@ -1,15 +1,15 @@
-﻿.tr_row_Green {
-    font-size: xx-large;
+﻿.TJR_row_Green {
+
     background-color: lawngreen;
 }
 
-.tr_Hidden {
+.TJR_th_Hidden {
     visibility: collapse;
     background-color: white;
     /*border:solid black 5px;*/
 }
 
-.td_Hidden {
+.TJR_td_Hidden {
     visibility: collapse;
     /*border:5px solid black;*/
 }
@@ -24,6 +24,23 @@ body {
   	margin-right: 15%;
 margin-left: 15%;
 	position: relative;
+}
+
+
+table.TJR_UpcomingTable td:nth-child(7) {
+    display:none;
+}
+
+table.TJR_UpcomingTable th:nth-child(7) {
+    display: none;
+}
+
+table.TJR_MonthlyTable td:nth-child(1) {
+    display: none;
+}
+
+table.TJR_MonthlyTable th:nth-child(1) {
+    display: none;
 }
 
 

@@ -22,7 +22,7 @@
     </p>
 }
 
-<table class="table">
+<table class="table TJR_UpcomingTable">
     <tr class="trbold">
         <th>
             @Html.ActionLink("The Date", "Index", new { sortOrder = ViewBag.DateSortParam })
@@ -47,7 +47,7 @@
             @*@Html.DisplayNameFor(model => model.RunningtotalincomeFinal)*@
             Running Total
         </th>
-        <th style="visibility:collapse; background-color:white; border:solid black 5px;">id</th>
+        <th class="TJR_th_Hidden"></th>
         @*<th></th>*@
     </tr>
     @foreach (var item in Model)
@@ -71,7 +71,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.RunningTotal)
             </td>
-            <td class="Paid" style="visibility:collapse; border:5px solid black;">
+            <td class="Paid TJR_td_Hidden">
                 <span>@Html.HiddenFor(modelItem => item.Paid_) </span>
             </td>
         </tr>
@@ -109,7 +109,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
             //console.log($(this).find('.Paid').find('input').val());
             if ($(this).find('.Paid').find('input').val() == "True") {
                 //console.log('truez');
-                $(this).addClass('tr_row_Green');
+                $(this).addClass('TJR_row_Green');
             } else {
                 //console.log('falsez');
             }
