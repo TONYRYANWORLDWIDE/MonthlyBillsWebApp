@@ -8,6 +8,11 @@ margin-left: 15%;
 	position: relative;
 }
 
+.tr_row_Green {
+    font-size: 24px;
+
+}
+
 
 /* Set padding to keep content from hitting the edges */
 .body {
@@ -23,6 +28,7 @@ margin-left: 20%;
   color: #333333;
   background-color: #fff;
 }
+
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,

@@ -14,12 +14,12 @@
 
 @using (Html.BeginForm("Index", "UpcomingBills", FormMethod.Get))
 {
-<p>
-    Find by Name: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
-    <input type="submit" value="Search" />
-    <button type="reset" onclick="clearSearchString">Reset</button>
+    <p>
+        Find by Name: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+        <button type="reset" onclick="clearSearchString">Reset</button>
 
-</p>
+    </p>
 }
 
 <table class="table">
@@ -47,6 +47,7 @@
             @*@Html.DisplayNameFor(model => model.RunningtotalincomeFinal)*@
             Running Total
         </th>
+        <th style="visibility:collapse; background-color:white; border:solid black 5px;">id</th>
         @*<th></th>*@
     </tr>
     @foreach (var item in Model)
@@ -70,6 +71,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.RunningTotal)
             </td>
+            <td class="Paid" style="visibility:collapse; border:5px solid black;">
+                <span>@Html.HiddenFor(modelItem => item.Paid_) </span>
+            </td>
         </tr>
     }
 
@@ -78,3 +82,43 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    //$(document).ready(function () {
+    //    $(".Paid").each(function () {
+    //         //$(this).html( $(this).attr('title') );
+    //        //console.log(this.innerHTML);
+    //        //var spanx = $(this).find('span');
+    //        console.log($(this).find('input').val());
+    //        if ($(this).find('input').val() == "True") {
+    //            //console.log("truez")
+    //        } else {
+    //            //console.log("falsez");
+    //        }
+
+    //    })
+    //});
+        $(document).ready(function () {
+        $("tr").each(function () {
+             //$(this).html( $(this).attr('title') );
+            //console.log(this.innerHTML);
+            //var spanx = $(this).find('span');
+            //console.log($(this).find('.Paid').find('input').val());
+            if ($(this).find('.Paid').find('input').val() == "True") {
+                //console.log('truez');
+                $(this).addClass('tr_row_Green');
+            } else {
+                //console.log('falsez');
+            }
+            //if ($(this).find('input').val() == "True") {
+            //    //console.log("truez")
+            //} else {
+            //    //console.log("falsez");
+            //}
+
+        })
+    });
+</script>
