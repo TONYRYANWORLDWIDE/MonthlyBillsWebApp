@@ -187,6 +187,7 @@
     <Compile Include="Controllers\KeyBalancesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MonthlyBillsController.cs" />
+    <Compile Include="Controllers\MonthlyWeeeklyVMController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UpcomingBillsController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
@@ -242,6 +243,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ViewModelMonthlyWeekly.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
@@ -343,6 +345,7 @@
     <Content Include="Views\BringHomePays\Delete.cshtml" />
     <Content Include="Views\BringHomePays\Edit.cshtml" />
     <Content Include="Views\BringHomePays\Index.cshtml" />
+    <Content Include="Views\MonthlyWeeklyVM\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
