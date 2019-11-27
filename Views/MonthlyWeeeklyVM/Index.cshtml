@@ -6,6 +6,9 @@
     //ViewBag.Title = "Index";
 }
 
+
+
+
 <div>
     <h4>Budget</h4>
 </div>
@@ -46,6 +49,12 @@
     }
 </table>
 <body>
+    @*@Styles.Render("~/Content/css")*@
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @using (Html.BeginForm("Index", "MonthlyWeeklyVM", FormMethod.Post))
     {
         <div id="tabs" style="width:300px">
@@ -68,33 +77,28 @@
         <input type="hidden" id="selectedTab" name="selectedTab" value="@ViewBag.SelectedTab" />
         <input type="submit" value="Submit" />
     }
-    <link rel="stylesheet" href="jquery-ui.min.css">
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/jquery-ui.js"></script>
 
 
-    @*@Scripts.Render("~/bundles/jquery")*@
-    <script type="text/javascript">
 
 
-        var selected_tab = 0;
-        $(function () {
-            var tabs = ("#tabs").tabs({
-                select: function (e, i) {
-                    selected_tab = i.index;
-                    console.log(selected_tab);
-                }
-            });
-
-
-            selected_tab = $("#selectedTab").val() != "" ? parseInt($("#selectedTab").val()) : 0;
-            tabs.tabs('select', selected_tab);
-            $("form").submit(function () {
-                $("#selectedTab").val(selected_tab);
-            });
+<script type="text/javascript">
+    var selected_tab = 0;
+    $(function () {
+        var tabs = $("#tabs").tabs({
+            
+            select: function (e, i) {
+                console.log(tabs)
+                selected_tab = i.index;
+            }
         });
+        selected_tab = $("#selectedTab").val() != "" ? parseInt($("#selectedTab").val()) : 0;
+        tabs.tabs('select', selected_tab);
+        $("form").submit(function () {
+            $("#selectedTab").val(selected_tab);
+        });
+    });
 
-    </script>
+</script>
 </body>
 
 
