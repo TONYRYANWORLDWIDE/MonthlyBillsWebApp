@@ -32,20 +32,24 @@ namespace MonthlyBillsWebApp.Controllers
             {
                 userIdValue = "tempuser";
             }
-            var monthlyBills = from u in db.MonthlyBills
+
+
+            var monthlyBill = (from u in db.MonthlyBills
                                where u.UserID == userIdValue
                                orderby u.Date
-                               select u;
+                               select u).FirstOrDefault();
 
-            var weeklyBills = from u in db.WeeklyBills
-                              where u.UserID == userIdValue
-                              orderby u.Bill
-                              select u;
+            var weeklyBill = (from v in db.WeeklyBills
+                              where v.UserID == userIdValue
+                              orderby v.Bill
+                              select v).FirstOrDefault();
 
 
-            ViewModelMonthlyWeekly viewModel = new ViewModelMonthlyWeekly();
-            viewModel.monthlyBills = monthlyBills;
-            viewModel.weeklyBills = weeklyBills;
+            ViewModelMonthlyWeekly viewModel = new ViewModelMonthlyWeekly { monthlyBills = monthlyBill, weeklyBills = weeklyBill }; ;
+
+   
+            //viewModel.monthlyBills = monthlyBills;
+            //viewModel.weeklyBills = weeklyBills;
 
 
             return View(viewModel);
