@@ -3,40 +3,46 @@
 @*@model IQueryable<MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly>*@
 
 @{
-    ViewBag.Title = "Index";
+//ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
 <div>
-    <h4>ViewModelMonthlyWeekly</h4>
-    <hr />
-    <dl class="dl-horizontal">
-    </dl>
+    <h4>Budget</h4>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
 
-<div>
-    <span>
-        @foreach (var item in Model.weeklyBills.ToList())
-        {
-        <span>
-            @Html.DisplayFor(modelItem => item.Bill)
-        </span>
-        }
 
-    </span>
-        @*@foreach (MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly mw in Model)
-        {
-    <span>
-        @Html.EditorFor(model => @mw.monthlyBills)
-    </span>
-    <span>
-        @Html.EditorFor(model => @mw.weeklyBills)
-    </span>
-        }*@
+<table id="tblWeeklyBills" class="table">
+    <tr class="trbold">
 
-</div>
+        <th style="visibility:collapse; background-color:white; border:solid black 5px;">id</th>
+        <th style="width: 25%;">Bill</th>
+        <th style="width:25%">Day Of Week</th>
+        <th style="width: 25%;">Cost</th>
+        <th style="width:25%;"></th>
+    </tr>
+    @foreach (var item in Model.weeklyBills.ToList())
+    {
+<tr>
+
+    <td class="id" style="visibility:collapse; border:5px solid black;">
+        <span>@Html.HiddenFor(modelItem => item.id) </span>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Bill)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DayOfWeek)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cost)
+    </td>
+    <td>
+        <a class="Update" href="javascript:;">Update</a>
+        <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
+        <a class="Delete" href="javascript:;">Delete</a>
+    </td>
+
+</tr>}
+</table>
+
+
