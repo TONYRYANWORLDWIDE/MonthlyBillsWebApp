@@ -387,7 +387,7 @@
     <Content Include="Views\BringHomePays\Delete.cshtml" />
     <Content Include="Views\BringHomePays\Edit.cshtml" />
     <Content Include="Views\BringHomePays\Index.cshtml" />
-    <Content Include="Views\MonthlyWeeeklyVM\Index.cshtml" />
+    <Content Include="Views\MonthlyWeeklyVM\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

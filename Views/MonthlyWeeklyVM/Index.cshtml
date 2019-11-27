@@ -148,7 +148,7 @@
             </div>
         </div>
         <br />
-        <input type="hidden" id="selectedTab" name="selectedTab" value="@ViewBag.SelectedTab" />
+        <input  id="selectedTab" name="selectedTab" value="@ViewBag.SelectedTab" />
         <input type="submit" value="Submit" />
     }
 
@@ -164,10 +164,13 @@
                     console.log(tabs)
                     selected_tab = i.index;
                 }
+
             });
             selected_tab = $("#selectedTab").val() != "" ? parseInt($("#selectedTab").val()) : 0;
             tabs.tabs('select', selected_tab);
             $("form").submit(function () {
+                console.log(this.val());
+                console.log(tabs);
                 $("#selectedTab").val(selected_tab);
             });
         });

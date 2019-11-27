@@ -13,7 +13,7 @@ using System.Data.Entity.Infrastructure;
 
 namespace MonthlyBillsWebApp.Controllers
 {
-    public class MonthlyWeeeklyVMController : Controller
+    public class MonthlyWeeklyVMController : Controller
     {
         private BillsEntities db = new BillsEntities();
         public string userIdValue { get; private set; }
@@ -56,10 +56,11 @@ namespace MonthlyBillsWebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(int selectedTab)
+        public ActionResult Index(int? selectedTab)
         {
             ViewBag.SelectedTab = selectedTab;
-            return View();
+            //return View(viewModel);
+            return RedirectToAction("Index");
         }
         //public ActionResult MonthlyWeekly(ViewModelMonthlyWeekly mw)
         //{
@@ -73,7 +74,7 @@ namespace MonthlyBillsWebApp.Controllers
         //}
         //private BillsEntities db = new BillsEntities();
         //public string userIdValue { get; private set; }
-        //// GET: MonthlyWeeeklyVM
+        //// GET: MonthlyWeeklyVM
         //public ActionResult Index()
         //{
         //    var claimsIdentity = User.Identity as ClaimsIdentity;
