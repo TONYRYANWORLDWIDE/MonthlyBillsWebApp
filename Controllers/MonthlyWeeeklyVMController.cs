@@ -17,7 +17,7 @@ namespace MonthlyBillsWebApp.Controllers
     {
         private BillsEntities db = new BillsEntities();
         public string userIdValue { get; private set; }
-        // GET: MonthlyWeeeklyVM
+
         public ActionResult Index()
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
@@ -32,26 +32,72 @@ namespace MonthlyBillsWebApp.Controllers
             {
                 userIdValue = "tempuser";
             }
-            var monthlybills = from u in db.MonthlyBills
+            var monthlyBills = from u in db.MonthlyBills
                                where u.UserID == userIdValue
                                orderby u.Date
                                select u;
 
-            var weeklybills = from u in db.WeeklyBills
+            var weeklyBills = from u in db.WeeklyBills
                               where u.UserID == userIdValue
                               orderby u.Bill
                               select u;
 
-            var ViewModelMonthlyWeekly = new ViewModelMonthlyWeekly()
-            {
-                monthlyBills = monthlybills,
-                weeklyBills = weeklybills
-            };
 
-            return View(ViewModelMonthlyWeekly);
+            ViewModelMonthlyWeekly viewModel = new ViewModelMonthlyWeekly();
+            viewModel.monthlyBills = monthlyBills;
+            viewModel.weeklyBills = weeklyBills;
 
-       
 
+            return View(viewModel);
         }
+
+        //public ActionResult MonthlyWeekly(ViewModelMonthlyWeekly mw)
+        //{
+
+
+
+          
+
+
+
+        //}
+        //private BillsEntities db = new BillsEntities();
+        //public string userIdValue { get; private set; }
+        //// GET: MonthlyWeeeklyVM
+        //public ActionResult Index()
+        //{
+        //    var claimsIdentity = User.Identity as ClaimsIdentity;
+
+        //    var userIdClaim = claimsIdentity.Claims
+        //        .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+        //    if (userIdClaim != null)
+        //    {
+        //        userIdValue = userIdClaim.Value;
+        //    }
+        //    else
+        //    {
+        //        userIdValue = "tempuser";
+        //    }
+        //    //var monthlybills = from u in db.MonthlyBills
+        //    //                   //where u.UserID == userIdValue
+        //    //                   orderby u.Date
+        //    //                   select u;
+
+        //    //var weeklybills = from u in db.WeeklyBills
+        //    //                  where u.UserID == userIdValue
+        //    //                  orderby u.Bill
+        //    //                  select u;
+
+        //    var ViewModelMonthlyWeekly = new ViewModelMonthlyWeekly()
+        //    {
+        //        monthlyBills = monthlybills,
+        //        weeklyBills = weeklybills
+        //    };
+
+
+
+
+
     }
+    
 }

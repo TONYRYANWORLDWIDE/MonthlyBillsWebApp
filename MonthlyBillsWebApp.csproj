@@ -183,7 +183,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BringHomePaysController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KeyBalancesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MonthlyBillsController.cs" />
@@ -345,7 +344,6 @@
     <Content Include="Views\BringHomePays\Delete.cshtml" />
     <Content Include="Views\BringHomePays\Edit.cshtml" />
     <Content Include="Views\BringHomePays\Index.cshtml" />
-    <Content Include="Views\MonthlyWeeklyVM\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
