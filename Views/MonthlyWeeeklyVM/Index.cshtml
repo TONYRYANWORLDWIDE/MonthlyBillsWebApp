@@ -1,6 +1,6 @@
-﻿@*@model MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly*@
+﻿@model MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly
 
-@model IEnumerable<MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly>
+@*@model IQueryable<MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly>*@
 
 @{
     ViewBag.Title = "Index";
@@ -20,8 +20,16 @@
 </p>
 
 <div>
+    <span>
+        @foreach (var item in Model.weeklyBills.ToList())
+        {
+        <span>
+            @Html.DisplayFor(modelItem => item.Bill)
+        </span>
+        }
 
-        @foreach (MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly mw in Model)
+    </span>
+        @*@foreach (MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly mw in Model)
         {
     <span>
         @Html.EditorFor(model => @mw.monthlyBills)
@@ -29,6 +37,6 @@
     <span>
         @Html.EditorFor(model => @mw.weeklyBills)
     </span>
-        }
+        }*@
 
 </div>

@@ -36,13 +36,13 @@ namespace MonthlyBillsWebApp.Controllers
 
             var monthlyBill = (from u in db.MonthlyBills
                                where u.UserID == userIdValue
-                               orderby u.Date
-                               select u).ToList();
+                               //orderby u.Date
+                               select u).AsQueryable();
 
             var weeklyBill = (from v in db.WeeklyBills
                               where v.UserID == userIdValue
-                              orderby v.Bill
-                              select v).ToList();
+                              //orderby v.Bill
+                              select v).AsQueryable();
 
 
             ViewModelMonthlyWeekly viewModel = new ViewModelMonthlyWeekly { monthlyBills = monthlyBill, weeklyBills = weeklyBill }; ;
