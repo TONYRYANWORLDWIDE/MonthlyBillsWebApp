@@ -55,13 +55,18 @@ namespace MonthlyBillsWebApp.Controllers
             return View(viewModel);
         }
 
-
+        [HttpPost]
+        public ActionResult Index(int selectedTab)
+        {
+            ViewBag.SelectedTab = selectedTab;
+            return View();
+        }
         //public ActionResult MonthlyWeekly(ViewModelMonthlyWeekly mw)
         //{
 
 
 
-          
+
 
 
 

@@ -3,7 +3,7 @@
 @*@model IQueryable<MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly>*@
 
 @{
-//ViewBag.Title = "Index";
+    //ViewBag.Title = "Index";
 }
 
 <div>
@@ -22,27 +22,79 @@
     </tr>
     @foreach (var item in Model.weeklyBills.ToList())
     {
-<tr>
+        <tr>
 
-    <td class="id" style="visibility:collapse; border:5px solid black;">
-        <span>@Html.HiddenFor(modelItem => item.id) </span>
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Bill)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.DayOfWeek)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Cost)
-    </td>
-    <td>
-        <a class="Update" href="javascript:;">Update</a>
-        <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
-        <a class="Delete" href="javascript:;">Delete</a>
-    </td>
+            <td class="id" style="visibility:collapse; border:5px solid black;">
+                <span>@Html.HiddenFor(modelItem => item.id) </span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bill)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DayOfWeek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                <a class="Update" href="javascript:;">Update</a>
+                <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
+                <a class="Delete" href="javascript:;">Delete</a>
+            </td>
 
-</tr>}
+        </tr>
+    }
 </table>
+<body>
+    @using (Html.BeginForm("Index", "MonthlyWeeklyVM", FormMethod.Post))
+    {
+        <div id="tabs" style="width:300px">
+            <ul>
+                <li><a href="#tabs-1">Tab 1</a></li>
+                <li><a href="#tabs-2">Tab 2</a></li>
+                <li><a href="#tabs-3">Tab 3</a></li>
+            </ul>
+            <div id="tabs-1">
+                Content 1
+            </div>
+            <div id="tabs-2">
+                Content 2
+            </div>
+            <div id="tabs-3">
+                Content 3
+            </div>
+        </div>
+        <br />
+        <input type="hidden" id="selectedTab" name="selectedTab" value="@ViewBag.SelectedTab" />
+        <input type="submit" value="Submit" />
+    }
+    <link rel="stylesheet" href="jquery-ui.min.css">
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    <script type="text/javascript">
+
+
+        var selected_tab = 0;
+        $(function () {
+            var tabs = ("#tabs").tabs({
+                select: function (e, i) {
+                    selected_tab = i.index;
+                    console.log(selected_tab);
+                }
+            });
+
+
+            selected_tab = $("#selectedTab").val() != "" ? parseInt($("#selectedTab").val()) : 0;
+            tabs.tabs('select', selected_tab);
+            $("form").submit(function () {
+                $("#selectedTab").val(selected_tab);
+            });
+        });
+
+    </script>
+</body>
 
 
