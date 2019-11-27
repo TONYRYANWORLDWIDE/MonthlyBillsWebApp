@@ -54,125 +54,134 @@
 </tr>
     }
 </table>
+<body>
 
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
+    @*@Styles.Render("~/Content/css")*@
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
 
 
-    function AppendRow(row, id, bill, date, cost) {
-        $(".id", row).find("span").html(id);
-        $(".Bill", row).find("span").html(bill);
-        $(".Bill", row).find("input").val(bill);
-        $(".Date", row).find("span").html(date);
-        $(".Date", row).find("input").val(date);
-        $(".Cost", row).find("span").html(cost);
-        $(".Cost", row).find("input").val(cost);
-        row.find(".Edit").show();
-        row.find(".Delete").show();
-        $("#tblMonthlyBills").append(row);
-    };
-    //Add event handler.
-    $("body").on("click", "#btnAdd", function () {
-        var txtBill = $("#txtBill");
-        var txtDate = $("#txtDate");
-        var txtCost = $("#txtCost");
-        $.ajax({
-            type: "POST",
-            url: "/MonthlyBills/InsertMonthlyBills",
-            data: '{bill: "' + txtBill.val() + '", date: "' + txtDate.val() + '" + cost: "' + txtCost.val() + '" }',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (r) {
-                var row = $("#tblMonthlyBills tr:last-child");
-                if ($("#tblMonthlyBills tr:last-child span").eq(0).html() != "&nbsp;") {
-                    row = row.clone();
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+
+
+        function AppendRow(row, id, bill, date, cost) {
+            $(".id", row).find("span").html(id);
+            $(".Bill", row).find("span").html(bill);
+            $(".Bill", row).find("input").val(bill);
+            $(".Date", row).find("span").html(date);
+            $(".Date", row).find("input").val(date);
+            $(".Cost", row).find("span").html(cost);
+            $(".Cost", row).find("input").val(cost);
+            row.find(".Edit").show();
+            row.find(".Delete").show();
+            $("#tblMonthlyBills").append(row);
+        };
+        //Add event handler.
+        $("body").on("click", "#btnAdd", function () {
+            var txtBill = $("#txtBill");
+            var txtDate = $("#txtDate");
+            var txtCost = $("#txtCost");
+            $.ajax({
+                type: "POST",
+                url: "/MonthlyBills/InsertMonthlyBills",
+                data: '{bill: "' + txtBill.val() + '", date: "' + txtDate.val() + '" + cost: "' + txtCost.val() + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var row = $("#tblMonthlyBills tr:last-child");
+                    if ($("#tblMonthlyBills tr:last-child span").eq(0).html() != "&nbsp;") {
+                        row = row.clone();
+                    }
+                    AppendRow(row, r.id, r.Bill, r.Date, r.Cost);
+                    txtBill.val("");
+                    txtDate.val("");
+                    txtCost.val("");
                 }
-                AppendRow(row, r.id, r.Bill, r.Date, r.Cost);
-                txtBill.val("");
-                txtDate.val("");
-                txtCost.val("");
-            }
+            });
         });
-    });    
 
-    $("input.k-checkbox:checkbox").change(function () {
-        var monthlyPaid = {};
-        var row = $(this).closest("tr");
-        $("td", row).each(function () {
-            if ($(this).find("input").length > 0) {
-                var span = $(this).find("span");
-                var input = $(this).find("input");
-                span.html(input.val());
-            }
-        });
-        monthlyPaid.id = row.find(".id").find('span').html();
-            if (this.checked)
-            {
+        $("input.k-checkbox:checkbox").change(function () {
+            var monthlyPaid = {};
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    var span = $(this).find("span");
+                    var input = $(this).find("input");
+                    span.html(input.val());
+                }
+            });
+            monthlyPaid.id = row.find(".id").find('span').html();
+            if (this.checked) {
                 monthlyPaid.Paid_ = true;
                 console.log("checked");
             }
-            else
-            {
+            else {
                 console.log("it aint");
                 monthlyPaid.Paid_ = false;
             }
- 
+
 
             $.ajax({
-            type: "POST", 
-            url: "/MonthlyBills/UpdateMonthlyPaid",
-            data: '{monthlyPaid:' + JSON.stringify(monthlyPaid) + '}',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json"
+                type: "POST",
+                url: "/MonthlyBills/UpdateMonthlyPaid",
+                data: '{monthlyPaid:' + JSON.stringify(monthlyPaid) + '}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            });
         });
-    });
 
-    $("body").on("click", "#tblMonthlyBills .Update", function () {
-        console.log("Starting Update");
-        var row = $(this).closest("tr");
-        $("td", row).each(function () {
-            if ($(this).find("input").length > 0) {
-                var span = $(this).find("span");
-                var input = $(this).find("input");
-                span.html(input.val());
-            }
-        });       
-
-        var monthlyBill = {};
-        monthlyBill.id = row.find(".id").find('span').html();
-        monthlyBill.Bill = row.find(".Bill").find('input').val();
-        monthlyBill.Date = row.find(".Date").find('input').val();
-        monthlyBill.Cost = row.find(".Cost").find('input').val();
-
-        $.ajax({
-            type: "POST", 
-            url: "/MonthlyBills/UpdateMonthlyBills",
-            data: '{monthlyBill:' + JSON.stringify(monthlyBill) + '}',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json"
-        });
-    });
-
-    $("body").on("click", "#tblMonthlyBills .Delete", function () {
-    if (confirm("Do you want to delete this row?")) {
-        var row = $(this).closest("tr");
-        var id = row.find("span").html();
-        $.ajax({
-            type: "POST",
-            url: "/MonthlyBills/Delete",
-            data: '{id: ' + id + '}',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                if ($("#tblMonthlyBills tr").length > 2) {
-                    row.remove();
-                } else {
-                    row.find(".Edit").hide();
-                    row.find(".Delete").hide();
-                    row.find("span").html('&nbsp;');
+        $("body").on("click", "#tblMonthlyBills .Update", function () {
+            console.log("Starting Update");
+            var row = $(this).closest("tr");
+            $("td", row).each(function () {
+                if ($(this).find("input").length > 0) {
+                    var span = $(this).find("span");
+                    var input = $(this).find("input");
+                    span.html(input.val());
                 }
+            });
+
+            var monthlyBill = {};
+            monthlyBill.id = row.find(".id").find('span').html();
+            monthlyBill.Bill = row.find(".Bill").find('input').val();
+            monthlyBill.Date = row.find(".Date").find('input').val();
+            monthlyBill.Cost = row.find(".Cost").find('input').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/MonthlyBills/UpdateMonthlyBills",
+                data: '{monthlyBill:' + JSON.stringify(monthlyBill) + '}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            });
+        });
+
+        $("body").on("click", "#tblMonthlyBills .Delete", function () {
+            if (confirm("Do you want to delete this row?")) {
+                var row = $(this).closest("tr");
+                var id = row.find("span").html();
+                $.ajax({
+                    type: "POST",
+                    url: "/MonthlyBills/Delete",
+                    data: '{id: ' + id + '}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if ($("#tblMonthlyBills tr").length > 2) {
+                            row.remove();
+                        } else {
+                            row.find(".Edit").hide();
+                            row.find(".Delete").hide();
+                            row.find("span").html('&nbsp;');
+                        }
+                    }
+                });
             }
         });
-    }
-});
-</script>
+    </script>
+</body>

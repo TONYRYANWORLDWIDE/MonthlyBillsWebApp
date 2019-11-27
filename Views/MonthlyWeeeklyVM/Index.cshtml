@@ -51,10 +51,10 @@
 <body>
     @*@Styles.Render("~/Content/css")*@
     @Styles.Render("~/Content/themes/base/css")
-    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
     @using (Html.BeginForm("Index", "MonthlyWeeklyVM", FormMethod.Post))
     {
         <div id="tabs" style="width:300px">
@@ -81,24 +81,24 @@
 
 
 
-<script type="text/javascript">
-    var selected_tab = 0;
-    $(function () {
-        var tabs = $("#tabs").tabs({
-            
-            select: function (e, i) {
-                console.log(tabs)
-                selected_tab = i.index;
-            }
-        });
-        selected_tab = $("#selectedTab").val() != "" ? parseInt($("#selectedTab").val()) : 0;
-        tabs.tabs('select', selected_tab);
-        $("form").submit(function () {
-            $("#selectedTab").val(selected_tab);
-        });
-    });
+    <script type="text/javascript">
+        var selected_tab = 0;
+        $(function () {
+            var tabs = $("#tabs").tabs({
 
-</script>
+                select: function (e, i) {
+                    console.log(tabs)
+                    selected_tab = i.index;
+                }
+            });
+            selected_tab = $("#selectedTab").val() != "" ? parseInt($("#selectedTab").val()) : 0;
+            tabs.tabs('select', selected_tab);
+            $("form").submit(function () {
+                $("#selectedTab").val(selected_tab);
+            });
+        });
+
+    </script>
 </body>
 
 
