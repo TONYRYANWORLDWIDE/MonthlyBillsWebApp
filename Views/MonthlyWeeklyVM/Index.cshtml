@@ -14,44 +14,7 @@
 </div>
 
 
-<table id="tblMonthlyBills" class="table TJR_MonthlyTable">
-    <tr class="trbold">
 
-        <th class="TJR_th_Hidden"></th>
-        <th style="width: 35%;">Bill</th>
-        <th style="width:15%">Date</th>
-        <th style="width: 25%;">Cost</th>
-        <th style="width: 10%">Paid?</th>
-        <th style="width:15%;"></th>
-    </tr>
-    @foreach (var item in Model.monthlyBills.ToList())
-    {
-<tr>
-
-    <td class="id" style="visibility:collapse; border:5px solid black;">
-        <span>@Html.HiddenFor(modelItem => item.id) </span>
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Bill)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Date)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Cost)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Paid_)
-    </td>
-    <td>
-        <a class="Update" href="javascript:;">Update</a>
-        <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
-        <a class="Delete" href="javascript:;">Delete</a>
-    </td>
-
-</tr>
-    }
-</table>
 <body>
     @*@Styles.Render("~/Content/css")*@
     @Styles.Render("~/Content/themes/base/css")
