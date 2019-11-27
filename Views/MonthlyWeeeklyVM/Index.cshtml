@@ -1,4 +1,6 @@
-﻿@model MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly
+﻿@*@model MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly*@
+
+@model IEnumerable<MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly>
 
 @{
     ViewBag.Title = "Index";
@@ -16,3 +18,17 @@
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<div>
+
+        @foreach (MonthlyBillsWebApp.ViewModels.ViewModelMonthlyWeekly mw in Model)
+        {
+    <span>
+        @Html.EditorFor(model => @mw.monthlyBills)
+    </span>
+    <span>
+        @Html.EditorFor(model => @mw.weeklyBills)
+    </span>
+        }
+
+</div>

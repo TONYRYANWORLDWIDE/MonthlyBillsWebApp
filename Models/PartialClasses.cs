@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MonthlyBillsWebApp.Models
@@ -6,6 +7,10 @@ namespace MonthlyBillsWebApp.Models
     [MetadataType(typeof(MonthlyBillMetadata))]
     public partial class MonthlyBill
     {
+        public static implicit operator List<object>(MonthlyBill v)
+        {
+            throw new NotImplementedException();
+        }
     }
     [MetadataType(typeof(UpcomingBillMetadata))]
     public partial class UpcomingBill
