@@ -10,10 +10,10 @@ namespace MonthlyBillsWebApp.ViewModels
     public class ViewModelMonthlyWeekly // System.Collections.IEnumerable
     {
 
-        //public List<MonthlyBill> monthlyBills { get; set; }
-        //public List<WeeklyBill> weeklyBills { get; set; }
-        public IQueryable<MonthlyBill> monthlyBills { get; set; }
-        public IQueryable<WeeklyBill> weeklyBills { get; set; }
+        public List<MonthlyBill> monthlyBills { get; set; }
+        public List<WeeklyBill> weeklyBills { get; set; }
+        //public IQueryable<MonthlyBill> monthlyBills { get; set; }
+        //public IQueryable<WeeklyBill> weeklyBills { get; set; }
 
         //public IEnumerator GetEnumerator()
         //{
