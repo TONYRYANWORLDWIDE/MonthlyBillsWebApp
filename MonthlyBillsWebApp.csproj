@@ -237,6 +237,9 @@
     <Compile Include="Models\UpcomingBill.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UpcomingBills_Alter.cs">
+      <DependentUpon>BillsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WeeklyBill.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>

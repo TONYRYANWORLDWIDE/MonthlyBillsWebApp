@@ -34,6 +34,7 @@ namespace MonthlyBillsWebApp.Models
         public virtual DbSet<UpcomingBill> UpcomingBills { get; set; }
         public virtual DbSet<KeyBalance> KeyBalances { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<UpcomingBills_Alter> UpcomingBills_Alter { get; set; }
     
         public virtual int sp_DateOfEachBill()
         {
