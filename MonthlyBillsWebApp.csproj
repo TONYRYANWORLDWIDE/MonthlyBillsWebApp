@@ -349,7 +349,6 @@
     <Content Include="Views\BringHomePays\Index.cshtml" />
     <Content Include="Views\UpcomingBills_Alter\Create.cshtml" />
     <Content Include="Views\UpcomingBills_Alter\Delete.cshtml" />
-    <Content Include="Views\UpcomingBills_Alter\Details.cshtml" />
     <Content Include="Views\UpcomingBills_Alter\Edit.cshtml" />
     <Content Include="Views\UpcomingBills_Alter\Index.cshtml" />
   </ItemGroup>
