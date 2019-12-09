@@ -80,6 +80,18 @@
           <Property Name="UserID" Type="nvarchar" MaxLength="128" />
           <Property Name="Paid?" Type="bit" />
         </EntityType>
+        <EntityType Name="UpcomingBills_Alter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TheDate" Type="date" />
+          <Property Name="DayOfWeek" Type="varchar" MaxLength="9" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="Amount" Type="real" />
+          <Property Name="Type" Type="varchar" MaxLength="7" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="WeeklyBills">
           <Key>
             <PropertyRef Name="id" />
@@ -138,6 +150,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__UpcomingB__UserI__4282C7A2">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="UpcomingBills" Type="Self.UpcomingBills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UpcomingBills">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__WeeklyBil__UserI__345EC57D">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="WeeklyBills" Type="Self.WeeklyBills" Multiplicity="*" />
@@ -158,6 +182,7 @@
           <EntitySet Name="KeyBalance" EntityType="Self.KeyBalance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MonthlyBills" EntityType="Self.MonthlyBills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UpcomingBills" EntityType="Self.UpcomingBills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UpcomingBills_Alter" EntityType="Self.UpcomingBills_Alter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeeklyBills" EntityType="Self.WeeklyBills" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__BringHome__UserI__467D75B8" Association="Self.FK__BringHome__UserI__467D75B8">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -172,6 +197,10 @@
             <End Role="MonthlyBills" EntitySet="MonthlyBills" />
           </AssociationSet>
           <AssociationSet Name="FK__UpcomingB__UserI__36470DEF" Association="Self.FK__UpcomingB__UserI__36470DEF">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UpcomingBills" EntitySet="UpcomingBills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UpcomingB__UserI__4282C7A2" Association="Self.FK__UpcomingB__UserI__4282C7A2">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="UpcomingBills" EntitySet="UpcomingBills" />
           </AssociationSet>
@@ -237,6 +266,7 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="WeeklyBill" EntitySet="WeeklyBills" />
           </AssociationSet>
+          <EntitySet Name="UpcomingBills_Alter" EntityType="BillsModel.UpcomingBills_Alter" />
         </EntityContainer>
         <EntityType Name="BringHomePay">
           <Key>
@@ -380,6 +410,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UpcomingBills_Alter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TheDate" Type="DateTime" Precision="0" />
+          <Property Name="DayOfWeek" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Single" />
+          <Property Name="Type" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -476,6 +518,19 @@
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UpcomingBills_Alter">
+            <EntityTypeMapping TypeName="BillsModel.UpcomingBills_Alter">
+              <MappingFragment StoreEntitySet="UpcomingBills_Alter">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+                <ScalarProperty Name="TheDate" ColumnName="TheDate" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
