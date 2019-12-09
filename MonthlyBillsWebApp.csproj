@@ -189,6 +189,7 @@
     <Compile Include="Controllers\MonthlyBillsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UpcomingBillsController.cs" />
+    <Compile Include="Controllers\UpcomingBills_AlterController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WeeklyBillsController.cs" />
@@ -346,6 +347,11 @@
     <Content Include="Views\BringHomePays\Delete.cshtml" />
     <Content Include="Views\BringHomePays\Edit.cshtml" />
     <Content Include="Views\BringHomePays\Index.cshtml" />
+    <Content Include="Views\UpcomingBills_Alter\Create.cshtml" />
+    <Content Include="Views\UpcomingBills_Alter\Delete.cshtml" />
+    <Content Include="Views\UpcomingBills_Alter\Details.cshtml" />
+    <Content Include="Views\UpcomingBills_Alter\Edit.cshtml" />
+    <Content Include="Views\UpcomingBills_Alter\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
