@@ -22,6 +22,8 @@ namespace MonthlyBillsWebApp.Controllers
         {
             return View();
         }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "id,TheDate,DayOfWeek,Name,Amount,Type,UserID")] UpcomingBills_Alter upcomingBills_Alter)

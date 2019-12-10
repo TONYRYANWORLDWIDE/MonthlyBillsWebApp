@@ -22,59 +22,64 @@
     </p>
 }
 
-<table class="table TJR_UpcomingTable">
+<table id="TR_UpcomingBills" class="table TJR_UpcomingTable">
     <tr class="trbold">
+        <th class="TJR_th_Hidden"></th>
         <th>
             @Html.ActionLink("The Date", "Index", new { sortOrder = ViewBag.DateSortParam })
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.Bill)*@
             Day Of Week
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.Cost)*@
             Name
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.runningtotalbills2)*@
             Amount
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.bringhome)*@
             Type
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.RunningtotalincomeFinal)*@
             Running Total
         </th>
+        <th>Update</th>
+        <th>Update</th>
         <th class="TJR_th_Hidden"></th>
         @*<th></th>*@
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TheDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DayOfWeek)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RunningTotal)
-            </td>
-            <td class="Paid TJR_td_Hidden">
-                <span>@Html.HiddenFor(modelItem => item.Paid_) </span>
-            </td>
-        </tr>
+<tr>
+    <td class="id" style="visibility:collapse; border:5px solid black;">
+        <span>@Html.HiddenFor(modelItem => item.id) </span>
+    </td>
+    <td class="TheDate">
+        @Html.EditorFor(modelItem => item.TheDate, new { htmlAttributes = new { @class = "form-control TheDate" } })
+    </td>
+    <td class="DayOfWeek">
+        @Html.EditorFor(modelItem => item.DayOfWeek, new { htmlAttributes = new { @class = "form-control DayOfWeek" } })
+    </td>
+    <td class="Name">
+        @Html.EditorFor(modelItem => item.Name, new { htmlAttributes = new { @class = "form-control Name" } })
+    </td>
+    <td class="Amount">
+        @Html.EditorFor(modelItem => item.Amount, new { htmlAttributes = new { @class = "form-control Amount" } })
+    </td>
+    <td class="Type">
+        @Html.EditorFor(modelItem => item.Type, new { htmlAttributes = new { @class = "form-control Type" } })
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RunningTotal)
+    </td>
+    <td>
+        <a class="Update" href="javascript:;">Update</a>
+        <a class="Cancel" href="javascript:;" style="display:none">Cancel</a>
+    </td>
+    <td class="Paid TJR_td_Hidden">
+        <span>@Html.HiddenFor(modelItem => item.Paid_) </span>
+    </td>
+</tr>
     }
 
 </table>
@@ -87,38 +92,42 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 
-    //$(document).ready(function () {
-    //    $(".Paid").each(function () {
-    //         //$(this).html( $(this).attr('title') );
-    //        //console.log(this.innerHTML);
-    //        //var spanx = $(this).find('span');
-    //        console.log($(this).find('input').val());
-    //        if ($(this).find('input').val() == "True") {
-    //            //console.log("truez")
-    //        } else {
-    //            //console.log("falsez");
-    //        }
 
-    //    })
-    //});
-        $(document).ready(function () {
-        $("tr").each(function () {
-             //$(this).html( $(this).attr('title') );
-            //console.log(this.innerHTML);
-            //var spanx = $(this).find('span');
-            //console.log($(this).find('.Paid').find('input').val());
-            if ($(this).find('.Paid').find('input').val() == "True") {
-                //console.log('truez');
-                $(this).addClass('TJR_row_Green');
-            } else {
-                //console.log('falsez');
+        //$(document).ready(function () {
+        //    console.log("Boom Nigga");
+
+        $("body").on("click", "#TR_UpcomingBills .Update", function () {
+        console.log("Starting Update");
+            var row = $(this).closest("tr");
+            console.log("Grabbing row");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                var span = $(this).find("span");
+                var input = $(this).find("input");
+                span.html(input.val());
             }
-            //if ($(this).find('input').val() == "True") {
-            //    //console.log("truez")
-            //} else {
-            //    //console.log("falsez");
-            //}
+        });       
 
-        })
-    });
+            var upcomingBill_alter = {};
+            console.log("Row Finds");
+            console.log(row.find(".TheDate").find('input').val());
+            console.log(row.find(".id").find('span').html());
+            
+            upcomingBill_alter.id = row.find(".id").find('span').html();
+            
+        upcomingBill_alter.TheDate = row.find(".TheDate").find('input').val();
+        upcomingBill_alter.Name = row.find(".Name").find('input').val();
+        upcomingBill_alter.DayOfWeek = row.find(".DayOfWeek").find('input').val()
+        upcomingBill_alter.Amount = row.find(".Amount").find('input').val();
+        upcomingBill_alter.Type = row.find(".Type").find('input').val();
+            console.log("Ajax Start");
+        $.ajax({
+            type: "POST", 
+            url: "/UpcomingBills/Update",
+            data: '{upcomingBill_alter:' + JSON.stringify(upcomingBill_alter) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        });
+});
+
 </script>

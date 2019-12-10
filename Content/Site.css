@@ -30,11 +30,11 @@ body {
 }
 
 
-table.TJR_UpcomingTable td:nth-child(7) {
+table.TJR_UpcomingTable td:nth-child(9) {
     display:none;
 }
 
-table.TJR_UpcomingTable th:nth-child(7) {
+table.TJR_UpcomingTable th:nth-child(9) {
     display: none;
 }
 

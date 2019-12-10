@@ -71,10 +71,34 @@ namespace MonthlyBillsWebApp.Controllers
             int pageNumber = (page ?? 1);
             return View(upcomingbills.ToPagedList(pageNumber, pageSize));
         }
+        [HttpPost]
+        public ActionResult Update(UpcomingBills_Alter upcomingBill_alter)
+        {
+            using (BillsEntities entities = new BillsEntities())
+            {
+                //UpcomingBills_Alter updatedUpcomingBills = (from c in entities.UpcomingBills_Alter
+                //                            where c.id == upcomingBills.id
+                //                            select c).FirstOrDefault();
+                //var updatedUpcomingBills = new UpcomingBills_Alter();
+                //updatedUpcomingBills.id = upcomingBills.id;
+                //updatedUpcomingBills.TheDate = upcomingBills.TheDate;
+                //updatedUpcomingBills.DayOfWeek = upcomingBills.DayOfWeek;
+                //updatedUpcomingBills.Amount = upcomingBills.Amount;
+                //updatedUpcomingBills.Type = upcomingBills.Type;
+                db.UpcomingBills_Alter.Add(upcomingBill_alter);
+                db.SaveChanges();
 
-       
-       
-       
+            }
+
+            var upb = from u in db.UpcomingBills
+                                               
+                               select u;
+            return View(upb.ToList());
+            //return View(monthlyBill);
+            //return RedirectToAction("Index");
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
