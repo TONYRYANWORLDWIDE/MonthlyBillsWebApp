@@ -21,5 +21,9 @@ namespace MonthlyBillsWebApp.Models
         public Nullable<float> Amount { get; set; }
         public string Type { get; set; }
         public string UserID { get; set; }
+        public int idFK { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual UpcomingBill UpcomingBill { get; set; }
     }
 }

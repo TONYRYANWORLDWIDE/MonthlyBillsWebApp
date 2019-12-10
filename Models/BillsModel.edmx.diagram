@@ -18,6 +18,8 @@
         <AssociationConnector Association="BillsModel.FK__UpcomingB__UserI__36470DEF" />
         <AssociationConnector Association="BillsModel.FK__WeeklyBil__UserI__345EC57D" />
         <EntityTypeShape EntityType="BillsModel.UpcomingBills_Alter" Width="1.5" PointX="3.375" PointY="8.75" />
+        <AssociationConnector Association="BillsModel.FK__UpcomingB__UserI__330B79E8" />
+        <AssociationConnector Association="BillsModel.FK__UpcomingBi__idFK__321755AF" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

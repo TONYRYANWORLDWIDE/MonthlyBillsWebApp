@@ -22,6 +22,7 @@ namespace MonthlyBillsWebApp.Models
             this.MonthlyBills = new HashSet<MonthlyBill>();
             this.UpcomingBills = new HashSet<UpcomingBill>();
             this.WeeklyBills = new HashSet<WeeklyBill>();
+            this.UpcomingBills_Alter = new HashSet<UpcomingBills_Alter>();
         }
     
         public string Id { get; set; }
@@ -47,5 +48,7 @@ namespace MonthlyBillsWebApp.Models
         public virtual ICollection<UpcomingBill> UpcomingBills { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WeeklyBill> WeeklyBills { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UpcomingBills_Alter> UpcomingBills_Alter { get; set; }
     }
 }
