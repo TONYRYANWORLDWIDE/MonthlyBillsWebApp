@@ -40,5 +40,10 @@ namespace MonthlyBillsWebApp.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DateOfEachBill");
         }
+    
+        public virtual int sp_Cleanup_UpcomingBill_Alter()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Cleanup_UpcomingBill_Alter");
+        }
     }
 }

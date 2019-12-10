@@ -76,29 +76,12 @@ namespace MonthlyBillsWebApp.Controllers
         {
             using (BillsEntities entities = new BillsEntities())
             {
-                //UpcomingBills_Alter updatedUpcomingBills = (from c in entities.UpcomingBills_Alter
-                //                            where c.id == upcomingBills.id
-                //                            select c).FirstOrDefault();
-                //var updatedUpcomingBills = new UpcomingBills_Alter();
-                //updatedUpcomingBills.id = upcomingBills.id;
-                //updatedUpcomingBills.TheDate = upcomingBills.TheDate;
-                //updatedUpcomingBills.DayOfWeek = upcomingBills.DayOfWeek;
-                //updatedUpcomingBills.Amount = upcomingBills.Amount;
-                //updatedUpcomingBills.Type = upcomingBills.Type;
                 db.UpcomingBills_Alter.Add(upcomingBill_alter);
                 db.SaveChanges();
-
+                entities.sp_Cleanup_UpcomingBill_Alter();
             }
-
-            //var upb = from u in db.UpcomingBills
-
-            //                   select u;
-            //return View(upb.ToList());
-            //return View(monthlyBill);
             return RedirectToAction("Index");
         }
-
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

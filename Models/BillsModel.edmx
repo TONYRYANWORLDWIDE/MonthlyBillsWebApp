@@ -175,18 +175,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UpcomingBi__idFK__321755AF">
-          <End Role="UpcomingBills" Type="Self.UpcomingBills" Multiplicity="1" />
-          <End Role="UpcomingBills_Alter" Type="Self.UpcomingBills_Alter" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UpcomingBills">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="UpcomingBills_Alter">
-              <PropertyRef Name="idFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__WeeklyBil__UserI__345EC57D">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="WeeklyBills" Type="Self.WeeklyBills" Multiplicity="*" />
@@ -199,6 +187,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_Cleanup_UpcomingBill_Alter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_DateOfEachBill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="BillsModelStoreContainer">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
@@ -232,10 +221,6 @@
           <AssociationSet Name="FK__UpcomingB__UserI__4282C7A2" Association="Self.FK__UpcomingB__UserI__4282C7A2">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="UpcomingBills" EntitySet="UpcomingBills" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UpcomingBi__idFK__321755AF" Association="Self.FK__UpcomingBi__idFK__321755AF">
-            <End Role="UpcomingBills" EntitySet="UpcomingBills" />
-            <End Role="UpcomingBills_Alter" EntitySet="UpcomingBills_Alter" />
           </AssociationSet>
           <AssociationSet Name="FK__WeeklyBil__UserI__345EC57D" Association="Self.FK__WeeklyBil__UserI__345EC57D">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -308,6 +293,7 @@
             <End Role="UpcomingBill" EntitySet="UpcomingBills" />
             <End Role="UpcomingBills_Alter" EntitySet="UpcomingBills_Alter" />
           </AssociationSet>
+          <FunctionImport Name="sp_Cleanup_UpcomingBill_Alter" />
         </EntityContainer>
         <EntityType Name="BringHomePay">
           <Key>
@@ -603,6 +589,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_Cleanup_UpcomingBill_Alter" FunctionName="BillsModel.Store.sp_Cleanup_UpcomingBill_Alter" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
