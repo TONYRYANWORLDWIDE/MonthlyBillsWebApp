@@ -357,7 +357,6 @@
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="BillsModel.FK__UpcomingB__UserI__36470DEF" FromRole="UpcomingBill" ToRole="AspNetUser" />
           <Property Name="Paid_" Type="Boolean" />
-          <NavigationProperty Name="UpcomingBills_Alter" Relationship="BillsModel.FK__UpcomingBi__idFK__321755AF" FromRole="UpcomingBill" ToRole="UpcomingBills_Alter" />
         </EntityType>
         <EntityType Name="KeyBalance">
           <Key>
@@ -466,7 +465,6 @@
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="idFK" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="BillsModel.FK__UpcomingB__UserI__330B79E8" FromRole="UpcomingBills_Alter" ToRole="AspNetUser" />
-          <NavigationProperty Name="UpcomingBill" Relationship="BillsModel.FK__UpcomingBi__idFK__321755AF" FromRole="UpcomingBills_Alter" ToRole="UpcomingBill" />
         </EntityType>
         <Association Name="FK__UpcomingB__UserI__330B79E8">
           <End Type="BillsModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />

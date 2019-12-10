@@ -24,6 +24,5 @@ namespace MonthlyBillsWebApp.Models
         public int idFK { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual UpcomingBill UpcomingBill { get; set; }
     }
 }

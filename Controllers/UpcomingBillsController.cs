@@ -90,12 +90,12 @@ namespace MonthlyBillsWebApp.Controllers
 
             }
 
-            var upb = from u in db.UpcomingBills
-                                               
-                               select u;
-            return View(upb.ToList());
+            //var upb = from u in db.UpcomingBills
+
+            //                   select u;
+            //return View(upb.ToList());
             //return View(monthlyBill);
-            //return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
 

@@ -113,7 +113,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
             console.log(row.find(".TheDate").find('input').val());
             console.log(row.find(".id").find('span').html());
             
-            upcomingBill_alter.id = row.find(".id").find('span').html();
+            upcomingBill_alter.idFK = row.find(".id").find('span').html();
             
         upcomingBill_alter.TheDate = row.find(".TheDate").find('input').val();
         upcomingBill_alter.Name = row.find(".Name").find('input').val();

@@ -14,12 +14,6 @@ namespace MonthlyBillsWebApp.Models
     
     public partial class UpcomingBill
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UpcomingBill()
-        {
-            this.UpcomingBills_Alter = new HashSet<UpcomingBills_Alter>();
-        }
-    
         public int id { get; set; }
         public Nullable<System.DateTime> TheDate { get; set; }
         public string DayOfWeek { get; set; }
@@ -31,7 +25,5 @@ namespace MonthlyBillsWebApp.Models
         public Nullable<bool> Paid_ { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UpcomingBills_Alter> UpcomingBills_Alter { get; set; }
     }
 }
