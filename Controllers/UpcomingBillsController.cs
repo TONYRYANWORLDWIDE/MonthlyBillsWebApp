@@ -36,7 +36,7 @@ namespace MonthlyBillsWebApp.Controllers
             }
             using (var context = new BillsEntities())
             {
-                context.sp_DateOfEachBill();
+                context.sp_DateOfEachBill_WithParameter(userIdValue);
             }
              ViewBag.CurrentSort = sortOrder;
             if (searchString != null)
