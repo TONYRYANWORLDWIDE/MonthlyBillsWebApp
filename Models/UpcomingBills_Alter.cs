@@ -22,8 +22,8 @@ namespace MonthlyBillsWebApp.Models
         public string Type { get; set; }
         public string UserID { get; set; }
         public int idFK { get; set; }
-        public bool Paid_ { get; set; }
-
+        public Nullable<bool> Paid_ { get; set; }
+    
         public virtual AspNetUser AspNetUser { get; set; }
     }
 }
