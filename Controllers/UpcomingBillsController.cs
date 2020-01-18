@@ -71,6 +71,25 @@ namespace MonthlyBillsWebApp.Controllers
             int pageNumber = (page ?? 1);
             return View(upcomingbills.ToPagedList(pageNumber, pageSize));
         }
+
+        [HttpPost]
+        public ActionResult UpdateUpcomingPaid(UpcomingBills_Alter upComingPaid)
+        {
+            using (BillsEntities entities = new BillsEntities())
+            {
+                UpcomingBills_Alter updatedPaid = (from c in entities.UpcomingBills_Alter
+                                            where c.id == upComingPaid.id
+                                           select c).FirstOrDefault();
+                updatedPaid.Paid_ = upComingPaid.Paid_;
+
+                entities.SaveChanges();
+            }
+            //return View(monthlyBill);
+            return RedirectToAction("Index");
+        }
+
+
+
         [HttpPost]
         public ActionResult Update(UpcomingBills_Alter upcomingBill_alter)
         {

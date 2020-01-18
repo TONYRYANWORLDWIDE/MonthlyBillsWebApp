@@ -30,13 +30,13 @@ body {
 }
 
 
-table.TJR_UpcomingTable td:nth-child(9) {
+/*table.TJR_UpcomingTable td:nth-child(9) {
     display:none;
 }
 
 table.TJR_UpcomingTable th:nth-child(9) {
     display: none;
-}
+}*/
 
 table.TJR_MonthlyTable td:nth-child(1) {
     display: none;
