@@ -99,8 +99,6 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 <script type="text/javascript">
 
 
-        //$(document).ready(function () {
-        //    console.log("Boom Nigga");
 
         $("body").on("click", "#TR_UpcomingBills .Update", function () {
         console.log("Starting Update");
@@ -122,19 +120,6 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
             console.log("Paid?");
             console.log(row.find(".Paid").find('input').val());
 
-            //$("input.k-checkbox:checkbox").change(function () {
-            //    console.log("checkbox");
-
-            //    if (this.checked) {
-            //        upcomingBill_alter.Paid_ = true;
-            //        console.log("checked");
-            //    }
-            //    else {
-            //        console.log("it aint");
-            //        upcomingBill_alter.Paid_ = false;
-            //    }
-            //});
-
             
             upcomingBill_alter.idFK = row.find(".id").find('span').html();
             upcomingBill_alter.Paid_ = row.find(".Paid").find('input').val();
@@ -154,36 +139,45 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
             });
         });
 
-        //$("input.k-checkbox:checkbox").change(function () {
-        //var upComingPaid = {};
-        //var row = $(this).closest("tr");
-        //$("td", row).each(function () {
-        //    if ($(this).find("input").length > 0) {
-        //        var span = $(this).find("span");
-        //        var input = $(this).find("input");
-        //        span.html(input.val());
-        //    }
-        //});
-        //upComingPaid.id = row.find(".id").find('span').html();
-        //    if (this.checked)
-        //    {
-        //        upComingPaid.Paid_ = true;
-        //        console.log("checked");
-        //    }
-        //    else
-        //    {
-        //        console.log("it aint");
-        //        upComingPaid.Paid_ = false;
-        //    }
- 
+        $("input.k-checkbox:checkbox").change(function () {
+        var upComingPaid = {};
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                var span = $(this).find("span");
+                var input = $(this).find("input");
+                span.html(input.val());
+            }
+        });
 
-        //    $.ajax({
-        //    type: "POST", 
-        //    url: "/UpcomingBills/UpdateUpcomingPaid",
-        //    data: '{upComingPaid:' + JSON.stringify(upComingPaid) + '}',
-        //    contentType: "application/json; charset=utf-8",
-        //    dataType: "json"
-        //});
-    //});
+
+        upComingPaid.idFK = row.find(".id").find('span').html();
+        upComingPaid.TheDate = row.find(".TheDate").find('input').val();
+        upComingPaid.Name = row.find(".Name").find('input').val();
+        upComingPaid.DayOfWeek = row.find(".DayOfWeek").find('input').val()
+        upComingPaid.Amount = row.find(".Amount").find('input').val();
+        upComingPaid.Type = row.find(".Type").find('input').val();
+
+        upComingPaid.id = row.find(".id").find('span').html();
+            if (this.checked)
+            {
+                upComingPaid.Paid_ = true;
+                console.log("checked");
+            }
+            else
+            {
+                console.log("it aint");
+                upComingPaid.Paid_ = false;
+            }
+         console.log("Ajax Start");
+
+            $.ajax({
+            type: "POST", 
+            url: "/UpcomingBills/UpdateUpcomingPaid",
+            data: '{upComingPaid:' + JSON.stringify(upComingPaid) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        });
+    });
 
 </script>

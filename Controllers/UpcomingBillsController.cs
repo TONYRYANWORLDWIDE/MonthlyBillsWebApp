@@ -80,15 +80,26 @@ namespace MonthlyBillsWebApp.Controllers
                 UpcomingBills_Alter updatedPaid = (from c in entities.UpcomingBills_Alter
                                             where c.id == upComingPaid.id
                                            select c).FirstOrDefault();
-                updatedPaid.Paid_ = upComingPaid.Paid_;
+                //if (updatedPaid.Paid_ != null)
+                //{
+                //    updatedPaid.Paid_ = upComingPaid.Paid_;
+                //}
+                //else
+                //{
+                db.UpcomingBills_Alter.Add(upComingPaid);
+                db.SaveChanges();
+                entities.sp_Cleanup_UpcomingBill_Alter();
+                //}
+                    
 
                 entities.SaveChanges();
             }
             //return View(monthlyBill);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "UpcomingBills");
+
         }
 
-
+ 
 
         [HttpPost]
         public ActionResult Update(UpcomingBills_Alter upcomingBill_alter)
