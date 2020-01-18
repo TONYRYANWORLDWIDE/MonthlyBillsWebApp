@@ -89,8 +89,9 @@ namespace MonthlyBillsWebApp.Controllers
                 db.UpcomingBills_Alter.Add(upComingPaid);
                 db.SaveChanges();
                 entities.sp_Cleanup_UpcomingBill_Alter();
+                entities.sp_DateOfEachBill();
                 //}
-                    
+
 
                 entities.SaveChanges();
             }
