@@ -22,4 +22,8 @@ namespace MonthlyBillsWebApp.Models
     
         public virtual AspNetUser AspNetUser { get; set; }
     }
+
+
+
+
 }
