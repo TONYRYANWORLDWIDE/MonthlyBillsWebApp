@@ -24,4 +24,10 @@ namespace MonthlyBillsWebApp.Models
     
         public virtual AspNetUser AspNetUser { get; set; }
     }
+
+    public enum Freq
+    {
+        Weekly,
+        BiWeekly
+    }
 }

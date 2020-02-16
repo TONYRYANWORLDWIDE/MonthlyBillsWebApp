@@ -1,4 +1,6 @@
-﻿@model MonthlyBillsWebApp.Models.BringHomePay
+﻿@using MonthlyBillsWebApp.Models
+
+@model MonthlyBillsWebApp.Models.BringHomePay
 
 @{
     ViewBag.Title = "Create";
@@ -7,10 +9,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>BringHomePay</h4>
         <hr />
@@ -34,7 +36,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DayOfWeek, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DayOfWeek, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.DayOfWeek, new SelectList(Enum.GetValues(typeof(DayOfWeek))), "Select DayOfWeek")
+                @*@Html.EditorFor(model => model.DayOfWeek, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.DayOfWeek, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +45,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Frequency, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Frequency, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.DropDownList(model => model.Frequency, new SelectList(Enum.GetValues(typeof())), "Select Frequency")*@
+                @Html.DropDownListFor(model => model.Frequency, new SelectList(Enum.GetValues(typeof(Freq))), "Select Freq")
+                @*@Html.EditorFor(model => model.Frequency, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.Frequency, "", new { @class = "text-danger" })
             </div>
         </div>
