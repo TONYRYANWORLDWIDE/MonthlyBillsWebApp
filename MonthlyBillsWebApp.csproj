@@ -219,6 +219,7 @@
     <Compile Include="Models\BringHomePay.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BringHomePay2.cs" />
     <Compile Include="Models\Date.cs">
       <DependentUpon>BillsModel.tt</DependentUpon>
     </Compile>
