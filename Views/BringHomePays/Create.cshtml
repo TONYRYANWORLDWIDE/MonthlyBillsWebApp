@@ -14,7 +14,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>BringHomePay</h4>
+        <h4>Bring Home Pay</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DayOfWeek, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.DayOfWeek, new SelectList(Enum.GetValues(typeof(DayOfWeek))), "Select DayOfWeek")
+                @Html.DropDownListFor(model => model.DayOfWeek, new SelectList(Enum.GetValues(typeof(DayOfWeek))), "Select Day Of Week")
                 @*@Html.EditorFor(model => model.DayOfWeek, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.DayOfWeek, "", new { @class = "text-danger" })
             </div>
@@ -46,7 +46,7 @@
             @Html.LabelFor(model => model.Frequency, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.DropDownList(model => model.Frequency, new SelectList(Enum.GetValues(typeof())), "Select Frequency")*@
-                @Html.DropDownListFor(model => model.Frequency, new SelectList(Enum.GetValues(typeof(Freq))), "Select Freq")
+                @Html.DropDownListFor(model => model.Frequency, new SelectList(Enum.GetValues(typeof(Freq))), "Select Pay Frequency")
                 @*@Html.EditorFor(model => model.Frequency, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.Frequency, "", new { @class = "text-danger" })
             </div>
